@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+  --font-digital: var(--font-vt323);
+  --font-vt323: var(--font-vt323);
+
+  /* Minesweeper Windows 95 colors */
+  --color-win-gray: #c0c0c0;
+  --color-win-dark: #808080;
+  --color-win-light: #ffffff;
+  --color-win-c0: #c0c0c0;
+
+  /* Minesweeper Windows 95 box shadows */
+  --shadow-win-out: inset -2px -2px #808080, inset 2px 2px #ffffff;
+  --shadow-win-in: inset -2px -2px #ffffff, inset 2px 2px #808080;
+
+  /* Terminal Solitaire colors */
+  --color-term-bg: #0a0e14;
+  --color-term-white: #e6e9ef;
+  --color-term-border: #4a5568;
+  --color-term-green: #10b981;
+  --color-term-yellow: #fbbf24;
+  --color-term-red: #ef4444;
+  --color-term-card: #1a202c;
+}
+
+/* Gambit Viz Terminal Themes */
+:root {
+  /* Default (Slate / B&W) */
+  --term-main: #ffffff;
+  --term-main-rgb: 255, 255, 255;
+  --term-dim: #666666;
+  --term-dim-rgb: 102, 102, 102;
+  --term-bg: #000000;
+  --term-border: #ffffff;
+}
+
+/* Theme: Matrix Green */
+body.theme-green {
+  --term-main: #33ff00;
+  --term-main-rgb: 51, 255, 0;
+  --term-dim: #1a8000;
+  --term-dim-rgb: 26, 128, 0;
+  --term-bg: #050505;
+  --term-border: #33ff00;
+}
+
+/* Theme: Amber */
+body.theme-amber {
+  --term-main: #ffb000;
+  --term-main-rgb: 255, 176, 0;
+  --term-dim: #805800;
+  --term-dim-rgb: 128, 88, 0;
+  --term-bg: #100a00;
+  --term-border: #ffb000;
+}
+
+/* Theme: Cyan */
+body.theme-cyan {
+  --term-main: #00ffff;
+  --term-main-rgb: 0, 255, 255;
+  --term-dim: #008080;
+  --term-dim-rgb: 0, 128, 128;
+  --term-bg: #001010;
+  --term-border: #00ffff;
+}
+
+/* Theme: Rose */
+body.theme-rose {
+  --term-main: #ff007f;
+  --term-main-rgb: 255, 0, 127;
+  --term-dim: #800040;
+  --term-dim-rgb: 128, 0, 64;
+  --term-bg: #1a000d;
+  --term-border: #ff007f;
+}
+
+/* Theme: Purple */
+body.theme-purple {
+  --term-main: #cc00ff;
+  --term-main-rgb: 204, 0, 255;
+  --term-dim: #660080;
+  --term-dim-rgb: 102, 0, 128;
+  --term-bg: #14001a;
+  --term-border: #cc00ff;
+}
+
+/* Theme: Slate (Explicit class, matches root) */
+body.theme-slate {
+  --term-main: #ffffff;
+  --term-main-rgb: 255, 255, 255;
+  --term-dim: #666666;
+  --term-dim-rgb: 102, 102, 102;
+  --term-bg: #000000;
+  --term-border: #ffffff;
+}
+
+/* Body styling for Terminal Themes */
+body.theme-green,
+body.theme-amber,
+body.theme-cyan,
+body.theme-rose,
+body.theme-purple,
+body.theme-slate {
+  font-family: var(--font-vt323), monospace;
+  background-color: var(--term-bg);
+  color: var(--term-main);
+  overflow: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Override terminal theme overflow for pages that need scrolling */
+body.theme-green:has(#japanese-web-page),
+body.theme-amber:has(#japanese-web-page),
+body.theme-cyan:has(#japanese-web-page),
+body.theme-rose:has(#japanese-web-page),
+body.theme-purple:has(#japanese-web-page),
+body.theme-slate:has(#japanese-web-page),
+body:has(#japanese-web-page).theme-green,
+body:has(#japanese-web-page).theme-amber,
+body:has(#japanese-web-page).theme-cyan,
+body:has(#japanese-web-page).theme-rose,
+body:has(#japanese-web-page).theme-purple,
+body:has(#japanese-web-page).theme-slate,
+body:has(#japanese-web-page) {
+  overflow: visible !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* CRT Scanline Effect for Terminal Themes */
+body.theme-green::before,
+body.theme-amber::before,
+body.theme-cyan::before,
+body.theme-rose::before,
+body.theme-purple::before,
+body.theme-slate::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 9999;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+/* Terminal Effects */
+.terminal-border {
+  border: 2px solid var(--term-main);
+  box-shadow: 0 0 10px rgba(var(--term-main-rgb), 0.2);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.terminal-text-shadow {
+  text-shadow: 0 0 5px rgba(var(--term-main-rgb), 0.5);
+}
+
+/* Custom Scrollbar for Terminal */
+.font-vt323::-webkit-scrollbar {
+  width: 12px;
+}
+.font-vt323::-webkit-scrollbar-track {
+  background: #000;
+  border-left: 1px solid var(--term-dim);
+}
+.font-vt323::-webkit-scrollbar-thumb {
+  background: var(--term-dim);
+}
+.font-vt323::-webkit-scrollbar-thumb:hover {
+  background: var(--term-main);
+}
+
+/* Custom Scrollbar for Modal */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Firefox scrollbar styling */
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  overscroll-behavior-y: auto !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  max-height: none !important;
+  position: relative !important;
+}
+
+/* Flashing animation for about button */
+@keyframes slowFlash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.flash-slow {
+  animation: slowFlash 3s ease-in-out infinite;
+}
