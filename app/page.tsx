@@ -31,6 +31,7 @@ function HomeContent() {
     { slug: "pixel-chaos-engine", title: "Pixel Chaos Engine", featured: true },
     { slug: "hero-adventure-retro", title: "Hero Adventure Retro", featured: false },
     { slug: "retro-tetris", title: "Retro Tetris", featured: true },
+    { slug: "generative-pattern-studio", title: "Pattern Studio", featured: false },
   ];
 
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
