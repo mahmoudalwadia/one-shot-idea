@@ -145,7 +145,7 @@ export default function WorldsMazeGame() {
   };
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
+    <div className="fixed inset-0 w-full h-dvh bg-black overflow-hidden touch-none">
       {/* Back Button */}
       <Link
         href="/"
