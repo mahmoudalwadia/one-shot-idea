@@ -32,6 +32,7 @@ function HomeContent() {
     { slug: "hero-adventure-retro", title: "Hero Adventure Retro", featured: false },
     { slug: "retro-tetris", title: "Retro Tetris", featured: true },
     { slug: "generative-pattern-studio", title: "Pattern Studio", featured: false },
+    { slug: "worlds-maze-game", title: "Worlds Maze", featured: true },
   ];
 
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
