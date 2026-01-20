@@ -55,12 +55,18 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
     if (!step) return;
 
     // Reset FEN to new step's position
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Reset UI state when step changes
     setDisplayFen(step.fen);
     // Reset step-specific state
+     
     setStepCompleted(step.type === 'explanation' || step.type === 'demonstration');
+     
     setAttempts(0);
+     
     setHintShown(false);
+     
     setFeedback(null);
+     
     setLastMove(null);
   }, [currentStepIndex, lesson.id]); // Only depend on index and lesson.id (not lesson.steps object)
 

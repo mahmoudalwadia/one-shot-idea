@@ -39,11 +39,14 @@ const CourseNavigator: React.FC<CourseNavigatorProps> = ({
     if (urlCourse) {
       const course = courses.find(c => c.id === urlCourse);
       if (course && course.id !== selectedCourse?.id) {
+         
         setSelectedCourse(course);
       }
     } else if (selectedCourse) {
+       
       setSelectedCourse(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Intentionally exclude selectedCourse to prevent loops
   }, [urlCourse, courses, selectedCourse?.id]);
 
   // Handle course selection with URL update

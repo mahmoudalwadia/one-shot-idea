@@ -1025,8 +1025,8 @@ const getBestMoveWithPV = (fen: string, difficulty: Difficulty): { move: string 
 
     // Use aspiration windows starting from depth 2
     if (depth >= 2) {
-      let alpha = bestValue - ASPIRATION_WINDOW;
-      let beta = bestValue + ASPIRATION_WINDOW;
+      const alpha = bestValue - ASPIRATION_WINDOW;
+      const beta = bestValue + ASPIRATION_WINDOW;
 
       result = searchAtDepth(game, depth, alpha, beta);
 

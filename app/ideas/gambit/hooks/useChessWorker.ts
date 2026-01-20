@@ -35,6 +35,7 @@ export const useChessWorker = () => {
       }
     };
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Initialization after worker setup
     setIsReady(true);
 
     return () => {

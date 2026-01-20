@@ -40,6 +40,7 @@ export const useProgress = (): UseProgressReturn => {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- Load from localStorage on mount
         setProgress({ ...DEFAULT_PROGRESS, ...parsed });
       }
     } catch (err) {

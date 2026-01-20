@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, Suspense } from "react";
 import { useAnalytics } from '@/app/hooks/useAnalytics';
 import { usePageTracking } from '@/app/hooks/usePageTracking';
+import { getAllIdeas } from '@/app/ideas/registry';
 
 function HomeContent() {
   const analytics = useAnalytics();
@@ -12,28 +13,7 @@ function HomeContent() {
   // Add automatic page tracking
   usePageTracking();
 
-  const ideas = [
-    { slug: "masonry", title: "Glass Masonry Gallery", featured: false },
-    { slug: "hand-3d", title: "The Scarred Hand", featured: false },
-    { slug: "simulation", title: "Simulation Patterns", featured: false },
-    { slug: "world-explorer", title: "World Explorer", featured: false },
-    { slug: "japanese-web", title: "デジタル東京", featured: false },
-    { slug: "supernova", title: "Supernova", featured: true },
-    { slug: "retro-dashboard", title: "Retro-Futuristic Dashboard", featured: false },
-    { slug: "xenon-interface", title: "Xenon Interface 9000", featured: false },
-    { slug: "chameleon-chat", title: "Chameleon Chat", featured: false },
-    { slug: "terra", title: "Terra", featured: true },
-    { slug: "minesweeper", title: "Minesweeper", featured: false },
-    { slug: "terminal-solitaire", title: "Terminal Solitaire", featured: false },
-    { slug: "gambit", title: "Gambit", featured: true },
-    { slug: "ascii-cortex", title: "ASCII Cortex", featured: false },
-    { slug: "a-train-retro-sim", title: "A-Train Retro Sim", featured: false },
-    { slug: "pixel-chaos-engine", title: "Pixel Chaos Engine", featured: true },
-    { slug: "hero-adventure-retro", title: "Hero Adventure Retro", featured: false },
-    { slug: "retro-tetris", title: "Retro Tetris", featured: true },
-    { slug: "generative-pattern-studio", title: "Pattern Studio", featured: false },
-    { slug: "worlds-maze-game", title: "Worlds Maze", featured: true },
-  ];
+  const ideas = getAllIdeas();
 
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);

@@ -70,6 +70,7 @@ const LearnMode: React.FC<LearnModeProps> = ({ onBack, urlCourse, urlLesson, onU
         const fullLessonId = `${urlCourse}-${urlLesson}`;
         startLesson(fullLessonId);
         updateStreak();
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- URL initialization on mount
         setActiveLesson({ courseId: urlCourse, lesson, initialStep: 0, startedAt: Date.now() });
       }
     }
@@ -87,8 +88,6 @@ const LearnMode: React.FC<LearnModeProps> = ({ onBack, urlCourse, urlLesson, onU
       startLesson(fullLessonId);
       updateStreak();
       setActiveLesson({ courseId, lesson, initialStep: 0, startedAt: Date.now() });
-
-      // Update URL
       onUrlChange(courseId, lessonId);
     }
   }, [courses, startLesson, updateStreak, onUrlChange]);

@@ -115,7 +115,9 @@ const LessonBoard: React.FC<LessonBoardProps> = ({
 
   // Reset selection when FEN changes (new position = clear selection)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Reset UI state when position changes
     setSelectedSquare(null);
+     
     setLegalMoves([]);
   }, [fen]);
 
