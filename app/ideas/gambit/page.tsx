@@ -615,11 +615,11 @@ function GambitContent() {
         <ModeSelector
           onSelectPlay={() => {
             setShowModeSelector(false);
-            // Play mode doesn't need URL params
+            updateUrlParams({ mode: 'play' });
           }}
           onSelectLearn={() => {
             setShowModeSelector(false);
-            setMode('learn');
+            updateUrlParams({ mode: 'learn' });
           }}
         />
       )}

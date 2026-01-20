@@ -41,7 +41,7 @@ export default function ModeSelector({ onSelectPlay, onSelectLearn }: ModeSelect
               </div>
             </div>
             <p className="text-xs md:text-sm text-[var(--term-dim)] group-hover:text-[var(--term-bg)]/80">
-              Challenge the AI with adjustable difficulty. Analyze your moves with real-time evaluation.
+              Challenge the engine with adjustable difficulty. Analyze your moves with real-time evaluation.
             </p>
             <div className="mt-3 flex items-center gap-2 text-[10px] uppercase">
               <Play size={12} />
@@ -79,7 +79,7 @@ export default function ModeSelector({ onSelectPlay, onSelectLearn }: ModeSelect
         <div className="mt-6 flex justify-center">
           <div className="border border-[var(--term-dim)] px-4 py-2">
             <p className="text-[10px] text-[var(--term-dim)] whitespace-nowrap">
-              │ 73+ lessons • 124 puzzles • 7 courses │
+              │ 76 lessons • 124 puzzles • 7 courses │
             </p>
           </div>
         </div>
