@@ -753,11 +753,11 @@ function GambitContent() {
           </div>
         </aside>
 
-        {/* Main Content - Board + Analysis on mobile */}
-        <main className="flex-1 flex flex-col min-h-0 relative bg-[var(--term-bg)] overflow-y-auto md:overflow-hidden">
+        {/* Main Content - Board + Analysis, scrollable until lg breakpoint */}
+        <main className="flex-1 flex flex-col min-h-0 relative bg-[var(--term-bg)] overflow-y-auto lg:overflow-hidden">
 
-          {/* Board Section - scrollable on mobile, hide when expanded */}
-          <div className={`p-2 md:p-4 md:flex-shrink-0 md:flex-1 flex flex-col items-center justify-center relative md:max-h-none ${isMobileExpanded ? 'hidden md:flex' : ''}`}>
+          {/* Board Section - scrollable until lg breakpoint, hide when expanded */}
+          <div className={`p-2 md:p-4 lg:flex-shrink-0 lg:flex-1 flex flex-col items-center justify-center relative lg:max-h-none ${isMobileExpanded ? 'hidden md:flex' : ''}`}>
 
             {/* Opponent Clock (Black) */}
             {!isUnlimitedTime && (
