@@ -37,13 +37,13 @@ const initialTree: TreeNode = {
 
 // Theme Definitions
 const THEMES = [
-  { id: 'theme-slate', name: 'SLATE' }, // Moved to top as default
+  { id: 'theme-modern', name: 'MODERN', featured: true },
+  { id: 'theme-slate', name: 'SLATE' },
   { id: 'theme-green', name: 'MATRIX' },
   { id: 'theme-amber', name: 'AMBER' },
   { id: 'theme-cyan', name: 'CYAN' },
   { id: 'theme-rose', name: 'ROSE' },
   { id: 'theme-purple', name: 'PURPLE' },
-  { id: 'theme-modern', name: 'MODERN' },
 ];
 
 // Helper to find nodes in tree
@@ -580,9 +580,15 @@ function GambitContent() {
               <button
                 key={t.id}
                 onClick={() => { setCurrentTheme(t.id); setShowThemes(false); }}
-                className={`text-[10px] p-1 border text-center transition-all cursor-pointer ${currentTheme === t.id ? 'bg-[var(--term-main)] text-[var(--term-bg)] font-bold' : 'border-[var(--term-dim)] text-[var(--term-dim)] hover:border-[var(--term-main)] hover:text-[var(--term-main)]'}`}
+                className={`text-[10px] p-1 border text-center transition-all cursor-pointer ${
+                  currentTheme === t.id
+                    ? 'bg-[var(--term-main)] text-[var(--term-bg)] font-bold'
+                    : t.featured
+                      ? 'border-[#81b64c] text-[#81b64c] bg-[#81b64c]/10 hover:bg-[#81b64c]/20 font-medium'
+                      : 'border-[var(--term-dim)] text-[var(--term-dim)] hover:border-[var(--term-main)] hover:text-[var(--term-main)]'
+                }`}
               >
-                {t.name}
+                {t.featured ? `★ ${t.name}` : t.name}
               </button>
             ))}
           </div>
@@ -679,9 +685,15 @@ function GambitContent() {
                    <button
                       key={t.id}
                       onClick={() => { setCurrentTheme(t.id); setShowThemes(false); }}
-                      className={`text-[10px] p-1 border text-center transition-all cursor-pointer ${currentTheme === t.id ? 'bg-[var(--term-main)] text-[var(--term-bg)] font-bold' : 'border-[var(--term-dim)] text-[var(--term-dim)] hover:border-[var(--term-main)] hover:text-[var(--term-main)]'}`}
+                      className={`text-[10px] p-1 border text-center transition-all cursor-pointer ${
+                        currentTheme === t.id
+                          ? 'bg-[var(--term-main)] text-[var(--term-bg)] font-bold'
+                          : t.featured
+                            ? 'border-[#81b64c] text-[#81b64c] bg-[#81b64c]/10 hover:bg-[#81b64c]/20 font-medium'
+                            : 'border-[var(--term-dim)] text-[var(--term-dim)] hover:border-[var(--term-main)] hover:text-[var(--term-main)]'
+                      }`}
                    >
-                       {t.name}
+                       {t.featured ? `★ ${t.name}` : t.name}
                    </button>
                ))}
           </div>
