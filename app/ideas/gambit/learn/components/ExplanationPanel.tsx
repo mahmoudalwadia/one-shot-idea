@@ -69,8 +69,8 @@ const ExplanationPanel: React.FC<ExplanationPanelProps> = ({
     : 'px-3 md:px-4 py-2 md:py-3 border-b border-[var(--term-dim)]';
 
   const buttonClass = isModernTheme
-    ? 'px-4 py-3 md:py-2 bg-[#81b64c] text-white rounded hover:bg-[#9ac964] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base font-medium'
-    : 'px-4 py-3 md:py-2 border border-[var(--term-main)] text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base font-medium';
+    ? 'px-4 py-3 md:py-2 min-w-[120px] bg-[#81b64c] text-white rounded hover:bg-[#9ac964] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base font-medium'
+    : 'px-4 py-3 md:py-2 min-w-[120px] border border-[var(--term-main)] text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base font-medium';
 
   const secondaryButtonClass = isModernTheme
     ? 'px-4 py-2 text-sm text-[#8b8987] hover:text-white transition-colors cursor-pointer'
