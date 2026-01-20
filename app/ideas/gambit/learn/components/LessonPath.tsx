@@ -92,31 +92,22 @@ const LessonPath: React.FC<LessonPathProps> = ({
 
   return (
     <div className={`h-full overflow-y-auto ${isModernTheme ? 'bg-[#262421]' : 'bg-[var(--term-bg)]'}`}>
-      {/* Header */}
-      <div className={`sticky top-0 z-20 p-4 border-b ${isModernTheme ? 'border-[#3d3a37] bg-[#262421]' : 'border-[var(--term-dim)] bg-[var(--term-bg)]'}`}>
-        <button
-          onClick={onBack}
-          className={`text-sm mb-2 cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'} transition-colors`}
-        >
-          ← Previous
-        </button>
-        <div className="flex items-center gap-3">
-          <span className="text-3xl">{course.icon}</span>
-          <div className="flex-1">
-            <h1 className={`text-lg font-bold ${isModernTheme ? 'text-white' : 'terminal-text-shadow'}`}>
-              {course.title}
-            </h1>
-            <p className={`text-xs ${isModernTheme ? 'text-[#8b8987]' : 'text-[var(--term-dim)]'}`}>
-              {completedCount}/{course.lessons.length} completed
-            </p>
-          </div>
-        </div>
-        {/* Progress bar */}
-        <div className={`h-1.5 mt-3 rounded-full overflow-hidden ${isModernTheme ? 'bg-[#3d3a37]' : 'bg-[var(--term-dim)]'}`}>
-          <div
-            className={`h-full rounded-full transition-all duration-500 ${isModernTheme ? 'bg-[#81b64c]' : 'bg-[var(--term-main)]'}`}
-            style={{ width: `${(completedCount / course.lessons.length) * 100}%` }}
-          />
+      {/* Header - Compact single row */}
+      <div className={`sticky top-0 z-20 px-3 py-2 border-b ${isModernTheme ? 'border-[#3d3a37] bg-[#262421]' : 'border-[var(--term-dim)] bg-[var(--term-bg)]'}`}>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onBack}
+            className={`text-xs px-2 py-1 cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'} transition-colors`}
+          >
+            ←
+          </button>
+          <span className="text-xl">{course.icon}</span>
+          <h1 className={`text-sm font-bold flex-1 truncate ${isModernTheme ? 'text-white' : 'terminal-text-shadow'}`}>
+            {course.title}
+          </h1>
+          <span className={`text-xs ${isModernTheme ? 'text-[#8b8987]' : 'text-[var(--term-dim)]'}`}>
+            {completedCount}/{course.lessons.length}
+          </span>
         </div>
       </div>
 

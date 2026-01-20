@@ -534,43 +534,42 @@ function GambitContent() {
     return (
       <div className="h-[100dvh] w-screen bg-[var(--term-bg)] text-[var(--term-main)] font-vt323 overflow-hidden flex flex-col transition-colors duration-300 relative">
         {/* Header with Mode Toggle */}
-        <header className="p-2 md:p-4 border-b border-[var(--term-main)] bg-[var(--term-bg)] flex-shrink-0">
-          {/* Title row with back button */}
-          <div className="flex justify-between items-start mb-2">
-            <h1 className="text-xl md:text-3xl uppercase mb-0 terminal-text-shadow leading-none tracking-tighter flex items-center gap-2">
-              <Monitor className="w-5 h-5 md:w-8 md:h-8" /> Gambit
-            </h1>
+        <header className="px-2 py-1.5 md:px-4 md:py-2 border-b border-[var(--term-main)] bg-[var(--term-bg)] flex-shrink-0">
+          {/* Single row with title, controls, and back */}
+          <div className="flex justify-between items-center gap-2">
+            <div className="flex items-center gap-2 md:gap-3">
+              <h1 className="text-lg md:text-2xl uppercase terminal-text-shadow leading-none tracking-tighter flex items-center gap-1.5">
+                <Monitor className="w-4 h-4 md:w-6 md:h-6" /> Gambit
+              </h1>
+              {/* Mode Toggle - In learn mode, LEARN is active */}
+              <div className="flex border border-[var(--term-main)]">
+                <button
+                  onClick={() => setMode('play')}
+                  className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors text-[var(--term-dim)] hover:text-[var(--term-main)]"
+                >
+                  <Play size={10} className="md:w-3 md:h-3" /> PLAY
+                </button>
+                <button
+                  onClick={() => setMode('learn')}
+                  className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors border-l border-[var(--term-main)] bg-[var(--term-main)] text-[var(--term-bg)]"
+                >
+                  <BookOpen size={10} className="md:w-3 md:h-3" /> LEARN
+                </button>
+              </div>
+              {/* Theme Toggle Button */}
+              <button
+                onClick={() => setShowThemes(!showThemes)}
+                className={`p-0.5 border cursor-pointer ${showThemes ? 'bg-[var(--term-main)] text-[var(--term-bg)]' : 'border-[var(--term-dim)] text-[var(--term-dim)]'}`}
+              >
+                <Palette size={14} />
+              </button>
+            </div>
             <Link
               href="/"
               className="text-[10px] md:text-xs text-[var(--term-dim)] hover:text-[var(--term-main)] transition-colors cursor-pointer"
             >
               ← BACK
             </Link>
-          </div>
-          {/* Controls row */}
-          <div className="flex items-center gap-2">
-            {/* Mode Toggle - In learn mode, LEARN is active */}
-            <div className="flex border border-[var(--term-main)]">
-              <button
-                onClick={() => setMode('play')}
-                className="px-2 py-1 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors text-[var(--term-dim)] hover:text-[var(--term-main)]"
-              >
-                <Play size={12} /> PLAY
-              </button>
-              <button
-                onClick={() => setMode('learn')}
-                className="px-2 py-1 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors border-l border-[var(--term-main)] bg-[var(--term-main)] text-[var(--term-bg)]"
-              >
-                <BookOpen size={12} /> LEARN
-              </button>
-            </div>
-            {/* Theme Toggle Button */}
-            <button
-              onClick={() => setShowThemes(!showThemes)}
-              className={`p-1 border cursor-pointer ${showThemes ? 'bg-[var(--term-main)] text-[var(--term-bg)]' : 'border-[var(--term-dim)] text-[var(--term-dim)]'}`}
-            >
-              <Palette size={16} />
-            </button>
           </div>
         </header>
 
@@ -634,43 +633,42 @@ function GambitContent() {
       )}
 
       {/* Header - Always at top */}
-      <header className="p-2 md:p-4 border-b border-[var(--term-main)] bg-[var(--term-bg)] flex-shrink-0">
-        {/* Title row with back button */}
-        <div className="flex justify-between items-start mb-2">
-          <h1 className="text-xl md:text-3xl uppercase mb-0 terminal-text-shadow leading-none tracking-tighter flex items-center gap-2">
-            <Monitor className="w-5 h-5 md:w-8 md:h-8" /> Gambit
-          </h1>
+      <header className="px-2 py-1.5 md:px-4 md:py-2 border-b border-[var(--term-main)] bg-[var(--term-bg)] flex-shrink-0">
+        {/* Single row with title, controls, and back */}
+        <div className="flex justify-between items-center gap-2">
+          <div className="flex items-center gap-2 md:gap-3">
+            <h1 className="text-lg md:text-2xl uppercase terminal-text-shadow leading-none tracking-tighter flex items-center gap-1.5">
+              <Monitor className="w-4 h-4 md:w-6 md:h-6" /> Gambit
+            </h1>
+            {/* Mode Toggle */}
+            <div className="flex border border-[var(--term-main)]">
+              <button
+                onClick={() => setMode('play')}
+                className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors bg-[var(--term-main)] text-[var(--term-bg)]"
+              >
+                <Play size={10} className="md:w-3 md:h-3" /> PLAY
+              </button>
+              <button
+                onClick={() => setMode('learn')}
+                className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors border-l border-[var(--term-main)] text-[var(--term-dim)] hover:text-[var(--term-main)]"
+              >
+                <BookOpen size={10} className="md:w-3 md:h-3" /> LEARN
+              </button>
+            </div>
+            {/* Theme Toggle Button */}
+            <button
+              onClick={() => setShowThemes(!showThemes)}
+              className={`p-0.5 border cursor-pointer ${showThemes ? 'bg-[var(--term-main)] text-[var(--term-bg)]' : 'border-[var(--term-dim)] text-[var(--term-dim)]'}`}
+            >
+              <Palette size={14} />
+            </button>
+          </div>
           <Link
             href="/"
             className="text-[10px] md:text-xs text-[var(--term-dim)] hover:text-[var(--term-main)] transition-colors cursor-pointer"
           >
             ← BACK
           </Link>
-        </div>
-        {/* Controls row */}
-        <div className="flex items-center gap-2">
-          {/* Mode Toggle - In play mode, PLAY is active */}
-          <div className="flex border border-[var(--term-main)]">
-            <button
-              onClick={() => setMode('play')}
-              className="px-2 py-1 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors bg-[var(--term-main)] text-[var(--term-bg)]"
-            >
-              <Play size={12} /> PLAY
-            </button>
-            <button
-              onClick={() => setMode('learn')}
-              className="px-2 py-1 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors border-l border-[var(--term-main)] text-[var(--term-dim)] hover:text-[var(--term-main)]"
-            >
-              <BookOpen size={12} /> LEARN
-            </button>
-          </div>
-          {/* Theme Toggle Button */}
-          <button
-            onClick={() => setShowThemes(!showThemes)}
-            className={`p-1 border cursor-pointer ${showThemes ? 'bg-[var(--term-main)] text-[var(--term-bg)]' : 'border-[var(--term-dim)] text-[var(--term-dim)]'}`}
-          >
-              <Palette size={16} />
-          </button>
         </div>
       </header>
 
@@ -753,15 +751,15 @@ function GambitContent() {
           </div>
         </aside>
 
-        {/* Main Content - Board + Analysis, scrollable until lg breakpoint */}
-        <main className="flex-1 flex flex-col min-h-0 relative bg-[var(--term-bg)] overflow-y-auto lg:overflow-hidden">
+        {/* Main Content - Board + Analysis, always scrollable */}
+        <main className="flex-1 flex flex-col min-h-0 relative bg-[var(--term-bg)] overflow-y-auto">
 
           {/* Board Section - scrollable until lg breakpoint, hide when expanded */}
           <div className={`p-2 md:p-4 lg:flex-shrink-0 lg:flex-1 flex flex-col items-center justify-center relative lg:max-h-none ${isMobileExpanded ? 'hidden md:flex' : ''}`}>
 
             {/* Opponent Clock (Black) */}
             {!isUnlimitedTime && (
-              <div className="w-full flex justify-between items-center mb-1 h-[24px] md:h-[36px] flex-shrink-0" style={{ maxWidth: 'min(100%, 85vh)' }}>
+              <div className="w-full flex justify-between items-center mb-1 h-[24px] md:h-[32px] flex-shrink-0" style={{ maxWidth: 'min(100%, 80vh)' }}>
                   <span className="text-[10px] md:text-xs font-bold text-[var(--term-dim)]">OPPONENT {isVsComputer ? '(CPU)' : ''}</span>
                   <Clock
                     timeMs={timeLeft.b}
@@ -771,16 +769,15 @@ function GambitContent() {
               </div>
             )}
 
-            {/* Board Container - Square, width-based on mobile, height-based on desktop */}
+            {/* Board Container - Square, always maintains 1:1 aspect ratio */}
             <div
-              className="flex items-center justify-center relative w-full md:flex-1 md:min-h-0"
-              style={{ maxWidth: 'min(100%, 85vh)' }}
+              className="flex items-center justify-center relative w-full"
+              style={{ maxWidth: 'min(100%, 80vh)', maxHeight: '80vh' }}
             >
                <div
-                 className="shadow-[0_0_10px_rgba(var(--term-main-rgb),0.3)] w-full md:h-full"
+                 className="shadow-[0_0_10px_rgba(var(--term-main-rgb),0.3)] w-full"
                  style={{
                    aspectRatio: '1/1',
-                   maxWidth: '100%',
                  }}
                >
                   <ChessBoard
@@ -814,7 +811,7 @@ function GambitContent() {
 
             {/* Player Clock (White) */}
             {!isUnlimitedTime && (
-              <div className="w-full flex justify-between items-center mt-1 h-[28px] md:h-[36px] flex-shrink-0" style={{ maxWidth: '85vh' }}>
+              <div className="w-full flex justify-between items-center mt-1 h-[24px] md:h-[32px] flex-shrink-0" style={{ maxWidth: '80vh' }}>
                   <span className="text-[10px] md:text-xs font-bold text-[var(--term-dim)]">YOU</span>
                   <Clock
                     timeMs={timeLeft.w}

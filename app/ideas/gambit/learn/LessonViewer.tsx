@@ -58,15 +58,15 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
     // eslint-disable-next-line react-hooks/set-state-in-effect -- Reset UI state when step changes
     setDisplayFen(step.fen);
     // Reset step-specific state
-     
+
     setStepCompleted(step.type === 'explanation' || step.type === 'demonstration');
-     
+
     setAttempts(0);
-     
+
     setHintShown(false);
-     
+
     setFeedback(null);
-     
+
     setLastMove(null);
   }, [currentStepIndex, lesson.id]); // Only depend on index and lesson.id (not lesson.steps object)
 
@@ -178,28 +178,28 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
   }, []);
 
   const containerClass = isModernTheme
-    ? 'h-full bg-[#262421] overflow-y-auto md:overflow-hidden'
-    : 'h-full bg-[var(--term-bg)] overflow-y-auto md:overflow-hidden';
+    ? 'h-full bg-[#262421] overflow-y-auto overflow-x-hidden'
+    : 'h-full bg-[var(--term-bg)] overflow-y-auto overflow-x-hidden';
 
   return (
     <div className={containerClass}>
       {/* Mobile: Exit button at top */}
-      <div className={`md:hidden sticky top-0 z-30 px-4 py-3 flex justify-between items-center ${isModernTheme ? 'bg-[#262421] border-b border-[#3d3a37]' : 'bg-[var(--term-bg)] border-b border-[var(--term-dim)]'}`}>
+      <div className={`md:hidden sticky top-0 z-30 px-3 py-1.5 flex justify-between items-center ${isModernTheme ? 'bg-[#262421] border-b border-[#3d3a37]' : 'bg-[var(--term-bg)] border-b border-[var(--term-dim)]'}`}>
         <button
           onClick={onExit}
-          className={`text-sm py-2 px-3 rounded cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'}`}
+          className={`text-xs py-1 px-2 rounded cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'}`}
         >
           ← Exit
         </button>
-        <span className={`text-xs ${isModernTheme ? 'text-[#8b8987]' : 'text-[var(--term-dim)]'}`}>
+        <span className={`text-[10px] ${isModernTheme ? 'text-[#8b8987]' : 'text-[var(--term-dim)]'}`}>
           Step {currentStepIndex + 1}/{lesson.steps.length}
         </span>
       </div>
 
       {/* Centered content wrapper */}
-      <div className="min-h-0 flex flex-col md:flex-row md:h-full md:justify-center md:items-start p-3 md:p-4 pt-2 md:pt-4 gap-3 md:gap-4">
+      <div className="min-h-0 flex flex-col lg:flex-row lg:h-full lg:justify-center lg:items-start p-2 lg:p-3 gap-2 lg:gap-3">
         {/* Board Section */}
-        <div className="flex-shrink-0 w-full max-w-[500px] md:max-w-[600px] mx-auto md:mx-0 md:pt-10">
+        <div className="flex-shrink-0 w-full max-w-[500px] lg:max-w-[600px] mx-auto lg:mx-0 lg:pt-9">
           <div className="relative w-full">
             <div className="aspect-square">
               <LessonBoard
@@ -229,10 +229,10 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
         </div>
 
         {/* Explanation Panel - full height on desktop, auto height on mobile */}
-        <div className={`w-full md:w-[480px] md:flex-shrink-0 md:h-full md:max-h-full ${isModernTheme ? 'bg-[#312e2b]' : 'bg-[var(--term-bg)]'} rounded-lg`}>
-          <div className="flex flex-col md:h-full md:max-h-full">
+        <div className={`w-full lg:w-[480px] lg:flex-shrink-0 lg:h-full lg:max-h-full ${isModernTheme ? 'bg-[#312e2b]' : 'bg-[var(--term-bg)]'} rounded-lg`}>
+          <div className="flex flex-col lg:h-full lg:max-h-full">
             {/* Exit button - desktop only */}
-            <div className={`hidden md:flex px-4 py-2 justify-end ${isModernTheme ? 'border-b border-[#3d3a37]' : 'border-b border-[var(--term-dim)]'}`}>
+            <div className={`hidden lg:flex px-4 py-2 justify-end ${isModernTheme ? 'border-b border-[#3d3a37]' : 'border-b border-[var(--term-dim)]'}`}>
               <button
                 onClick={onExit}
                 className={`text-sm cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'}`}
