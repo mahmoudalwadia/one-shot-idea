@@ -52,6 +52,7 @@
  */
 
 import { Chess } from 'chess.js';
+import { getBookMove, getAllBookMoves, simplifyFen } from './openingBook';
 
 type Difficulty = 'easy' | 'medium' | 'hard';
 
@@ -203,6 +204,78 @@ const transpositionTable = new Map<number, TTEntry>();
 let useQuiescence = true;
 let maxQuiescenceDepth = 4;
 
+// Killer moves - moves that caused beta cutoffs at each depth (non-captures)
+// Store 2 killers per depth level
+const MAX_DEPTH = 20;
+const killerMoves: [string | null, string | null][] = Array.from({ length: MAX_DEPTH }, () => [null, null]);
+
+// History heuristic - tracks moves that frequently cause cutoffs
+// Indexed by [pieceType][fromSquare][toSquare]
+const historyTable: number[][][] = Array.from({ length: 6 }, () =>
+  Array.from({ length: 64 }, () => Array(64).fill(0))
+);
+
+// Clear killer and history tables for new search
+const clearSearchTables = () => {
+  for (let i = 0; i < MAX_DEPTH; i++) {
+    killerMoves[i] = [null, null];
+  }
+  for (let p = 0; p < 6; p++) {
+    for (let from = 0; from < 64; from++) {
+      for (let to = 0; to < 64; to++) {
+        historyTable[p][from][to] = 0;
+      }
+    }
+  }
+};
+
+// Convert square notation to index (a1=0, h8=63)
+const squareToIndex = (sq: string): number => {
+  const file = sq.charCodeAt(0) - 'a'.charCodeAt(0);
+  const rank = parseInt(sq[1]) - 1;
+  return rank * 8 + file;
+};
+
+// Store a killer move at given depth
+const storeKiller = (move: string, depth: number) => {
+  if (depth >= MAX_DEPTH) return;
+  // Don't store if it's already the first killer
+  if (killerMoves[depth][0] === move) return;
+  // Shift killers: second = first, first = new
+  killerMoves[depth][1] = killerMoves[depth][0];
+  killerMoves[depth][0] = move;
+};
+
+// Update history table on beta cutoff
+const updateHistory = (pieceType: string, from: string, to: string, depth: number) => {
+  const pieceIdx = PIECE_TYPE_INDEX[pieceType];
+  if (pieceIdx === undefined) return;
+  const fromIdx = squareToIndex(from);
+  const toIdx = squareToIndex(to);
+  // Bonus is depth^2 (deeper cutoffs are more valuable)
+  historyTable[pieceIdx][fromIdx][toIdx] += depth * depth;
+  // Prevent overflow
+  if (historyTable[pieceIdx][fromIdx][toIdx] > 10000) {
+    // Age all history values
+    for (let p = 0; p < 6; p++) {
+      for (let f = 0; f < 64; f++) {
+        for (let t = 0; t < 64; t++) {
+          historyTable[p][f][t] = Math.floor(historyTable[p][f][t] / 2);
+        }
+      }
+    }
+  }
+};
+
+// Get history score for a move
+const getHistoryScore = (pieceType: string, from: string, to: string): number => {
+  const pieceIdx = PIECE_TYPE_INDEX[pieceType];
+  if (pieceIdx === undefined) return 0;
+  const fromIdx = squareToIndex(from);
+  const toIdx = squareToIndex(to);
+  return historyTable[pieceIdx][fromIdx][toIdx];
+};
+
 const DIFFICULTY_SETTINGS: Record<Difficulty, { depth: number; randomness: number; quiescence: boolean; maxQuiescenceDepth: number; timeLimitMs: number }> = {
   easy: { depth: 2, randomness: 0.3, quiescence: false, maxQuiescenceDepth: 0, timeLimitMs: 500 },
   medium: { depth: 3, randomness: 0.05, quiescence: true, maxQuiescenceDepth: 2, timeLimitMs: 1000 },
@@ -305,6 +378,286 @@ const evaluateMobility = (game: Chess): number => {
   return game.turn() === 'w' ? moves * 2 : -moves * 2;
 };
 
+// Bishop pair bonus - having two bishops is a significant advantage
+const evaluateBishopPair = (board: ReturnType<Chess['board']>): number => {
+  let whiteBishops = 0;
+  let blackBishops = 0;
+
+  for (const row of board) {
+    for (const piece of row) {
+      if (piece?.type === 'b') {
+        if (piece.color === 'w') whiteBishops++;
+        else blackBishops++;
+      }
+    }
+  }
+
+  let score = 0;
+  if (whiteBishops >= 2) score += 50;
+  if (blackBishops >= 2) score -= 50;
+  return score;
+};
+
+// Rook on open/semi-open file bonus
+const evaluateRookFiles = (board: ReturnType<Chess['board']>): number => {
+  // Count pawns per file
+  const whitePawnsPerFile: number[] = new Array(8).fill(0);
+  const blackPawnsPerFile: number[] = new Array(8).fill(0);
+  const whiteRookFiles: number[] = [];
+  const blackRookFiles: number[] = [];
+
+  for (let row = 0; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      const piece = board[row][col];
+      if (piece?.type === 'p') {
+        if (piece.color === 'w') whitePawnsPerFile[col]++;
+        else blackPawnsPerFile[col]++;
+      } else if (piece?.type === 'r') {
+        if (piece.color === 'w') whiteRookFiles.push(col);
+        else blackRookFiles.push(col);
+      }
+    }
+  }
+
+  let score = 0;
+
+  for (const file of whiteRookFiles) {
+    if (whitePawnsPerFile[file] === 0 && blackPawnsPerFile[file] === 0) {
+      score += 25; // Open file
+    } else if (whitePawnsPerFile[file] === 0) {
+      score += 15; // Semi-open file
+    }
+  }
+
+  for (const file of blackRookFiles) {
+    if (whitePawnsPerFile[file] === 0 && blackPawnsPerFile[file] === 0) {
+      score -= 25; // Open file
+    } else if (blackPawnsPerFile[file] === 0) {
+      score -= 15; // Semi-open file
+    }
+  }
+
+  return score;
+};
+
+// Knight outpost bonus - knight on opponent's side protected by pawn
+const evaluateKnightOutposts = (board: ReturnType<Chess['board']>): number => {
+  let score = 0;
+
+  for (let row = 0; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      const piece = board[row][col];
+      if (piece?.type !== 'n') continue;
+
+      if (piece.color === 'w') {
+        // White knight on rows 0-3 (black's side)
+        if (row <= 3) {
+          // Check if protected by white pawn
+          const leftPawnRow = row + 1;
+          const rightPawnRow = row + 1;
+          const hasPawnSupport =
+            (col > 0 && leftPawnRow < 8 && board[leftPawnRow][col - 1]?.type === 'p' && board[leftPawnRow][col - 1]?.color === 'w') ||
+            (col < 7 && rightPawnRow < 8 && board[rightPawnRow][col + 1]?.type === 'p' && board[rightPawnRow][col + 1]?.color === 'w');
+
+          if (hasPawnSupport) {
+            // Check if can't be attacked by enemy pawn
+            const canBeAttacked =
+              (col > 0 && row > 0 && board[row - 1]?.[col - 1]?.type === 'p' && board[row - 1][col - 1]?.color === 'b') ||
+              (col < 7 && row > 0 && board[row - 1]?.[col + 1]?.type === 'p' && board[row - 1][col + 1]?.color === 'b');
+
+            if (!canBeAttacked) score += 30;
+          }
+        }
+      } else {
+        // Black knight on rows 4-7 (white's side)
+        if (row >= 4) {
+          // Check if protected by black pawn
+          const leftPawnRow = row - 1;
+          const rightPawnRow = row - 1;
+          const hasPawnSupport =
+            (col > 0 && leftPawnRow >= 0 && board[leftPawnRow][col - 1]?.type === 'p' && board[leftPawnRow][col - 1]?.color === 'b') ||
+            (col < 7 && rightPawnRow >= 0 && board[rightPawnRow][col + 1]?.type === 'p' && board[rightPawnRow][col + 1]?.color === 'b');
+
+          if (hasPawnSupport) {
+            // Check if can't be attacked by enemy pawn
+            const canBeAttacked =
+              (col > 0 && row < 7 && board[row + 1]?.[col - 1]?.type === 'p' && board[row + 1][col - 1]?.color === 'w') ||
+              (col < 7 && row < 7 && board[row + 1]?.[col + 1]?.type === 'p' && board[row + 1][col + 1]?.color === 'w');
+
+            if (!canBeAttacked) score -= 30;
+          }
+        }
+      }
+    }
+  }
+
+  return score;
+};
+
+// Connected rooks bonus - rooks on same rank with no pieces between
+const evaluateConnectedRooks = (board: ReturnType<Chess['board']>): number => {
+  let score = 0;
+
+  for (let row = 0; row < 8; row++) {
+    const whiteRookCols: number[] = [];
+    const blackRookCols: number[] = [];
+
+    for (let col = 0; col < 8; col++) {
+      const piece = board[row][col];
+      if (piece?.type === 'r') {
+        if (piece.color === 'w') whiteRookCols.push(col);
+        else blackRookCols.push(col);
+      }
+    }
+
+    // Check if white rooks are connected (on same rank with nothing between)
+    if (whiteRookCols.length === 2) {
+      const [col1, col2] = whiteRookCols.sort((a, b) => a - b);
+      let connected = true;
+      for (let c = col1 + 1; c < col2; c++) {
+        if (board[row][c]) { connected = false; break; }
+      }
+      if (connected) score += 15;
+    }
+
+    // Check if black rooks are connected
+    if (blackRookCols.length === 2) {
+      const [col1, col2] = blackRookCols.sort((a, b) => a - b);
+      let connected = true;
+      for (let c = col1 + 1; c < col2; c++) {
+        if (board[row][c]) { connected = false; break; }
+      }
+      if (connected) score -= 15;
+    }
+  }
+
+  return score;
+};
+
+// Endgame knowledge - drive enemy king to corner/edge in winning endgames
+const evaluateEndgame = (board: ReturnType<Chess['board']>, phase: number): number => {
+  // Only apply in endgame (phase <= 6 means very few pieces left)
+  if (phase > 6) return 0;
+
+  let score = 0;
+  let whiteKingPos = { row: 0, col: 0 };
+  let blackKingPos = { row: 0, col: 0 };
+  let whiteMaterial = 0;
+  let blackMaterial = 0;
+  let whiteHasQueen = false;
+  let whiteHasRook = false;
+  let blackHasQueen = false;
+  let blackHasRook = false;
+  let whitePawns = 0;
+  let blackPawns = 0;
+
+  // Count material and find kings
+  for (let row = 0; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      const piece = board[row][col];
+      if (!piece) continue;
+
+      if (piece.type === 'k') {
+        if (piece.color === 'w') whiteKingPos = { row, col };
+        else blackKingPos = { row, col };
+      } else {
+        const value = PIECE_VALUES[piece.type] || 0;
+        if (piece.color === 'w') {
+          whiteMaterial += value;
+          if (piece.type === 'q') whiteHasQueen = true;
+          if (piece.type === 'r') whiteHasRook = true;
+          if (piece.type === 'p') whitePawns++;
+        } else {
+          blackMaterial += value;
+          if (piece.type === 'q') blackHasQueen = true;
+          if (piece.type === 'r') blackHasRook = true;
+          if (piece.type === 'p') blackPawns++;
+        }
+      }
+    }
+  }
+
+  // Distance to corner (0-3 = corner, higher = center)
+  const distToCorner = (pos: { row: number; col: number }): number => {
+    const fileFromEdge = Math.min(pos.col, 7 - pos.col);
+    const rankFromEdge = Math.min(pos.row, 7 - pos.row);
+    return fileFromEdge + rankFromEdge;
+  };
+
+  // Distance to edge (0 = edge, higher = center)
+  const distToEdge = (pos: { row: number; col: number }): number => {
+    return Math.min(
+      Math.min(pos.col, 7 - pos.col),
+      Math.min(pos.row, 7 - pos.row)
+    );
+  };
+
+  // King distance (Manhattan)
+  const kingDistance = Math.abs(whiteKingPos.row - blackKingPos.row) +
+                       Math.abs(whiteKingPos.col - blackKingPos.col);
+
+  // K+Q vs K or K+R vs K: Drive enemy king to corner/edge
+  if (whiteMaterial > 0 && blackMaterial === 0 && blackPawns === 0) {
+    // White is winning - drive black king to corner
+    if (whiteHasQueen) {
+      // K+Q vs K: corner is best
+      score += (7 - distToCorner(blackKingPos)) * 20;
+      // Bring king closer
+      score += (14 - kingDistance) * 5;
+    } else if (whiteHasRook) {
+      // K+R vs K: edge is good
+      score += (3 - distToEdge(blackKingPos)) * 25;
+      // Bring king closer
+      score += (14 - kingDistance) * 5;
+    }
+  }
+
+  if (blackMaterial > 0 && whiteMaterial === 0 && whitePawns === 0) {
+    // Black is winning - drive white king to corner
+    if (blackHasQueen) {
+      score -= (7 - distToCorner(whiteKingPos)) * 20;
+      score -= (14 - kingDistance) * 5;
+    } else if (blackHasRook) {
+      score -= (3 - distToEdge(whiteKingPos)) * 25;
+      score -= (14 - kingDistance) * 5;
+    }
+  }
+
+  // K+P vs K: Basic passed pawn evaluation
+  if (whitePawns > 0 && blackMaterial === 0 && blackPawns === 0) {
+    // Bonus for advancing pawns in K+P vs K
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = board[row][col];
+        if (piece?.type === 'p' && piece.color === 'w') {
+          // Pawn advancement bonus (row 0 = 8th rank = promotion)
+          score += (7 - row) * 15;
+          // King support for pawn
+          const kingDistToPawn = Math.abs(whiteKingPos.row - row) + Math.abs(whiteKingPos.col - col);
+          score += (8 - kingDistToPawn) * 5;
+        }
+      }
+    }
+  }
+
+  if (blackPawns > 0 && whiteMaterial === 0 && whitePawns === 0) {
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = board[row][col];
+        if (piece?.type === 'p' && piece.color === 'b') {
+          // Pawn advancement bonus (row 7 = 1st rank = promotion for black)
+          score -= row * 15;
+          // King support for pawn
+          const kingDistToPawn = Math.abs(blackKingPos.row - row) + Math.abs(blackKingPos.col - col);
+          score -= (8 - kingDistToPawn) * 5;
+        }
+      }
+    }
+  }
+
+  return score;
+};
+
 const evaluateBoard = (game: Chess): number => {
   if (game.isCheckmate()) return game.turn() === 'w' ? -30000 : 30000;
   if (game.isDraw()) return 0;
@@ -340,6 +693,15 @@ const evaluateBoard = (game: Chess): number => {
   score += evaluateKingSafety(game) * (1 - endgameWeight);
   score += evaluateMobility(game) * 0.5;
 
+  // Additional evaluation terms
+  score += evaluateBishopPair(board);
+  score += evaluateRookFiles(board);
+  score += evaluateKnightOutposts(board);
+  score += evaluateConnectedRooks(board) * (1 - endgameWeight); // Less important in endgame
+
+  // Endgame knowledge
+  score += evaluateEndgame(board, phase);
+
   return score;
 };
 
@@ -351,7 +713,7 @@ const getMVVLVAScore = (move: { captured?: string; piece: string }): number => {
   return victimValue * 10 - attackerValue;
 };
 
-const orderMoves = (game: Chess, moves: string[]): { san: string; score: number }[] => {
+const orderMoves = (game: Chess, moves: string[], depth: number = 0): { san: string; score: number; moveObj?: { piece: string; from: string; to: string; captured?: string } }[] => {
   const ttKey = computeZobristHash(game);
   const ttEntry = transpositionTable.get(ttKey);
 
@@ -359,13 +721,32 @@ const orderMoves = (game: Chess, moves: string[]): { san: string; score: number 
     const moveObj = game.move(san);
     let score = 0;
 
+    // TT best move (highest priority)
     if (ttEntry?.bestMove === san) score += 10000;
-    if (moveObj.captured) score += getMVVLVAScore(moveObj) + 1000;
+
+    // Captures (MVV-LVA ordering)
+    if (moveObj.captured) {
+      score += getMVVLVAScore(moveObj) + 5000;
+    } else {
+      // Non-captures: check killer moves
+      if (depth < MAX_DEPTH) {
+        if (killerMoves[depth][0] === san) score += 9000;
+        else if (killerMoves[depth][1] === san) score += 8000;
+      }
+
+      // History heuristic for quiet moves
+      score += getHistoryScore(moveObj.piece, moveObj.from, moveObj.to);
+    }
+
+    // Promotions
     if (moveObj.promotion) score += PIECE_VALUES[moveObj.promotion] + 500;
+
+    // Check bonus
     if (game.isCheck()) score += 50;
 
+    const moveData = { piece: moveObj.piece, from: moveObj.from, to: moveObj.to, captured: moveObj.captured };
     game.undo();
-    return { san, score };
+    return { san, score, moveObj: moveData };
   }).sort((a, b) => b.score - a.score);
 };
 
@@ -457,8 +838,9 @@ const minimaxWithTT = (
     } catch { /* ignore */ }
   }
 
-  const orderedMoves = orderMoves(game, moves);
+  const orderedMoves = orderMoves(game, moves, depth);
   let bestMove: string | undefined;
+  let bestMoveData: { piece: string; from: string; to: string; captured?: string } | undefined;
   let bestValue = maximizing ? -Infinity : Infinity;
   let flag: 'exact' | 'lower' | 'upper' = 'exact';
 
@@ -489,16 +871,34 @@ const minimaxWithTT = (
       if (value > bestValue) {
         bestValue = value;
         bestMove = move.san;
+        bestMoveData = move.moveObj;
       }
       if (value > alpha) alpha = value;
-      if (alpha >= beta) { flag = 'lower'; break; }
+      if (alpha >= beta) {
+        // Beta cutoff - store killer and update history for quiet moves
+        if (move.moveObj && !move.moveObj.captured) {
+          storeKiller(move.san, depth);
+          updateHistory(move.moveObj.piece, move.moveObj.from, move.moveObj.to, depth);
+        }
+        flag = 'lower';
+        break;
+      }
     } else {
       if (value < bestValue) {
         bestValue = value;
         bestMove = move.san;
+        bestMoveData = move.moveObj;
       }
       if (value < beta) beta = value;
-      if (alpha >= beta) { flag = 'upper'; break; }
+      if (alpha >= beta) {
+        // Beta cutoff - store killer and update history for quiet moves
+        if (move.moveObj && !move.moveObj.captured) {
+          storeKiller(move.san, depth);
+          updateHistory(move.moveObj.piece, move.moveObj.from, move.moveObj.to, depth);
+        }
+        flag = 'upper';
+        break;
+      }
     }
   }
 
@@ -536,20 +936,20 @@ const extractPV = (game: Chess, maxLength: number = 6): string[] => {
   return pv;
 };
 
-// Search at a specific depth
-const searchAtDepth = (game: Chess, depth: number): { move: string | null; value: number } => {
+// Search at a specific depth with aspiration window
+const searchAtDepth = (game: Chess, depth: number, alpha: number = -Infinity, beta: number = Infinity): { move: string | null; value: number } => {
   const moves = game.moves();
   if (moves.length === 0) return { move: null, value: 0 };
 
   let bestMove: string | null = null;
   let bestValue = game.turn() === 'w' ? -Infinity : Infinity;
-  const orderedMoves = orderMoves(game, moves);
+  const orderedMoves = orderMoves(game, moves, depth);
 
   for (const move of orderedMoves) {
     if (searchAborted) break;
 
     game.move(move.san);
-    const boardValue = minimaxWithTT(game, depth - 1, -Infinity, Infinity, game.turn() === 'w');
+    const boardValue = minimaxWithTT(game, depth - 1, alpha, beta, game.turn() === 'w');
     game.undo();
 
     if (searchAborted) break;
@@ -559,11 +959,13 @@ const searchAtDepth = (game: Chess, depth: number): { move: string | null; value
         bestValue = boardValue;
         bestMove = move.san;
       }
+      if (boardValue > alpha) alpha = boardValue;
     } else {
       if (boardValue < bestValue) {
         bestValue = boardValue;
         bestMove = move.san;
       }
+      if (boardValue < beta) beta = boardValue;
     }
   }
 
@@ -579,6 +981,12 @@ const getBestMoveWithPV = (fen: string, difficulty: Difficulty): { move: string 
     return { move: null, pv: [], eval: 0 };
   }
 
+  // Check opening book first (instant response)
+  const bookMove = getBookMove(fen);
+  if (bookMove && moves.includes(bookMove)) {
+    return { move: bookMove, pv: [bookMove], eval: 0 };
+  }
+
   // Only one legal move - return immediately
   if (moves.length === 1) {
     return { move: moves[0], pv: [moves[0]], eval: 0 };
@@ -592,6 +1000,9 @@ const getBestMoveWithPV = (fen: string, difficulty: Difficulty): { move: string 
   searchStartTime = Date.now();
   searchAborted = false;
 
+  // Clear killer moves and history for new search
+  clearSearchTables();
+
   // Don't clear TT - reuse from previous searches for better move ordering
   if (transpositionTable.size > 100000) {
     transpositionTable.clear(); // Only clear if too large
@@ -603,13 +1014,33 @@ const getBestMoveWithPV = (fen: string, difficulty: Difficulty): { move: string 
     return { move: randomMove, pv: [randomMove], eval: 0 };
   }
 
-  // Iterative deepening: start at depth 1, go deeper until time runs out
+  // Iterative deepening with aspiration windows
   let bestMove: string | null = moves[0]; // Default to first move
   let bestValue = 0;
+  const ASPIRATION_WINDOW = 50; // 0.5 pawns initial window
 
   for (let depth = 1; depth <= maxDepth; depth++) {
     searchAborted = false;
-    const result = searchAtDepth(game, depth);
+    let result: { move: string | null; value: number };
+
+    // Use aspiration windows starting from depth 2
+    if (depth >= 2) {
+      let alpha = bestValue - ASPIRATION_WINDOW;
+      let beta = bestValue + ASPIRATION_WINDOW;
+
+      result = searchAtDepth(game, depth, alpha, beta);
+
+      // If search fell outside window and wasn't aborted, re-search with full window
+      if (!searchAborted && result.move) {
+        if (result.value <= alpha || result.value >= beta) {
+          searchAborted = false;
+          result = searchAtDepth(game, depth, -Infinity, Infinity);
+        }
+      }
+    } else {
+      // Depth 1: use full window
+      result = searchAtDepth(game, depth);
+    }
 
     // Only use result if search completed (wasn't aborted)
     if (!searchAborted && result.move) {
@@ -625,13 +1056,86 @@ const getBestMoveWithPV = (fen: string, difficulty: Difficulty): { move: string 
   return { move: bestMove, pv, eval: bestValue };
 };
 
+/**
+ * Analyze all legal moves in a position using deep search.
+ * Returns moves ranked by evaluation with book move recognition.
+ * Used for game analysis (reviewing past moves for accuracy).
+ */
+interface AnalyzedMove {
+  san: string;
+  score: number;
+  isBookMove: boolean;
+}
+
+const analyzeAllMoves = (fen: string, depth: number = 4): AnalyzedMove[] => {
+  const game = new Chess(fen);
+  const moves = game.moves();
+
+  if (moves.length === 0) return [];
+
+  // Get book moves for this position
+  const simplifiedFen = simplifyFen(fen);
+  const bookMoves = getAllBookMoves(simplifiedFen);
+  const bookMoveSet = new Set(bookMoves);
+
+  // Configure search settings for analysis (no randomness, deep search)
+  useQuiescence = true;
+  maxQuiescenceDepth = 3;
+  searchTimeLimit = 30000; // 30 seconds max for full analysis
+  searchStartTime = Date.now();
+  searchAborted = false;
+
+  // Clear search tables for fresh analysis
+  clearSearchTables();
+
+  const results: AnalyzedMove[] = [];
+  const isWhite = game.turn() === 'w';
+
+  // Analyze each move
+  for (const san of moves) {
+    game.move(san);
+
+    // Search from opponent's perspective after the move
+    const score = minimaxWithTT(
+      game,
+      depth - 1,
+      -Infinity,
+      Infinity,
+      game.turn() === 'w' // Now it's opponent's turn
+    );
+
+    game.undo();
+
+    results.push({
+      san,
+      // Negate score since we searched from opponent's perspective
+      score: isWhite ? score : -score,
+      isBookMove: bookMoveSet.has(san)
+    });
+  }
+
+  // Sort by score (best first for current player)
+  results.sort((a, b) => {
+    if (isWhite) {
+      return b.score - a.score; // White wants highest score
+    } else {
+      return a.score - b.score; // Black wants lowest score
+    }
+  });
+
+  return results;
+};
+
 // Worker message handler
-self.onmessage = (e: MessageEvent<{ type: string; fen: string; difficulty: Difficulty }>) => {
-  const { type, fen, difficulty } = e.data;
+self.onmessage = (e: MessageEvent<{ type: string; fen: string; difficulty?: Difficulty; depth?: number }>) => {
+  const { type, fen, difficulty, depth } = e.data;
 
   if (type === 'getBestMove') {
-    const result = getBestMoveWithPV(fen, difficulty);
+    const result = getBestMoveWithPV(fen, difficulty || 'medium');
     self.postMessage(result);
+  } else if (type === 'analyze') {
+    const evaluatedMoves = analyzeAllMoves(fen, depth || 4);
+    self.postMessage({ type: 'analysis', moves: evaluatedMoves });
   }
 };
 

@@ -33,7 +33,7 @@
   --color-term-card: #1a202c;
 }
 
-/* Gambit Viz Terminal Themes */
+/* Gambit Terminal Themes */
 :root {
   /* Default (Slate / B&W) */
   --term-main: #ffffff;
@@ -104,6 +104,24 @@ body.theme-slate {
   --term-border: #ffffff;
 }
 
+/* Theme: Modern (Lichess-style) */
+body.theme-modern {
+  --term-main: #bababa;
+  --term-main-rgb: 186, 186, 186;
+  --term-dim: #8b8987;
+  --term-dim-rgb: 139, 137, 135;
+  --term-bg: #312e2b;
+  --term-border: #5c5955;
+  /* Lichess board colors */
+  --board-light: #f0d9b5;
+  --board-dark: #b58863;
+  --board-highlight-light: #cdd26a;
+  --board-highlight-dark: #aaa23a;
+  --board-selected-light: #f7f783;
+  --board-selected-dark: #bbcc44;
+  --board-use-solid: 1;
+}
+
 /* Body styling for Terminal Themes */
 body.theme-green,
 body.theme-amber,
@@ -112,6 +130,15 @@ body.theme-rose,
 body.theme-purple,
 body.theme-slate {
   font-family: var(--font-vt323), monospace;
+  background-color: var(--term-bg);
+  color: var(--term-main);
+  overflow: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Body styling for Modern Theme (no ASCII/terminal aesthetic) */
+body.theme-modern {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   background-color: var(--term-bg);
   color: var(--term-main);
   overflow: hidden;
@@ -138,6 +165,7 @@ body:has(#japanese-web-page) {
   height: auto !important;
   min-height: 100vh !important;
 }
+
 
 /* CRT Scanline Effect for Terminal Themes */
 body.theme-green::before,

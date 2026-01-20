@@ -31,6 +31,72 @@ import { Chess, Move } from 'chess.js';
 import { MoveClassification } from '../types';
 import { classifyMove } from './moveReview';
 
+// === ANALYSIS WORKER ===
+// Lazy-initialized worker for deep position analysis
+let analysisWorker: Worker | null = null;
+
+interface AnalyzedMove {
+  san: string;
+  score: number;
+  isBookMove: boolean;
+}
+
+interface AnalysisResult {
+  type: 'analysis';
+  moves: AnalyzedMove[];
+}
+
+/**
+ * Get or create the analysis worker (lazy initialization)
+ */
+const getAnalysisWorker = (): Worker | null => {
+  if (typeof window === 'undefined') return null; // SSR guard
+
+  if (!analysisWorker) {
+    try {
+      analysisWorker = new Worker(
+        new URL('./chessWorker.ts', import.meta.url)
+      );
+    } catch (e) {
+      console.error('Failed to create analysis worker:', e);
+      return null;
+    }
+  }
+  return analysisWorker;
+};
+
+/**
+ * Deep analysis of a position using web worker.
+ * Returns all moves ranked by search evaluation.
+ */
+export const analyzePositionDeep = async (fen: string, depth: number = 4): Promise<AnalyzedMove[]> => {
+  return new Promise((resolve) => {
+    const worker = getAnalysisWorker();
+
+    if (!worker) {
+      // Fallback: return empty array if worker unavailable
+      resolve([]);
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      // Timeout after 30 seconds
+      resolve([]);
+    }, 30000);
+
+    const handler = (e: MessageEvent<AnalysisResult>) => {
+      if (e.data.type === 'analysis') {
+        clearTimeout(timeoutId);
+        worker.removeEventListener('message', handler);
+        resolve(e.data.moves);
+      }
+    };
+
+    worker.addEventListener('message', handler);
+    worker.postMessage({ type: 'analyze', fen, depth });
+  });
+};
+
 // Difficulty level type
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
@@ -1009,92 +1075,121 @@ export const getEvaluatedMoves = (game: Chess, limit: number = 3, _depth: number
     });
 };
 
-// Local Analysis Implementation - Optimized for speed
+// Local Analysis Implementation - Uses deep search via web worker for accuracy
 export const analyzeBoardLocal = async (gameObj: Chess): Promise<{ analysis: string, classification: MoveClassification, evalScore?: number }> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            // 1. Get current status
-            if (gameObj.isCheckmate()) {
-                resolve({
-                    analysis: "Checkmate! The game is over.",
-                    classification: "Brilliant",
-                    evalScore: gameObj.turn() === 'w' ? -20000 : 20000
-                });
-                return;
-            }
-            if (gameObj.isDraw()) {
-                resolve({
-                    analysis: "Draw position.",
-                    classification: "Book",
-                    evalScore: 0
-                });
-                return;
-            }
+    // 1. Get current status
+    if (gameObj.isCheckmate()) {
+        return {
+            analysis: "Checkmate! The game is over.",
+            classification: "Brilliant",
+            evalScore: gameObj.turn() === 'w' ? -20000 : 20000
+        };
+    }
+    if (gameObj.isDraw()) {
+        return {
+            analysis: "Draw position.",
+            classification: "Book",
+            evalScore: 0
+        };
+    }
 
-            const history = gameObj.history({ verbose: true });
-            if (history.length === 0) {
-                 resolve({
-                    analysis: "Game Start.",
-                    classification: "Book",
-                    evalScore: 0
-                });
-                return;
-            }
+    const history = gameObj.history({ verbose: true });
+    if (history.length === 0) {
+        return {
+            analysis: "Game Start.",
+            classification: "Book",
+            evalScore: 0
+        };
+    }
 
-            const lastMove = history[history.length - 1];
-            const moveSan = lastMove.san;
+    const lastMove = history[history.length - 1];
+    const moveSan = lastMove.san;
 
-            // 2. Clone to go back one step to evaluate the position BEFORE the move
-            const tempGame = new Chess(gameObj.fen());
+    // 2. Clone to go back one step to evaluate the position BEFORE the move
+    const tempGame = new Chess(gameObj.fen());
+    tempGame.undo();
+    const fenBefore = tempGame.fen();
+
+    // 3. Use deep analysis via web worker (depth 4 search)
+    const analyzedMoves = await analyzePositionDeep(fenBefore, 4);
+
+    // Fallback to static eval if worker analysis failed
+    if (analyzedMoves.length === 0) {
+        // Use fast static eval as fallback
+        const moves = tempGame.moves();
+        const evaluatedCandidates: { san: string; score: number; isBookMove: boolean }[] = [];
+        const isWhiteTurn = tempGame.turn() === 'w';
+
+        for (const m of moves) {
+            tempGame.move(m);
+            const score = evaluateBoard(tempGame);
             tempGame.undo();
+            evaluatedCandidates.push({ san: m, score, isBookMove: false });
+        }
 
-            const isWhiteTurn = tempGame.turn() === 'w';
+        if (isWhiteTurn) {
+            evaluatedCandidates.sort((a, b) => b.score - a.score);
+        } else {
+            evaluatedCandidates.sort((a, b) => a.score - b.score);
+        }
 
-            // 3. FAST evaluation: Only use static eval (no minimax) for speed
-            const moves = tempGame.moves();
-            const evaluatedCandidates: { san: string; score: number }[] = [];
+        const bestMoveObj = evaluatedCandidates[0];
+        const playedMoveIndex = evaluatedCandidates.findIndex(c => c.san === moveSan);
+        const playedMoveScore = playedMoveIndex !== -1 ? evaluatedCandidates[playedMoveIndex].score : 0;
 
-            for (const m of moves) {
-                tempGame.move(m);
-                const score = evaluateBoard(tempGame); // Static eval only - much faster
-                tempGame.undo();
-                evaluatedCandidates.push({ san: m, score });
-            }
+        const review = classifyMove({
+            evalBefore: bestMoveObj?.score || 0,
+            evalAfter: playedMoveScore,
+            fenBefore: fenBefore,
+            fenAfter: gameObj.fen(),
+            moveSan: moveSan,
+            bestMoveSan: bestMoveObj?.san || "",
+            turn: tempGame.turn(),
+            rank: playedMoveIndex !== -1 ? playedMoveIndex + 1 : moves.length
+        });
 
-            // Sort candidates to find best and rank
-            if (isWhiteTurn) {
-                evaluatedCandidates.sort((a, b) => b.score - a.score);
-            } else {
-                evaluatedCandidates.sort((a, b) => a.score - b.score);
-            }
+        return {
+            analysis: review.explanation,
+            classification: review.classification,
+            evalScore: playedMoveScore
+        };
+    }
 
-            const bestMoveObj = evaluatedCandidates[0];
-            const bestScore = bestMoveObj ? bestMoveObj.score : 0;
-            const bestMoveSan = bestMoveObj ? bestMoveObj.san : "";
+    // 4. Find the played move in deep analysis results
+    const bestMoveObj = analyzedMoves[0];
+    const bestScore = bestMoveObj?.score || 0;
+    const bestMoveSan = bestMoveObj?.san || "";
 
-            // Find rank of played move
-            const playedMoveIndex = evaluatedCandidates.findIndex(c => c.san === moveSan);
-            const playedMoveScore = playedMoveIndex !== -1 ? evaluatedCandidates[playedMoveIndex].score : 0;
-            const playedMoveRank = playedMoveIndex !== -1 ? playedMoveIndex + 1 : moves.length;
+    const playedMoveIndex = analyzedMoves.findIndex(m => m.san === moveSan);
+    const playedMoveData = playedMoveIndex !== -1 ? analyzedMoves[playedMoveIndex] : null;
+    const playedMoveScore = playedMoveData?.score || 0;
+    const playedMoveRank = playedMoveIndex !== -1 ? playedMoveIndex + 1 : analyzedMoves.length;
+    const isBookMove = playedMoveData?.isBookMove || false;
 
-            // 4. Use Move Review Module
-            const review = classifyMove({
-                evalBefore: bestScore,
-                evalAfter: playedMoveScore,
-                fenBefore: tempGame.fen(),
-                fenAfter: gameObj.fen(),
-                moveSan: moveSan,
-                bestMoveSan: bestMoveSan,
-                turn: tempGame.turn(),
-                rank: playedMoveRank
-            });
+    // 5. Special case: Book moves get "Book" classification
+    if (isBookMove) {
+        return {
+            analysis: `${moveSan} is a standard opening book move.`,
+            classification: "Book",
+            evalScore: playedMoveScore
+        };
+    }
 
-            resolve({
-                analysis: review.explanation,
-                classification: review.classification,
-                evalScore: playedMoveScore
-            });
-
-        }, 0); // Reduced timeout from 10ms to 0
+    // 6. Use Move Review Module with accurate deep-search evaluations
+    const review = classifyMove({
+        evalBefore: bestScore,
+        evalAfter: playedMoveScore,
+        fenBefore: fenBefore,
+        fenAfter: gameObj.fen(),
+        moveSan: moveSan,
+        bestMoveSan: bestMoveSan,
+        turn: tempGame.turn(),
+        rank: playedMoveRank
     });
+
+    return {
+        analysis: review.explanation,
+        classification: review.classification,
+        evalScore: playedMoveScore
+    };
 };

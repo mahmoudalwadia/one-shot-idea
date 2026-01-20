@@ -57,6 +57,10 @@ const CONFIG = {
     kBase: 0.0035,        // Sensitivity to centipawn diff
     mateScore: 20000,     // Threshold where we consider it a forced mate sequence
 
+    // Equality margin: moves within this many centipawns of best are considered equally good
+    // This prevents classifying near-equal alternatives as suboptimal
+    equalityMarginCp: 20, // 0.2 pawns - moves within this range are all "Best"
+
     // Classification Thresholds (Expected Points Loss)
     thresholds: {
         best: 0.005,
@@ -174,7 +178,12 @@ export const classifyMove = (input: MoveReviewInput): MoveReviewOutput => {
     // Use rank as a strong hint if available
     // If Rank 1, it's effectively Best unless loss is high (which implies engine noise or fail low)
 
-    if (epLoss <= CONFIG.thresholds.best) classification = 'Best';
+    // Check equality margin: if played move is within margin of best, it's "Best"
+    // This handles cases where multiple moves are essentially equal
+    const cpDiff = Math.abs(cpBefore - cpAfter);
+    const withinEqualityMargin = cpDiff <= CONFIG.equalityMarginCp;
+
+    if (withinEqualityMargin || epLoss <= CONFIG.thresholds.best) classification = 'Best';
     else if (epLoss <= CONFIG.thresholds.excellent) classification = 'Excellent';
     else if (epLoss <= CONFIG.thresholds.good) classification = 'Good';
     else if (epLoss <= CONFIG.thresholds.inaccuracy) classification = 'Inaccuracy';

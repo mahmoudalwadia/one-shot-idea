@@ -16,7 +16,8 @@ import {
     Minimize2,
     TrendingUp,
     Lightbulb,
-    EyeOff
+    EyeOff,
+    Loader2
 } from 'lucide-react';
 
 interface DeepAnalysisPanelProps {
@@ -26,6 +27,7 @@ interface DeepAnalysisPanelProps {
   isMobileExpanded?: boolean;
   onToggleMobileExpand?: () => void;
   principalVariation?: string[];
+  analyzingNodeId?: string | null;
 }
 
 // --- Classification Helpers ---
@@ -86,6 +88,7 @@ interface MoveRowProps {
     isActiveBlack: boolean;
     onNodeClick: (n: TreeNode) => void;
     showDebug: boolean;
+    analyzingNodeId?: string | null;
 }
 
 const MoveCell: React.FC<{
@@ -94,11 +97,12 @@ const MoveCell: React.FC<{
     onClick: (n: TreeNode) => void;
     showDebug: boolean;
     hasBorderRight?: boolean;
-}> = ({ node, isActive, onClick, showDebug, hasBorderRight }) => {
+    isAnalyzing?: boolean;
+}> = ({ node, isActive, onClick, showDebug, hasBorderRight, isAnalyzing }) => {
     if (!node) return <div className={`h-full ${hasBorderRight ? 'border-r border-[var(--term-dim)] border-opacity-30' : ''}`} />;
 
     const config = getClassificationConfig(node.classification);
-    const Icon = config?.icon;
+    const Icon = isAnalyzing ? Loader2 : config?.icon;
 
     // Eval Bar Logic
     const evalScore = node.evalScore ?? 0;
@@ -127,8 +131,8 @@ const MoveCell: React.FC<{
                 </span>
 
                 {Icon && (
-                    <span className={`${config?.color} drop-shadow-sm`}>
-                         <Icon size={14} className={config?.fill} strokeWidth={2.5} />
+                    <span className={`${isAnalyzing ? 'text-[var(--term-main)]' : config?.color} drop-shadow-sm`}>
+                         <Icon size={14} className={`${isAnalyzing ? 'animate-spin' : config?.fill}`} strokeWidth={2.5} />
                     </span>
                 )}
             </div>
@@ -150,7 +154,7 @@ const MoveCell: React.FC<{
     );
 };
 
-const MoveRow: React.FC<MoveRowProps> = ({ moveNum, white, black, isActiveWhite, isActiveBlack, onNodeClick, showDebug }) => {
+const MoveRow: React.FC<MoveRowProps> = ({ moveNum, white, black, isActiveWhite, isActiveBlack, onNodeClick, showDebug, analyzingNodeId }) => {
     return (
         <div className="grid grid-cols-[36px_1fr_1fr] border-b border-[var(--term-dim)] border-opacity-30 h-9 items-stretch">
             {/* Move Number */}
@@ -165,6 +169,7 @@ const MoveRow: React.FC<MoveRowProps> = ({ moveNum, white, black, isActiveWhite,
                 onClick={onNodeClick}
                 showDebug={showDebug}
                 hasBorderRight={true}
+                isAnalyzing={white?.id === analyzingNodeId}
             />
 
             {/* Black Move */}
@@ -173,6 +178,7 @@ const MoveRow: React.FC<MoveRowProps> = ({ moveNum, white, black, isActiveWhite,
                 isActive={isActiveBlack}
                 onClick={onNodeClick}
                 showDebug={showDebug}
+                isAnalyzing={black?.id === analyzingNodeId}
             />
         </div>
     );
@@ -180,7 +186,7 @@ const MoveRow: React.FC<MoveRowProps> = ({ moveNum, white, black, isActiveWhite,
 
 // --- Main Panel ---
 
-const DeepAnalysisPanel: React.FC<DeepAnalysisPanelProps> = ({ rootNode, activeNodeId, onNodeClick, isMobileExpanded, onToggleMobileExpand, principalVariation }) => {
+const DeepAnalysisPanel: React.FC<DeepAnalysisPanelProps> = ({ rootNode, activeNodeId, onNodeClick, isMobileExpanded, onToggleMobileExpand, principalVariation, analyzingNodeId }) => {
     // Debug toggle removed, defaulting to false
     const showDebug = false;
     // Hint is hidden by default
@@ -285,7 +291,7 @@ const DeepAnalysisPanel: React.FC<DeepAnalysisPanelProps> = ({ rootNode, activeN
              <div className="flex justify-between items-center p-2 border-b border-[var(--term-main)] bg-[rgba(var(--term-main-rgb),0.05)]">
                  <div className="flex items-center gap-2">
                      <Activity size={16} className="text-[var(--term-main)]" />
-                     <span className="text-sm font-bold text-[var(--term-main)] uppercase tracking-wider">Deep Analysis</span>
+                     <span className="text-sm font-bold text-[var(--term-main)] uppercase tracking-wider">Analysis</span>
                  </div>
 
                  {/* Mobile Toggle Button (Replaces Debug) */}
@@ -367,6 +373,7 @@ const DeepAnalysisPanel: React.FC<DeepAnalysisPanelProps> = ({ rootNode, activeN
                             isActiveBlack={row.b?.id === activeNodeId}
                             onNodeClick={onNodeClick}
                             showDebug={showDebug}
+                            analyzingNodeId={analyzingNodeId}
                          />
                      ))
                  )}

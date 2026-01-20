@@ -25,7 +25,7 @@ function HomeContent() {
     { slug: "terra", title: "Terra", featured: true },
     { slug: "minesweeper", title: "Minesweeper", featured: false },
     { slug: "terminal-solitaire", title: "Terminal Solitaire", featured: false },
-    { slug: "gambit-viz---ascii", title: "Gambit Viz", featured: true },
+    { slug: "gambit", title: "Gambit", featured: true },
     { slug: "ascii-cortex", title: "ASCII Cortex", featured: false },
     { slug: "a-train-retro-sim", title: "A-Train Retro Sim", featured: false },
     { slug: "pixel-chaos-engine", title: "Pixel Chaos Engine", featured: true },
