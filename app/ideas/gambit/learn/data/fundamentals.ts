@@ -49,7 +49,7 @@ Let's learn how each piece moves!`,
         {
           id: 'pawn-movement',
           type: 'explanation',
-          fen: '8/8/8/8/8/8/4P3/8 w - - 0 1',
+          fen: '7k/8/8/8/8/8/4P3/K7 w - - 0 1',
           title: 'The Pawn',
           explanation: `Pawns are the most numerous pieces - you start with 8 of them!
 
@@ -78,7 +78,7 @@ The highlighted pawn can move to e3 (one square) or e4 (two squares on first mov
         {
           id: 'pawn-capture',
           type: 'interactive',
-          fen: '8/8/8/3p4/4P3/8/8/8 w - - 0 1',
+          fen: '7k/8/8/3p4/4P3/8/8/K7 w - - 0 1',
           title: 'Pawn Capture Practice',
           explanation: `Your White pawn on e4 can capture the Black pawn on d5.
 
@@ -95,7 +95,7 @@ Remember: Pawns capture **diagonally forward**, not straight ahead!
         {
           id: 'knight-movement',
           type: 'explanation',
-          fen: '8/8/8/8/4N3/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/4N3/8/8/K7 w - - 0 1',
           title: 'The Knight',
           explanation: `The Knight is the trickiest piece to learn - but also the most fun!
 
@@ -137,7 +137,7 @@ From the center, a Knight can reach up to **8 squares**. From a corner, only 2!
         {
           id: 'knight-practice',
           type: 'interactive',
-          fen: '8/8/3p4/8/4N3/8/8/8 w - - 0 1',
+          fen: '7k/8/3p4/8/4N3/8/8/K7 w - - 0 1',
           title: 'Knight Capture Practice',
           explanation: `Your Knight on e4 can capture the Black pawn on d6.
 
@@ -154,7 +154,7 @@ Remember the L-shape: two squares up, one square left (or any other L-pattern).
         {
           id: 'bishop-movement',
           type: 'explanation',
-          fen: '8/8/8/8/4B3/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/4B3/8/8/K7 w - - 0 1',
           title: 'The Bishop',
           explanation: `Bishops are the diagonal specialists of chess.
 
@@ -189,7 +189,7 @@ The arrows show the Bishop's range from e4.`,
         {
           id: 'rook-movement',
           type: 'explanation',
-          fen: '8/8/8/8/4R3/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/4R3/8/8/K7 w - - 0 1',
           title: 'The Rook',
           explanation: `Rooks are powerful pieces that control straight lines.
 
@@ -223,7 +223,7 @@ The arrows show how the Rook controls both the rank and file.`,
         {
           id: 'queen-movement',
           type: 'explanation',
-          fen: '8/8/8/8/4Q3/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/4Q3/8/8/K7 w - - 0 1',
           title: 'The Queen',
           explanation: `The Queen is the most powerful piece on the board!
 
@@ -258,7 +258,7 @@ The Queen truly is the "powerhouse" of the chess army.`,
         {
           id: 'king-movement',
           type: 'explanation',
-          fen: '8/8/8/8/4K3/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/4K3/8/8/8 w - - 0 1',
           title: 'The King',
           explanation: `The King is the most important piece - if it's checkmated, you lose!
 
@@ -352,11 +352,11 @@ Understanding these concepts is essential. Let's explore each one!
         {
           id: 'what-is-check',
           type: 'explanation',
-          fen: 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3',
+          fen: 'rnb1kbnr/pppp1ppp/8/4p3/4P2q/5P2/PPPP2PP/RNBQKBNR w KQkq - 1 3',
           title: 'What is Check?',
           explanation: `**Check** means the King is under attack by an enemy piece.
 
-In this position, the Black Queen on h4 is attacking the White King on e1. This is check!
+In this position (after 1. e4 e5 2. f3?? Qh4+), the Black Queen on h4 is attacking the White King on e1. This is check!
 
 **When you're in check, you MUST respond.** You have only three options:
 
@@ -383,9 +383,11 @@ If you can do any of these, you escape check. If you can't do any of them, it's 
         {
           id: 'escape-check',
           type: 'interactive',
-          fen: 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3',
+          fen: 'rnb1kbnr/pppp1ppp/8/4p3/4P2q/5P2/PPPP2PP/RNBQKBNR w KQkq - 1 3',
           title: 'Escape from Check!',
           explanation: `The White King is in check from the Queen on h4!
+
+This position can happen after 1. e4 e5 2. f3?? Qh4+ - a classic blunder!
 
 Find a way to escape the check. Remember your three options:
 1. Move the King
@@ -393,8 +395,8 @@ Find a way to escape the check. Remember your three options:
 3. Capture the attacker
 
 **Get out of check!**`,
-          correctMoves: ['Ke2', 'Kf1', 'g3'],
-          successMessage: 'Great escape! You got out of check by either moving the King or blocking with g3.',
+          correctMoves: ['Ke2', 'g3'],
+          successMessage: 'Great escape! You got out of check by moving the King or blocking with g3.',
           failureMessage: 'You must escape check! Try moving the King to safety or blocking with a pawn.',
           wrongMoveHints: {
             'Qe2': 'The Queen blocks, but then Qxe2 is checkmate! Find another way.',
@@ -454,18 +456,18 @@ Hint: Use your Rook to attack the King on a square it cannot escape from.`,
         {
           id: 'what-is-stalemate',
           type: 'explanation',
-          fen: '7k/8/6K1/8/8/8/8/7Q w - - 0 1',
+          fen: '7k/8/5KQ1/8/8/8/8/8 b - - 0 1',
           title: 'What is Stalemate?',
           explanation: `**Stalemate** is when a player has NO legal moves but is NOT in check.
 
 **Result: The game is a DRAW!**
 
-Look at this position if it were Black's turn:
-• The Black King is NOT in check
-• But every square around it is either attacked by the Queen or the White King
+Look at this position - it's Black's turn:
+• The Black King is NOT in check (Queen on g6 doesn't attack h8)
+• But every square around it is attacked: g8, g7 by Queen; h7 by Queen
 • Black has no legal moves!
 
-This would be **stalemate** - a draw, even though White has a huge advantage!
+This is **stalemate** - a draw, even though White has a huge advantage!
 
 **Stalemate is different from checkmate:**
 • Checkmate: King IS in check, no escape → attacker WINS
@@ -481,30 +483,31 @@ This would be **stalemate** - a draw, even though White has a huge advantage!
             { square: 'g7', color: 'red' },
           ],
           arrows: [
-            { from: 'h1', to: 'h7', color: 'red' },
-            { from: 'g6', to: 'g7', color: 'red' },
+            { from: 'g6', to: 'g8', color: 'red' },
+            { from: 'g6', to: 'h7', color: 'red' },
           ],
         },
         {
           id: 'stalemate-vs-checkmate',
           type: 'interactive',
-          fen: 'k7/8/1K6/8/8/8/8/7Q w - - 0 1',
+          fen: 'k7/8/K7/8/8/8/8/6Q1 w - - 0 1',
           title: 'Checkmate or Stalemate?',
           explanation: `White wants to checkmate Black, not stalemate!
 
-The Black King is in the corner. Choose carefully:
-• Some moves give checkmate (win!)
-• Some moves give stalemate (draw!)
+The Black King is trapped in the corner by the White King. Choose your Queen move carefully:
+• One move gives checkmate (win!)
+• Another move gives stalemate (draw!)
 
 **Find the move that delivers CHECKMATE, not stalemate!**
 
-Think: Will the King be in check? Will it have any escape squares?`,
-          correctMoves: ['Qb7#', 'Qa1#'],
+Hint: Qb1 would block the b8 escape square but NOT give check - that's stalemate!`,
+          correctMoves: ['Qg8#', 'Qg8', 'Qa7#', 'Qa7'],
           wrongMoveHints: {
-            'Qa7': 'This is stalemate! The King is NOT in check but has no legal moves. Try again!',
-            'Qh8': 'This is stalemate! The King is NOT in check but has no legal moves. Try again!',
+            'Qb1': 'Stalemate! The King is NOT in check but has no legal moves. The game is a draw!',
+            'Qa1+': 'Check! But the King can escape to b8. Try another move.',
+            'Qa1': 'Check! But the King can escape to b8. Try another move.',
           },
-          successMessage: 'Checkmate! The King is in check and has no escape. You avoided the stalemate trap!',
+          successMessage: 'Checkmate! Both Qg8 and Qa7 deliver checkmate - the King is in check and has no escape squares (a7 and b7 blocked by your King, b8 blocked by your Queen).',
           failureMessage: 'Make sure your move puts the King in CHECK while also cutting off all escape squares.',
         },
         {
@@ -608,7 +611,7 @@ She combines the powers of both the Rook (horizontal and vertical movement) and 
         {
           id: 'rooks-value',
           type: 'explanation',
-          fen: 'r6r/8/8/8/8/8/8/R6R w - - 0 1',
+          fen: 'r5kr/8/8/8/8/8/8/R4K1R w - - 0 1',
           title: 'The Power of Rooks',
           explanation: `Rooks are worth **5 points** each - the second most valuable pieces after the Queen.
 
@@ -870,6 +873,42 @@ The King is still in the center - dangerous! Any tactics on the e-file could be 
           ],
         },
         {
+          id: 'castle-queenside',
+          type: 'interactive',
+          fen: 'r3kbnr/pppqpppp/2n5/3p4/3P1B2/2N2N2/PPP1PPPP/R3KB1R w KQkq - 0 1',
+          title: 'Queenside Castling (O-O-O)',
+          explanation: `Sometimes queenside castling is the better choice! In this position, White has developed pieces and the queenside is clear.
+
+**Queenside castling (O-O-O) is different:**
+• King moves TWO squares toward the a-file Rook (e1 → c1)
+• Rook jumps to d1 - immediately centralizing it!
+• The Rook becomes active right away
+
+**When to castle queenside:**
+• When kingside is under attack
+• When you want an aggressive game
+• When your Rook will be useful on the d-file
+
+**In this position:**
+• The b1, c1, d1 squares are empty
+• Neither the King's path nor landing square is attacked
+• Queenside castling activates the Rook on the d-file!
+
+**Castle queenside now!**`,
+          correctMoves: ['O-O-O'],
+          successMessage: `Excellent! O-O-O! Your King is safe on c1, and the Rook on d1 is immediately active on the open d-file. Queenside castling often leads to more aggressive games - your Rook is ready to support the d-pawn or join an attack!`,
+          failureMessage: 'Remember: O-O-O means queenside castling. Move the King two squares toward the a-file Rook!',
+          highlights: [
+            { square: 'e1', color: 'red' },
+            { square: 'c1', color: 'green' },
+            { square: 'd1', color: 'blue' },
+          ],
+          arrows: [
+            { from: 'e1', to: 'c1', color: 'green' },
+            { from: 'a1', to: 'd1', color: 'blue' },
+          ],
+        },
+        {
           id: 'castling-rules',
           type: 'explanation',
           fen: 'r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1',
@@ -1017,7 +1056,7 @@ If not, find an alternative move.`,
         {
           id: 'intro',
           type: 'explanation',
-          fen: '8/4P3/8/8/8/8/8/8 w - - 0 1',
+          fen: '7k/4P3/8/8/8/8/8/K7 w - - 0 1',
           title: 'Pawns Have Superpowers!',
           explanation: `Pawns may seem like the weakest pieces, but they have two special abilities no other piece has!
 
@@ -1089,7 +1128,7 @@ When you move the pawn to e8, it will automatically become a Queen (the most pow
         {
           id: 'en-passant-rule',
           type: 'explanation',
-          fen: '8/8/8/3Pp3/8/8/8/8 w - e6 0 1',
+          fen: '7k/8/8/3Pp3/8/8/8/K7 w - e6 0 1',
           title: 'En Passant: The Special Capture',
           explanation: `**En passant** (French for "in passing") is the most unusual rule in chess!
 
@@ -1652,7 +1691,7 @@ If Black plays **Nxe5!** (Knight captures):
 **Alternative:** What if Black doesn't capture?
 
 Decide: Capture now, or maintain tension with a developing move?`,
-          correctMoves: ['exd4', 'Bb4', 'Bc5', 'd6'],
+          correctMoves: ['exd4', 'd6'],
           successMessage: 'Good choice! Both capturing and developing are reasonable here. The key is that you analyzed before deciding!',
           arrows: [
             { from: 'e5', to: 'd4', color: 'yellow' },
@@ -1838,7 +1877,7 @@ Look at the White King on g1 and the White Queen on d1. Is there a square where 
         {
           id: 'pin-practice',
           type: 'interactive',
-          fen: 'r2qkb1r/ppp2ppp/2n1bn2/3pp3/4P3/1B3N2/PPPP1PPP/RNBQ1RK1 w kq - 0 6',
+          fen: 'r2qkb1r/ppp2ppp/2n1bn2/4p3/3PP3/1B3N2/PPP2PPP/RNBQ1RK1 w kq - 0 6',
           title: 'Create a Winning Pin!',
           explanation: `White has a Bishop on b3 aiming at the Black King on e8.
 
@@ -2073,7 +2112,7 @@ You need to find a move that defends against this deadly threat.
 • Which moves counter-attack the Queen?
 
 Find a move that saves you from checkmate!`,
-          correctMoves: ['g6', 'Qe7', 'Qf6'],
+          correctMoves: ['g6', 'Qe7'],
           wrongMoveHints: {
             'Bc5': 'This doesn\'t stop Qxf7# - the f7 pawn is still hanging!',
             'Nxe4': 'Winning a pawn, but Qxf7# is checkmate! Always look for checks first.',
@@ -2114,7 +2153,7 @@ In this position, Black has just played Ne5?? (Knight to e5).
         {
           id: 'undefended-pieces',
           type: 'interactive',
-          fen: 'r2qkb1r/ppp2ppp/2n1bn2/3pp3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 0 5',
+          fen: 'r2qkb1r/ppp2ppp/2n1bn2/4p3/2BPP3/5N2/PPP2PPP/RNBQK2R w KQkq - 0 5',
           title: 'Find the Weakness',
           explanation: `Look at Black's position carefully.
 
@@ -2422,7 +2461,7 @@ This is why back rank themes combine with other tactics!
         {
           id: 'puzzle',
           type: 'puzzle',
-          fen: 'r1b2rk1/ppppqppp/8/4N3/1bB5/8/PPPP1PPP/R1BQR1K1 w - - 0 1',
+          fen: 'r1b2rk1/ppp1qppp/8/4N3/1bB5/8/PPP2PPP/R1BQ1RK1 w - - 0 1',
           title: 'Back Rank Puzzle',
           explanation: `White to play and win using back rank themes!
 
@@ -2432,7 +2471,7 @@ This is why back rank themes combine with other tactics!
 • What happens if the Queen leaves the e-file?
 
 Find the winning move!`,
-          correctMoves: ['Qd8', 'Qxd7'],
+          correctMoves: ['Qd8+'],
           wrongMoveHints: {
             'Re8': 'Close, but Black can play Qxe8 defending!',
           },
@@ -2623,7 +2662,7 @@ Qf6 or Qf7 keeps Black's King trapped but gives it g8 to move to. Then White can
         {
           id: 'edge-mate',
           type: 'interactive',
-          fen: '4k3/8/4K3/8/8/8/8/4Q3 w - - 0 1',
+          fen: 'k7/8/1KQ5/8/8/8/8/8 w - - 0 1',
           title: 'Deliver Checkmate',
           explanation: `The Black King is on the edge of the board. Your King supports the Queen perfectly.
 
@@ -2632,10 +2671,10 @@ Qf6 or Qf7 keeps Black's King trapped but gives it g8 to move to. Then White can
 Find the move that ends the game!
 
 **Remember:** The King must have no escape squares, and must be in check.`,
-          correctMoves: ['Qe7#', 'Qa8#', 'Qb8#', 'Qd8#'],
+          correctMoves: ['Qb7#', 'Qc8#'],
           successMessage: 'Checkmate! The King has no escape. You mastered the K+Q checkmate!',
           arrows: [
-            { from: 'e1', to: 'e7', color: 'green' },
+            { from: 'c6', to: 'b7', color: 'green' },
           ],
         },
         {
@@ -2671,7 +2710,7 @@ Key points: Restrict → King approach → Push to edge → Checkmate!`,
         {
           id: 'summary',
           type: 'explanation',
-          fen: '8/8/8/8/8/8/8/4QK2 w - - 0 1',
+          fen: '7k/8/8/8/8/8/8/4QK2 w - - 0 1',
           title: 'K+Q Checkmate Summary',
           explanation: `**The K+Q Checkmate Technique:**
 
@@ -2906,7 +2945,7 @@ Keep maximum distance between your Rook and the enemy King!`,
         {
           id: 'summary',
           type: 'explanation',
-          fen: '8/8/8/8/8/8/8/R3K3 w - - 0 1',
+          fen: '7k/8/8/8/8/8/8/R3K3 w - - 0 1',
           title: 'K+R Checkmate Summary',
           explanation: `**The K+R Checkmate Technique (Box Method):**
 

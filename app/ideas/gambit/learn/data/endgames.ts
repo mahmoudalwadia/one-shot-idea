@@ -108,8 +108,8 @@ Think about:
 - Which move cuts off the most squares?
 - What rank or file should your queen control?
 - How can you confine the king to the smallest possible area?`,
-          correctMoves: ['Qd1', 'Qe4+', 'Qb1', 'Qc1'],
-          successMessage: 'Excellent! The queen now creates a barrier the king cannot cross. Notice how much of the board is now off-limits to Black.',
+          correctMoves: ['Qh5+', 'Qe4+'],
+          successMessage: 'Excellent! The queen creates a barrier the king cannot cross. Whether you chose Qh5+ (controlling the 5th rank) or Qe4+ (check while restricting), you\'ve limited the king\'s movement!',
           failureMessage: 'Try using the queen to create a barrier the king cannot cross. Control a rank or file that restricts the king!',
           highlights: [
             { square: 'd5', color: 'red' },
@@ -149,22 +149,23 @@ In this position, White should play Ke3-d4-c5-c6 to approach. The queen keeps Bl
         {
           id: 'deliver-mate',
           type: 'interactive',
-          fen: '3k4/3Q4/3K4/8/8/8/8/8 w - - 0 1',
+          fen: '1k6/8/1K6/8/8/8/8/7Q w - - 0 1',
           title: 'Practice: Deliver Checkmate',
-          explanation: `The king is on the edge, and your king is perfectly positioned. Now deliver the checkmate!
+          explanation: `The black king is trapped on b8 with your king on b6 covering escape squares. Your queen on h1 is ready to strike!
 
 Look for a queen move that:
 - Gives check
 - Leaves the enemy king with no escape squares
-- Uses your king to cover potential flight squares`,
-          correctMoves: ['Qb7', 'Qc8#', 'Qe8#', 'Qa7#'],
-          successMessage: 'Checkmate! Notice how your king and queen work together - the king covers escape squares while the queen delivers the final blow.',
+- Uses your king to cover potential flight squares (a7, b7, c7)`,
+          correctMoves: ['Qb7#', 'Qh8#'],
+          successMessage: 'Checkmate! Notice how your king and queen work together - the king covers a7, b7, and c7 while the queen delivers the final blow.',
           failureMessage: 'The king is trapped on the edge. Look for a check that leaves no escape squares!',
           highlights: [
-            { square: 'd8', color: 'red' },
+            { square: 'b8', color: 'red' },
           ],
           arrows: [
-            { from: 'd7', to: 'e8', color: 'green' },
+            { from: 'h1', to: 'b7', color: 'green' },
+            { from: 'h1', to: 'h8', color: 'green' },
           ],
         },
         {
@@ -208,12 +209,16 @@ In this position, playing Qa1?? looks natural but is actually stalemate! The bla
           title: 'Find the Winning Move',
           explanation: `In this critical position, you must find the checkmate that DOESN'T result in stalemate.
 
-Remember: the goal is to give check while ensuring the king has nowhere to run. But be careful - one wrong move and it's a draw!`,
-          correctMoves: ['Qa1#'],
-          successMessage: 'Correct! Qa1 is actually checkmate here (not stalemate as we warned about) because the queen gives CHECK from a1. The king is in check with no escape!',
-          failureMessage: 'Look carefully - find the queen move that checkmates. Remember, if you give check, it cannot be stalemate!',
+Remember: the goal is to give check while ensuring the king has nowhere to run. But be careful - Qa1 looks tempting but allows Kb8!`,
+          correctMoves: ['Qb7#', 'Qh8#'],
+          wrongMoveHints: {
+            'Qa1': 'Close! Qa1 gives check, but the black king can escape to b8. Look for a move that covers b8 as well.',
+          },
+          successMessage: 'Checkmate! Your queen delivers the final blow while your king covers a7, b7, and c7. The black king has no escape!',
+          failureMessage: 'Look carefully - find the queen move that checkmates. The king needs to be in check with no escape squares!',
           arrows: [
-            { from: 'h1', to: 'a1', color: 'green' },
+            { from: 'h1', to: 'b7', color: 'green' },
+            { from: 'h1', to: 'h8', color: 'green' },
           ],
         },
         {
@@ -442,17 +447,17 @@ Better is Ra1 (waiting) or Ka5 (approaching), maintaining the pressure.`,
         {
           id: 'final-mate',
           type: 'interactive',
-          fen: 'k7/R7/1K6/8/8/8/8/8 w - - 0 1',
+          fen: 'k7/2K5/8/8/8/8/8/R7 w - - 0 1',
           title: 'Deliver the Checkmate',
-          explanation: `You've successfully driven the enemy king to the edge of the board. Now it's time to finish the game!
+          explanation: `You've successfully driven the enemy king to the corner. Your king on c7 controls all escape squares (b7, b8). Now deliver the final blow!
 
-Find the checkmate. Remember: the enemy king is trapped on the back rank.`,
-          correctMoves: ['Ra8#'],
+Find the checkmate with your rook. The black king is trapped with nowhere to run.`,
+          correctMoves: ['Ra6#', 'Ra5#', 'Ra4#', 'Ra3#', 'Ra2#'],
           arrows: [
-            { from: 'a7', to: 'a8', color: 'green' },
+            { from: 'a1', to: 'a6', color: 'green' },
           ],
-          successMessage: 'Checkmate! Ra8# - the king is trapped on the back rank with no escape. Your king covers b7 and b8.',
-          failureMessage: 'The black king is trapped on the edge. Give check on the back rank!',
+          successMessage: 'Checkmate! The rook delivers check along the a-file, and your king on c7 covers b7 and b8. The black king has no escape!',
+          failureMessage: 'The black king is cornered on a8. Use your rook to give check along the a-file!',
           highlights: [
             { square: 'a8', color: 'red' },
             { square: 'b7', color: 'yellow' },
@@ -559,7 +564,7 @@ This becomes crucial when pawns are added to the position.`,
         {
           id: 'take-opposition',
           type: 'interactive',
-          fen: '8/8/8/4k3/8/3K4/8/8 w - - 0 1',
+          fen: '8/8/4k3/8/8/3K4/8/8 w - - 0 1',
           title: 'Taking the Opposition',
           explanation: `Now it's your turn! Currently neither side has opposition because the kings are not directly facing each other.
 
@@ -614,12 +619,12 @@ The same position - but whether it's a win or draw depends entirely on whose tur
         {
           id: 'winning-position',
           type: 'interactive',
-          fen: '8/8/4k3/4P3/4K3/8/8/8 w - - 0 1',
+          fen: '8/4k3/8/4P3/3K4/8/8/8 w - - 0 1',
           title: 'Convert with Opposition',
-          explanation: `White has the opposition here (it's Black to move, but let's say it just became White's turn after Kd7-e6).
+          explanation: `White's king is on d4, pawn on e5, and Black's king is on e7.
 
-Actually wait - with White to move, White needs to maintain the advantage. Find the winning move that outflanks the black king!`,
-          correctMoves: ['Kd5', 'Kf5'],
+White needs to advance and support the pawn. Find the winning move that outflanks the black king!`,
+          correctMoves: ['Kd5', 'Ke4'],
           successMessage: 'Excellent! By outflanking (going around) the black king, White\'s king will eventually reach e6 or d6, protecting the pawn\'s advance to promotion.',
           failureMessage: 'You have the opposition, so Black must move away. Use this to outflank - go AROUND the black king!',
           arrows: [
@@ -952,7 +957,7 @@ Approach from the wider side (toward the center, not the edge). Here White shoul
         {
           id: 'summary',
           type: 'explanation',
-          fen: '8/8/8/8/4P3/8/8/4K3 w - - 0 1',
+          fen: '7k/8/8/8/4P3/8/8/4K3 w - - 0 1',
           title: 'Key Squares Summary',
           explanation: `Key squares are essential knowledge for pawn endgames:
 
@@ -1264,7 +1269,7 @@ Rook endgames reward deep understanding. The positions may look simple, but the 
         {
           id: 'intro',
           type: 'explanation',
-          fen: '8/p7/8/8/8/8/7P/8 w - - 0 1',
+          fen: '7k/p7/8/8/8/8/7P/K7 w - - 0 1',
           title: 'Racing to Promote',
           explanation: `**Pawn races** occur when both sides have passed pawns running toward promotion. These are some of the most exciting endgames - and they require precise calculation!
 
@@ -1292,7 +1297,7 @@ The question then becomes: Can White's queen stop Black's pawn?
         {
           id: 'counting-moves',
           type: 'explanation',
-          fen: '8/p7/8/8/8/8/7P/8 w - - 0 1',
+          fen: '7k/p7/8/8/8/8/7P/K7 w - - 0 1',
           title: 'The Art of Counting',
           explanation: `Accurate counting is the foundation of pawn race calculations. Here's how to do it reliably:
 
@@ -1330,7 +1335,7 @@ The question then becomes: Can White's queen stop Black's pawn?
         {
           id: 'queen-vs-pawn',
           type: 'explanation',
-          fen: '8/8/8/8/8/p7/8/K6Q w - - 0 1',
+          fen: '7k/8/8/8/8/p7/8/K6Q w - - 0 1',
           title: 'Queen vs Pawn: Usually Winning',
           explanation: `After one pawn queens, the typical scenario is Queen vs Pawn (about to queen). Here's what happens:
 
@@ -1359,7 +1364,7 @@ White wins with: Qc1! (threatening Qc3 winning the pawn)
         {
           id: 'race-calculation',
           type: 'interactive',
-          fen: '8/8/p7/8/8/8/5P2/8 w - - 0 1',
+          fen: '7k/8/p7/8/8/8/5P2/K7 w - - 0 1',
           title: 'Calculate the Race',
           explanation: `White to move. Both sides have passed pawns.
 
@@ -1380,7 +1385,7 @@ Count carefully: How many moves does each pawn need?`,
         {
           id: 'bishop-pawn-exception',
           type: 'explanation',
-          fen: '8/8/8/8/8/2p5/8/K6Q w - - 0 1',
+          fen: '7k/8/8/8/8/2p5/8/K6Q w - - 0 1',
           title: 'The c-Pawn and f-Pawn Exception',
           explanation: `Here's a critical exception every player must know!
 
@@ -1414,7 +1419,7 @@ In pawn races against c or f pawns:
         {
           id: 'rook-pawn-exception',
           type: 'explanation',
-          fen: '8/8/8/8/8/7p/8/K6Q w - - 0 1',
+          fen: '7k/8/8/8/8/7p/8/K6Q w - - 0 1',
           title: 'The Rook Pawn Exception',
           explanation: `Even more famous than the bishop pawn is the **rook pawn (a and h pawns)** exception!
 
@@ -1482,7 +1487,7 @@ Count the moves for each plan. The geometry of king movement decides these posit
         {
           id: 'summary',
           type: 'explanation',
-          fen: '8/p7/8/8/8/8/7P/8 w - - 0 1',
+          fen: '7k/p7/8/8/8/8/7P/K7 w - - 0 1',
           title: 'Pawn Race Summary',
           explanation: `Pawn races require precise calculation. Here's your checklist:
 
@@ -1679,7 +1684,7 @@ Even without Black having a bishop, White's bishop is extremely powerful. Find a
         {
           id: 'wrong-bishop',
           type: 'explanation',
-          fen: '8/8/8/8/8/B7/7P/6k1 w - - 0 1',
+          fen: '8/8/8/8/8/B4K2/7P/6k1 w - - 0 1',
           title: 'The Wrong-Colored Bishop',
           explanation: `One of the most famous drawing scenarios involves a **rook pawn and the "wrong" bishop**.
 
@@ -2068,7 +2073,7 @@ Knight endgames reward the player who understands both tactics (forks) and strat
         {
           id: 'intro',
           type: 'explanation',
-          fen: '4r3/ppp2ppp/2n2n2/3pp3/3PP3/2N2N2/PPP2PPP/4R1K1 w - - 0 1',
+          fen: '4r1k1/ppp2ppp/2n2n2/3pp3/3PP3/2N2N2/PPP2PPP/4R1K1 w - - 0 1',
           title: 'Endgame Philosophy',
           explanation: `Beyond specific theoretical positions, successful endgame play requires understanding **general principles** that apply across all endgame types.
 
@@ -2221,7 +2226,7 @@ When you're winning, slow down. Verify each move. The clock rarely matters more 
         {
           id: 'calculate-carefully',
           type: 'interactive',
-          fen: '8/5k2/8/5PK1/8/8/8/8 w - - 0 1',
+          fen: '5k2/8/8/5PK1/8/8/8/8 w - - 0 1',
           title: 'Calculate to the End',
           explanation: `Even simple-looking positions require calculation to the end!
 
@@ -2242,7 +2247,7 @@ Calculate carefully before moving. Where should the king go?`,
         {
           id: 'know-theory',
           type: 'explanation',
-          fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/8/8/8/K7 w - - 0 1',
           title: 'Know Your Theoretical Positions',
           explanation: `Certain endgame positions should be **memorized**. Recognizing them instantly saves time and prevents errors.
 
@@ -2319,7 +2324,7 @@ The players who understand endgames have a massive advantage. Invest the time - 
         {
           id: 'intro',
           type: 'explanation',
-          fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/8/8/8/K7 w - - 0 1',
           title: 'What is a Fortress?',
           explanation: `A **fortress** is a defensive setup where the defending side holds a draw despite being materially behind, because the attacking side **cannot make progress**.
 
@@ -2537,7 +2542,7 @@ This is one of the most common "surprising draws" in practical games. Know it co
 Evaluate this position: Is Black's setup a fortress, or can White win?
 
 Find a move that demonstrates whether this is holdable or not!`,
-          correctMoves: ['Qe8+', 'Qa1', 'Qb4', 'Qc5'],
+          correctMoves: ['Qe8+', 'Qb4', 'Qa5'],
           successMessage: 'Correct! This is NOT a fortress - White can infiltrate and win. The queen can penetrate via e8+ or through the dark squares. Black\'s pawns don\'t form a secure wall, and the king can be driven from the corner.',
           failureMessage: 'Look for a way for the queen to attack Black\'s position. Can you find entry points? Does Black have a true fortress or just a passive position?',
           highlights: [
@@ -2551,7 +2556,7 @@ Find a move that demonstrates whether this is holdable or not!`,
         {
           id: 'summary',
           type: 'explanation',
-          fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/8/8/8/K7 w - - 0 1',
           title: 'Fortress Summary',
           explanation: `Fortresses are powerful defensive resources. Know these key patterns:
 

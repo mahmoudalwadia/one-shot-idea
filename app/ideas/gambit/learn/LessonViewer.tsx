@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Chess, Square } from 'chess.js';
-import { Lesson, LessonStep } from './data/types';
+import { Lesson, LessonStep, Arrow } from './data/types';
 import LessonBoard from './components/LessonBoard';
 import ExplanationPanel from './components/ExplanationPanel';
 import FeedbackOverlay from './components/FeedbackOverlay';
@@ -47,6 +47,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
   const [hintShown, setHintShown] = useState(false);
   const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
   const [isModernTheme, setIsModernTheme] = useState(false);
+  const [solutionArrow, setSolutionArrow] = useState<Arrow | null>(null);
 
   // Reset displayFen and step-specific state when step index changes
   // This is the ONLY place where displayFen gets reset to match a step
@@ -68,7 +69,9 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
     setFeedback(null);
 
     setLastMove(null);
-  }, [currentStepIndex, lesson.id]); // Only depend on index and lesson.id (not lesson.steps object)
+
+    setSolutionArrow(null);
+  }, [currentStepIndex, lesson]); // Reset when step changes or lesson data changes
 
   // Theme detection
   useEffect(() => {
@@ -85,9 +88,9 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
   const handleMove = useCallback((from: Square, to: Square) => {
     if (stepCompleted) return;
 
-    const game = new Chess(displayFen);
-
     try {
+      const game = new Chess(displayFen);
+
       // Try the move
       const move = game.move({ from, to, promotion: 'q' }); // Auto-promote to queen for simplicity
 
@@ -96,8 +99,12 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
       }
 
       const moveSan = move.san;
+
+      // Normalize move notation for comparison (strip check/checkmate symbols)
+      const normalizeMove = (m: string) => m.replace(/[+#]$/, '').toLowerCase();
+
       const isCorrect = currentStep.correctMoves?.some(
-        cm => cm.toLowerCase() === moveSan.toLowerCase() ||
+        cm => normalizeMove(cm) === normalizeMove(moveSan) ||
               cm.toLowerCase() === `${from}${to}`.toLowerCase()
       );
 
@@ -167,11 +174,26 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
   const handleShowAnswer = useCallback(() => {
     setHintShown(true);
     if (currentStep.correctMoves && currentStep.correctMoves.length > 0) {
-      setFeedback({ type: 'success', message: `Answer: ${currentStep.correctMoves[0]}` });
+      const moveNotation = currentStep.correctMoves[0];
+      setFeedback({ type: 'success', message: `Answer: ${moveNotation}` });
+
+      // Try to parse the move and show an arrow
+      try {
+        const game = new Chess(displayFen);
+        // Remove check/checkmate symbols for parsing
+        const cleanMove = moveNotation.replace(/[+#]$/, '');
+        const move = game.move(cleanMove);
+        if (move) {
+          setSolutionArrow({ from: move.from, to: move.to, color: 'green' });
+        }
+      } catch {
+        // If parsing fails, no arrow shown
+      }
+
       // Allow continuing after showing answer
       setStepCompleted(true);
     }
-  }, [currentStep]);
+  }, [currentStep, displayFen]);
 
   const dismissOverlay = useCallback(() => {
     setShowOverlay(null);
@@ -205,7 +227,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
               <LessonBoard
                 fen={displayFen}
                 onMove={handleMove}
-                arrows={currentStep.arrows}
+                arrows={solutionArrow ? [...(currentStep.arrows || []), solutionArrow] : currentStep.arrows}
                 highlights={currentStep.highlights}
                 interactive={
                   (currentStep.type === 'interactive' || currentStep.type === 'puzzle') &&

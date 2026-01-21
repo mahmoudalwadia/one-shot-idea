@@ -155,7 +155,7 @@ In this endgame, the d5 pawn will likely decide the game. White's plan: push d6,
         {
           id: 'create-passed',
           type: 'interactive',
-          fen: '8/5pk1/4p1p1/3pP3/3P4/6K1/8/8 w - - 0 1',
+          fen: '8/5pk1/4p1p1/2p1P3/3P4/6K1/8/8 w - - 0 1',
           title: 'Create a Passed Pawn',
           explanation: `White has a pawn breakthrough available. The pawns are locked, but a clever sacrifice can create a devastating passed pawn!
 
@@ -294,7 +294,7 @@ A knight like this is often worth nearly as much as a rook!`,
           explanation: `White's position is solid but passive. One of White's knights can occupy a powerful central outpost where it cannot be challenged by Black's pawns.
 
 Which knight should go where?`,
-          correctMoves: ['Ne5', 'Nfe5', 'Nce5'],
+          correctMoves: ['Ne5'],
           highlights: [
             { square: 'e5', color: 'yellow' },
           ],
@@ -710,14 +710,14 @@ This trades the "bad" light-squared bishop (stuck behind e6-d5) for White's "goo
           fen: 'r1bq1rk1/1p2bppp/p1n1pn2/2pp4/3PP3/2NB1N2/PP3PPP/R1BQ1RK1 w - - 0 10',
           title: 'Improve Your Bishop',
           explanation: `White's light-squared bishop on d3 is currently blocked by the e4 pawn. White should reposition it to a more active diagonal. Find the best retreat square!`,
-          correctMoves: ['Bf5'],
-          successMessage: `**Excellent!** Bf5! places the bishop on a beautiful diagonal where it's not blocked by any pawns. From f5 it eyes d7, e6, and can support a kingside attack. Compare this to staying on d3 where it's blocked by e4!`,
+          correctMoves: ['Be2'],
+          successMessage: `**Excellent!** Be2! repositions the bishop to a flexible square where it's no longer blocked by the e4 pawn. From e2, it can later go to g4 or f3 to become truly active. Compare this to staying on d3 where it's blocked by e4!`,
           failureMessage: 'The bishop on d3 is blocked by your own e4 pawn. Where can it go to be truly active?',
           arrows: [
-            { from: 'd3', to: 'f5', color: 'green' },
+            { from: 'd3', to: 'e2', color: 'green' },
           ],
           highlights: [
-            { square: 'f5', color: 'green' },
+            { square: 'e2', color: 'green' },
           ],
         },
       ],
@@ -1038,7 +1038,7 @@ The side with less space should seek exchanges and pawn breaks!`,
         {
           id: 'break-space',
           type: 'interactive',
-          fen: 'r1bq1rk1/pp1nbppp/2p1pn2/3pP3/3P1P2/2N2N2/PPP1B1PP/R1BQK2R b KQ - 2 8',
+          fen: 'r1bqnrk1/pp1nbppp/2p1p3/3pP3/3P1P2/2N2N2/PPP1B1PP/R1BQK2R b KQ - 2 8',
           title: 'Challenge the Space',
           explanation: `Black is cramped and needs to fight back. What pawn break challenges White's space advantage and frees Black's position?`,
           correctMoves: ['f6', 'c5'],
@@ -1212,16 +1212,16 @@ Most estimates put it at **0.3-0.5 pawns** in open positions. In very open posit
         {
           id: 'trade-for-knight',
           type: 'interactive',
-          fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 b - - 2 8',
+          fen: 'r1bq1rk1/ppp2ppp/2np1n2/4p3/1bB1P3/2NP1N2/PPP2PPP/R1BQ1RK1 b - - 2 8',
           title: 'Strategic Exchange',
           explanation: `In this Italian Game position, Black can make a strategic exchange. Sometimes trading a bishop for a knight makes sense.
 
 Which knight should Black target, and why?`,
-          correctMoves: ['Bxf3'],
-          successMessage: `**Correct!** ...Bxf3 trades the c5 bishop (which looks active but has limited future) for the f3 knight (White's best piece, defending key squares). This also messes up White's pawn structure. The position will remain semi-closed, where Black's remaining knight can find good squares.`,
-          failureMessage: 'Think about which White piece is most valuable and which of your pieces you\'d least mind giving up.',
+          correctMoves: ['Bxc3'],
+          successMessage: `**Correct!** ...Bxc3 trades the c5 bishop for the c3 knight, messing up White's pawn structure after bxc3. The doubled c-pawns are a permanent weakness. The position will remain semi-closed, where Black's remaining knight can find good squares.`,
+          failureMessage: 'Think about which exchange would damage White\'s pawn structure. Which knight can your bishop actually capture?',
           arrows: [
-            { from: 'c5', to: 'f3', color: 'green' },
+            { from: 'c5', to: 'c3', color: 'green' },
           ],
         },
         {
@@ -1724,20 +1724,20 @@ White is building an attack with pieces aimed at the kingside. White should NOT 
         {
           id: 'exchange-decision',
           type: 'interactive',
-          fen: 'r1bq1rk1/ppp2pp1/2np1n1p/2b1p3/2B1P1P1/2NP1N2/PPP2P1P/R1BQ1RK1 b - g3 0 9',
+          fen: 'r1bq1rk1/ppp2pp1/2np1n1p/4p3/1bB1P1P1/2NP1N2/PPP2P1P/R1BQ1RK1 b - g3 0 9',
           title: 'To Exchange or Not?',
           explanation: `Black is slightly cramped in this position. White has just played g4, gaining space. Should Black exchange pieces to relieve the pressure?`,
-          correctMoves: ['Bxf3'],
-          successMessage: `**Correct!** ...Bxf3 is an excellent exchange. Black trades the cramped bishop for White's active knight, which was defending the kingside. After Qxf3, Black's position is easier to play—less cramped, and g4-g5 is less dangerous without the f3 knight supporting it.`,
-          failureMessage: 'When cramped, exchanges help! Look for a trade that relieves pressure AND removes a key White piece.',
+          correctMoves: ['Bxc3'],
+          successMessage: `**Correct!** ...Bxc3 is an excellent exchange. Black trades the cramped bishop for White's knight, and after bxc3, White has doubled c-pawns. Black's position is easier to play—less cramped, with a clearer pawn structure advantage.`,
+          failureMessage: 'When cramped, exchanges help! Look for a trade that relieves pressure AND damages White\'s pawn structure.',
           arrows: [
-            { from: 'c5', to: 'f3', color: 'green' },
+            { from: 'c5', to: 'c3', color: 'green' },
           ],
         },
         {
           id: 'exchange-practice',
           type: 'puzzle',
-          fen: 'r1bq1rk1/p1p2ppp/1pnp1n2/2b1p3/2B1P3/2NP1N2/PPP1QPPP/R1B2RK1 w - - 0 10',
+          fen: 'r1bq1rk1/p1p2ppp/1pnp1n2/2b1p1B1/2B1P3/2NP1N2/PPP1QPPP/R4RK1 w - - 0 10',
           title: 'Strategic Exchange',
           explanation: `White has a very active position with pieces well-placed. Black has some cramped pieces. White can make a strategic exchange that worsens Black's pawn structure. Find it!`,
           correctMoves: ['Bxf6'],

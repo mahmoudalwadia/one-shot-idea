@@ -45,7 +45,7 @@ Since Black must respond to the check by moving the King, the Rook is lost. This
         {
           id: 'knight-fork-power',
           type: 'explanation',
-          fen: '8/8/8/3N4/8/8/8/8 w - - 0 1',
+          fen: '7k/8/8/3N4/8/8/8/K7 w - - 0 1',
           title: 'Why Knights Fork Best',
           explanation: `Knights are the **masters of the fork** for several reasons:
 
@@ -147,7 +147,7 @@ In this position, Black's Knight on d4 has jumped into White's territory. But wa
         {
           id: 'pawn-fork-practice',
           type: 'interactive',
-          fen: 'r1bqkbnr/pppp1ppp/8/8/3nP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 0 1',
+          fen: 'r1bqkbnr/pppp1ppp/8/8/3nP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 1',
           title: 'Execute the Pawn Fork',
           explanation: `Black's Knight has invaded on d4. Find the pawn move that forks the Knight and creates a strong center!`,
           correctMoves: ['c3'],
@@ -160,7 +160,7 @@ In this position, Black's Knight on d4 has jumped into White's territory. But wa
         {
           id: 'queen-fork',
           type: 'interactive',
-          fen: 'r1b1k2r/ppppqppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 0 1',
+          fen: 'r1b1k2r/ppppqppp/2n2n2/2b1p3/2B1P3/2PP1N2/PP3PPP/RNBQK2R w KQkq - 0 1',
           title: 'Queen Forks',
           explanation: `The Queen is a powerful forking piece because she can attack along ranks, files, AND diagonals.
 
@@ -172,6 +172,106 @@ Hint: Look at the undefended pieces in Black's position...`,
           failureMessage: 'Look for Black pieces that are undefended. Can the Queen attack two at once?',
           arrows: [
             { from: 'd1', to: 'a4', color: 'green' },
+          ],
+        },
+        {
+          id: 'bishop-fork',
+          type: 'explanation',
+          fen: '5k2/4r3/8/3B4/8/8/8/4K2R w - - 0 1',
+          title: 'Bishop Forks',
+          explanation: `Bishops are sneaky forking pieces because they attack on diagonals - lines that other pieces often ignore!
+
+**Bishop fork characteristics:**
+• Attack two pieces on the same diagonal
+• Especially deadly when targeting King + Rook
+• "Corner to corner" forks span the entire board
+• Bishops can fork from far away, unlike Knights
+
+**When to look for Bishop forks:**
+• After exchanges open up diagonals
+• When enemy pieces align diagonally
+• In endgames with scattered pieces
+• When the King and Rook are on the same color squares
+
+**In this position**: The Bishop on d5 is forking Black's King on f8 and Rook on e7! Black must lose the exchange.`,
+          arrows: [
+            { from: 'd5', to: 'f7', color: 'green' },
+            { from: 'd5', to: 'b7', color: 'green' },
+          ],
+          highlights: [
+            { square: 'f8', color: 'yellow' },
+            { square: 'e7', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'bishop-fork-practice',
+          type: 'interactive',
+          fen: 'r4rk1/ppp2ppp/3p4/4p3/2B1n3/4P3/PPP2PPP/R3K2R w KQ - 0 1',
+          title: 'Find the Bishop Fork',
+          explanation: `White's Bishop on c4 is well-placed on an open diagonal.
+
+Look at Black's position carefully:
+• Where is the King?
+• Where is the Rook on a8?
+• Can you find a Bishop move that attacks two pieces at once?
+
+**Hint:** Look for a diagonal that connects the King and another valuable piece!`,
+          correctMoves: ['Bd5'],
+          successMessage: `Bd5! The Bishop forks Black's King (via f7) and the Rook on a8. Black loses the exchange! This is a classic Bishop fork - attacking on a long diagonal that the opponent didn't see coming.`,
+          failureMessage: 'Look for a diagonal where the Bishop can attack two valuable pieces at once. Check the a8-King diagonal...',
+          arrows: [
+            { from: 'c4', to: 'd5', color: 'green' },
+          ],
+        },
+        {
+          id: 'rook-fork',
+          type: 'explanation',
+          fen: '4k3/8/8/8/8/8/p3R3/4K3 w - - 0 1',
+          title: 'Rook Forks',
+          explanation: `Rooks fork along ranks and files - the highways of the chessboard!
+
+**Rook fork situations:**
+• **7th rank** - Fork King and pawns (very common!)
+• **Back rank** - Attack King and piece simultaneously
+• **Open files** - Cut through enemy position vertically
+
+**The 7th rank special:**
+When your Rook reaches the 7th rank, look for forks on the King and back-rank pawns! This is one of the most common Rook fork patterns.
+
+**In this position**: White's Rook on e2 attacks:
+• The Black King (can't let it escape!)
+• The passed pawn on a2
+
+The Rook controls the entire 2nd rank, winning the pawn!
+
+**Remember:** Rooks need open lines to fork effectively. Control those files and ranks!`,
+          arrows: [
+            { from: 'e2', to: 'e8', color: 'green' },
+            { from: 'e2', to: 'a2', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e8', color: 'yellow' },
+            { square: 'a2', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'rook-fork-practice',
+          type: 'interactive',
+          fen: '6k1/5ppp/8/8/8/8/4R3/n3K3 w - - 0 1',
+          title: 'Find the Rook Fork',
+          explanation: `White's Rook is on an open file. Black has a Knight on a1 and the King on g8.
+
+Look for a Rook move that attacks two pieces simultaneously!
+
+**Remember:**
+• Rooks attack on ranks and files
+• The 7th rank is especially powerful
+• Look for pieces that line up horizontally or vertically`,
+          correctMoves: ['Ra2'],
+          successMessage: `Ra2! The Rook forks Black's Knight on a1 and attacks the 7th rank toward the King. Black loses the Knight! Rook forks along ranks are very powerful because they're hard to see coming.`,
+          failureMessage: 'Look for a rank or file where the Rook can attack two pieces. Can you find a move that threatens both the Knight and controls an important rank?',
+          arrows: [
+            { from: 'e2', to: 'a2', color: 'green' },
           ],
         },
         {
@@ -314,7 +414,7 @@ If a Knight is pinned to a Queen, it might still capture something valuable if t
         {
           id: 'create-pin',
           type: 'interactive',
-          fen: 'rn1qkbnr/ppp2ppp/4p3/3p4/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 4',
+          fen: 'rnbqkb1r/ppp1pppp/5n2/3p4/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3',
           title: 'Create a Pin',
           explanation: `You're playing Black. Find the move that creates a powerful pin on White's Knight!
 
@@ -323,7 +423,7 @@ Remember: You need a long-range piece (Bishop, Rook, or Queen) to create a pin. 
           successMessage: `Bg4! Perfect! You've pinned the Knight to the Queen. Now the Knight is paralyzed and can't move without losing the Queen. This is a classic opening pin that appears in many games!`,
           failureMessage: 'Which piece can attack the Knight through to the Queen behind it?',
           arrows: [
-            { from: 'f8', to: 'g4', color: 'green' },
+            { from: 'c8', to: 'g4', color: 'green' },
             { from: 'g4', to: 'd1', color: 'yellow' },
           ],
         },
@@ -340,15 +440,16 @@ When a piece is pinned, it becomes vulnerable because:
 • You can often capture it for free or with material gain
 
 Find a move that wins material by exploiting this pin!`,
-          correctMoves: ['Bxe7'],
-          successMessage: `Bxe7! The Knight cannot recapture because it's absolutely pinned to the King. Black has to take back with something else, and you've won the Knight for free! This is the power of exploiting pins.`,
-          failureMessage: 'The Knight on e7 is pinned and cannot move. What can you capture that the Knight can\'t recapture?',
+          correctMoves: ['Qxf7#'],
+          successMessage: `Qxf7#! Checkmate! The Knight cannot capture the Queen because it's absolutely pinned to the King. This is the power of exploiting pins - you can attack squares the pinned piece should defend!`,
+          failureMessage: 'The Knight on e7 is pinned and cannot move. What square can the Queen attack that the Knight would normally defend?',
           arrows: [
             { from: 'h5', to: 'e8', color: 'red' },
-            { from: 'c4', to: 'e7', color: 'green' },
+            { from: 'h5', to: 'f7', color: 'green' },
           ],
           highlights: [
             { square: 'e7', color: 'red' },
+            { square: 'f7', color: 'yellow' },
           ],
         },
         {
@@ -489,14 +590,14 @@ In this position, if the White Rook plays Ra8+, it's a skewer:
         {
           id: 'rook-skewer',
           type: 'interactive',
-          fen: '6k1/8/8/8/q7/8/8/R3K3 w Q - 0 1',
+          fen: 'q7/k7/8/8/8/8/8/R3K3 w Q - 0 1',
           title: 'The Rook Skewer',
           explanation: `White to play. The Black King and Queen are aligned on the a-file!
 
 Find the move that skewers them - attack the King first, then collect the Queen when the King moves.
 
 Remember: Checks are forcing - the opponent MUST respond to them.`,
-          correctMoves: ['Ra8+'],
+          correctMoves: ['Ra7+'],
           successMessage: `Ra8+! The King must move out of check, and then Rxa4 captures the Queen. This is the classic Rook skewer - devastating and impossible to escape!`,
           failureMessage: 'Can you give check in a way that attacks the Queen behind the King?',
           arrows: [
@@ -507,12 +608,12 @@ Remember: Checks are forcing - the opponent MUST respond to them.`,
         {
           id: 'bishop-skewer',
           type: 'interactive',
-          fen: '8/8/8/6k1/8/8/3B4/4K2r w - - 0 1',
+          fen: '8/5r2/8/3k4/8/1B6/8/4K3 w - - 0 1',
           title: 'Bishop Skewer',
-          explanation: `Bishops skewer along diagonals. The Black King on g5 and the Rook on h1 are on the same diagonal!
+          explanation: `Bishops skewer along diagonals. The Black King on d5 and the Rook on f7 are on the same diagonal!
 
 Find the Bishop move that skewers the King and Rook.`,
-          correctMoves: ['Bf4+', 'Be3+'],
+          correctMoves: ['Bc4+'],
           successMessage: `Excellent! The Bishop gives check, and when the King moves, you capture the Rook on h1. Bishop skewers are common in endgames when pieces spread out across the board.`,
           failureMessage: 'Look at the diagonal that contains both the King and the Rook...',
           arrows: [
@@ -561,7 +662,7 @@ Look at this position. Can you force Black into a skewer?`,
         {
           id: 'skewer-vs-pin',
           type: 'explanation',
-          fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+          fen: '7k/8/8/8/8/8/8/K7 w - - 0 1',
           title: 'Skewer vs Pin - Know the Difference',
           explanation: `Let's clarify the difference between these similar tactics:
 
@@ -1150,8 +1251,8 @@ In this position, if White could deflect the Rook from the second rank, there mi
           explanation: `The Black Rook on a2 prevents Qa8 checkmate (it could interpose on a8).
 
 Can you deflect the Rook so it can't defend anymore?`,
-          correctMoves: ['Qa8+', 'Re8+'],
-          successMessage: `Re8+! This is even better than the puzzle suggests - it's just checkmate! The Rook gives check, the King has nowhere to go. Sometimes the "deflection" is actually the winning tactic itself!`,
+          correctMoves: ['Re8+'],
+          successMessage: `Re8+! This is checkmate! The Rook gives check, the King has nowhere to go. Sometimes the best tactic is the simplest one - just deliver mate!`,
           failureMessage: 'Can you give check in a way that the Rook can\'t block or the mate is unstoppable?',
         },
         {
@@ -1342,7 +1443,7 @@ Don't stop at "I take, he takes, I take." Ask "After I take, can he do something
         {
           id: 'zwischenzug-puzzle',
           type: 'puzzle',
-          fen: 'r1bqk2r/pppp1ppp/2n2n2/2b1P3/2Bp4/5N2/PPP2PPP/RNBQ1RK1 b kq - 0 1',
+          fen: 'r1bqk2r/pppp1ppp/2n2n2/2b1P3/2B5/5N2/PPP2PPP/RNBQ1RK1 b kq - 0 1',
           title: 'Zwischenzug Puzzle',
           explanation: `Black to move. White just captured on d4 with the Bishop.
 
@@ -1474,8 +1575,8 @@ Queens are tricky to trap because they're so mobile, but when they venture too f
           explanation: `Find the move that traps Black's Bishop on b4!
 
 Hint: Cut off all the escape squares.`,
-          correctMoves: ['a3', 'c3'],
-          successMessage: `a3 (or c3)! The Bishop has to move, and most squares lead to problems. After ...Ba5, b4 traps it! Or ...Bxc3+ Nxc3 and White has the better position. Pawns are great for trapping pieces!`,
+          correctMoves: ['c3'],
+          successMessage: `c3! This move blocks the check from the Bishop AND attacks it. The Bishop must move, and after ...Ba5, b4 traps it! Or ...Bxc3+ Nxc3 and White has the better position. Pawns are great for trapping pieces!`,
           failureMessage: 'Which pawn can attack the Bishop and limit its options?',
         },
       ],
@@ -1560,7 +1661,7 @@ This works because:
           explanation: `Use X-Ray tactics to win!
 
 Your Rooks can support each other through the line...`,
-          correctMoves: ['Rd8+', 'Rfd8+'],
+          correctMoves: ['Rxd8+', 'Rd8+'],
           successMessage: `Rd8+! Rxd8 is forced, and Rxd8# is checkmate! The X-Ray support from the second Rook seals the deal. When your Rooks are connected, they have incredible power!`,
           failureMessage: 'If you sacrifice one Rook with check, what can the other Rook do?',
         },

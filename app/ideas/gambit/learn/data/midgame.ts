@@ -104,16 +104,16 @@ export const midgameCourse: Course = {
         {
           id: 'greek-gift',
           type: 'interactive',
-          fen: 'r1bq1rk1/pppn1ppp/3p1n2/2b1p2Q/2B1P3/2NP1N2/PPP2PPP/R1B2RK1 w - - 0 9',
+          fen: 'r1bq1rk1/pppn1ppp/3p1nB1/2b1p2Q/4P3/2NP1N2/PPP2PPP/R1B2RK1 w - - 0 9',
           title: 'The Greek Gift Sacrifice',
-          explanation: `White has achieved a classic attacking position. The queen is on h5, the bishop eyes h7 through f7, and the knight on f3 is ready to jump to g5.
+          explanation: `White has achieved a classic attacking position. The queen is on h5, the bishop on g6 is poised to strike, and the knight on f3 is ready to jump to g5.
 
 Black's knight has moved to d7, leaving the kingside vulnerable. Find the **winning sacrifice** that has been played thousands of times throughout chess history!
 
 *Hint: What piece can be sacrificed to expose Black's king?*`,
           correctMoves: ['Bxh7+'],
           arrows: [
-            { from: 'c4', to: 'h7', color: 'red' },
+            { from: 'g6', to: 'h7', color: 'red' },
           ],
           highlights: [
             { square: 'h7', color: 'red' },
@@ -462,6 +462,377 @@ Find the sacrifice that **breaks through Black's defenses**!
       ],
     },
     {
+      id: 'brilliant-sacrifices',
+      title: 'Brilliant Sacrifices',
+      description: 'Moves that look wrong but lead to victory',
+      difficulty: 'advanced',
+      estimatedMinutes: 15,
+      tags: ['sacrifice', 'tactics', 'attack', 'combinations'],
+      steps: [
+        {
+          id: 'intro',
+          type: 'explanation',
+          fen: 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4',
+          title: 'The Art of Sacrifice',
+          explanation: `This position shows the famous **Scholar's Mate threat** - but brilliant sacrifices go far deeper than simple tricks.
+
+The greatest players in history have won games by giving away their most powerful pieces. Why would anyone sacrifice a queen or multiple rooks?
+
+**The secret**: Material is just ONE factor. These factors can outweigh pieces:
+
+- **Exposed enemy king** - Worth 3+ pawns of attack
+- **Massive development lead** - Each tempo ≈ 1/3 pawn
+- **Forcing moves** - Checks and threats that limit responses
+- **Coordination** - Multiple pieces attacking together
+
+**Mikhail Tal** (World Champion 1960-61) was the greatest attacking player ever. His philosophy:
+
+*"You must take your opponent into a deep dark forest where 2+2=5, and the path leading out is only wide enough for one."*
+
+In this lesson, you'll learn sacrifices that seem impossible - but lead to brilliant victories!`,
+          highlights: [
+            { square: 'f7', color: 'red' },
+            { square: 'e8', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'f7', to: 'f8', color: 'red' },
+            { from: 'f7', to: 'e8', color: 'red' },
+          ],
+        },
+        {
+          id: 'greek-gift',
+          type: 'explanation',
+          fen: 'r1bq1rk1/ppppnppp/4p3/6B1/2BPn3/2N2N2/PPP2PPP/R2QK2R w KQ - 0 8',
+          title: 'The Greek Gift - Bxh7+',
+          explanation: `The **Greek Gift** (Bxh7+ sacrifice) is one of chess's most famous combinations. It has decided thousands of games since the 1600s!
+
+**The classic setup requires:**
+1. Bishop able to capture on h7 with check
+2. Knight ready to jump to g5
+3. Queen ready to join via h5 or d3-h7
+
+**How it works after Bxh7+ Kxh7:**
+1. **Ng5+** - Knight attacks with check
+2. **Kg8** (Kg6 loses to Qd3+ or h4-h5+)
+3. **Qh5** - Queen joins the attack
+4. Black's king is trapped and mate follows!
+
+**Why Black cannot defend:**
+- The h-pawn is gone (captured bishop)
+- Knight on g5 controls escape squares
+- Queen and knight coordinate perfectly
+- Rooks can join on the h-file
+
+**Recognition pattern**: Look for Bxh7+ when:
+- Black has castled kingside
+- The h7 pawn is only defended by the king
+- Your knight can reach g5 quickly
+- Your queen has access to h5 or h7`,
+          highlights: [
+            { square: 'h7', color: 'red' },
+            { square: 'c4', color: 'green' },
+            { square: 'g5', color: 'blue' },
+          ],
+          arrows: [
+            { from: 'c4', to: 'h7', color: 'red' },
+            { from: 'f3', to: 'g5', color: 'blue' },
+            { from: 'd1', to: 'h5', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'greek-gift-puzzle',
+          type: 'interactive',
+          fen: 'r1bq1rk1/ppp2ppp/2n1pn2/3p2B1/2PP4/2NBPN2/PP3PPP/R2QK2R w KQ - 0 8',
+          title: 'Find the Greek Gift',
+          explanation: `White has the classic Greek Gift setup! The bishop on d3 aims at h7, the knight on f3 can jump to g5, and the queen waits on d1.
+
+Black's h7 pawn is defended **only by the king**. This is the key weakness!
+
+Find the **devastating sacrifice** that rips open Black's kingside. After the king takes, Ng5+ follows, then Qh5 with a crushing attack!`,
+          correctMoves: ['Bxh7+'],
+          highlights: [
+            { square: 'h7', color: 'red' },
+            { square: 'd3', color: 'green' },
+            { square: 'g8', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'd3', to: 'h7', color: 'red' },
+            { from: 'f3', to: 'g5', color: 'blue' },
+          ],
+          successMessage: 'Excellent! Bd3! sets up the Greek Gift. The bishop now targets h7, and after ...anything, Bxh7+! Kxh7 Ng5+ Kg8 (Kg6 Qd3+ wins) Qh5 with a crushing attack! This pattern has won countless games.',
+          failureMessage: 'Look at the h7 square - it\'s only defended by the king. How can your bishop reach a diagonal that attacks h7?',
+        },
+        {
+          id: 'opera-game',
+          type: 'explanation',
+          fen: '1n1Rkb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2K5 b k - 1 17',
+          title: 'The Opera Game - Morphy\'s Masterpiece',
+          explanation: `In 1858, Paul Morphy played the Duke of Brunswick and Count Isouard at the Paris Opera. This game showcases the **ultimate rook sacrifice**.
+
+**The position shown is AFTER the brilliant finish:**
+Morphy played **Qb8+!!** - sacrificing his queen!
+
+After **Nxb8**, White played **Rd8 CHECKMATE!**
+
+**What made this sacrifice brilliant:**
+- The queen sacrifice *deflects* the knight from d7
+- Once the knight moves, Rd8+ is mate
+- Black's rook on h8 is completely useless
+- The back rank is fatally weak
+
+**The lesson from Morphy:**
+*"Help your pieces and they will help you."*
+
+Black's pieces were stuck on the queenside while Morphy's army dominated the center and kingside. The sacrifice was possible because of **overwhelming development advantage**.
+
+**Back rank mate pattern**: When the enemy king is trapped on the first rank with no escape, a single rook delivers checkmate!`,
+          highlights: [
+            { square: 'd8', color: 'red' },
+            { square: 'e8', color: 'yellow' },
+            { square: 'b8', color: 'blue' },
+          ],
+          arrows: [
+            { from: 'd8', to: 'e8', color: 'red' },
+          ],
+        },
+        {
+          id: 'double-bishop',
+          type: 'explanation',
+          fen: 'rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQK2R w KQ - 0 7',
+          title: 'The Double Bishop Sacrifice',
+          explanation: `The **Double Bishop Sacrifice** (Bxh7+ followed by Bxg7!) is one of chess's most spectacular combinations. Emanuel Lasker made it famous in 1889.
+
+**The devastating sequence:**
+1. **Bxh7+! Kxh7** - First bishop sacrifice
+2. **Bxg7!! Kxg7** - Second bishop sacrifice!
+3. **Qg4+ Kh7** (or Kf6)
+4. **Rf3!** - Rook swings to the attack
+5. Mate is unavoidable!
+
+**Why does giving up BOTH bishops work?**
+- Each sacrifice rips open the king's shelter
+- After Bxh7+ Kxh7, the h-file opens
+- After Bxg7! Kxg7, the king is completely exposed
+- Queen + Rook create unstoppable mating threats
+
+**Requirements for the double bishop sacrifice:**
+1. Light-squared bishop can take h7 with check
+2. Dark-squared bishop can take g7
+3. Queen can reach g4 or h5 quickly
+4. Rook can swing to g3 or h3
+
+**The key insight**: Two bishops (6 points) are a small price for a mating attack!`,
+          highlights: [
+            { square: 'h7', color: 'red' },
+            { square: 'g7', color: 'red' },
+            { square: 'd3', color: 'green' },
+            { square: 'c1', color: 'green' },
+          ],
+          arrows: [
+            { from: 'd3', to: 'h7', color: 'red' },
+            { from: 'c1', to: 'g7', color: 'red' },
+            { from: 'd1', to: 'g4', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'double-bishop-puzzle',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp1n1ppp/2n1p3/2bpP3/3P4/2NB1N2/PP2BPPP/R1BQ1RK1 w - - 0 10',
+          title: 'Set Up the Double Bishop Sacrifice',
+          explanation: `White has both bishops ready. The light-squared bishop on d3 eyes h7. The dark-squared bishop is still on c1.
+
+Black has just played ...Bc5, and the position looks solid. But White can unleash the **double bishop sacrifice!**
+
+Find the first move that begins this devastating combination. Remember: Bxh7+ starts the sequence, then Bg5-h6 can target g7!`,
+          correctMoves: ['Bxh7+'],
+          highlights: [
+            { square: 'h7', color: 'red' },
+            { square: 'd3', color: 'green' },
+            { square: 'g8', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'd3', to: 'h7', color: 'red' },
+          ],
+          successMessage: 'Brilliant! Bxh7+!! begins the combination. After Kxh7, White plays Ng5+! Kg8 (Kg6 Qd3+ forces mate), then Qh5 threatening Qh7#. Black cannot survive the attack. The g7 square falls next!',
+          failureMessage: 'Look at h7 - the classic Greek Gift square. Your bishop on d3 can strike there with check!',
+        },
+        {
+          id: 'immortal-game',
+          type: 'explanation',
+          fen: 'r1b2k1r/pppp1Bpp/8/4n3/1bBPn2q/8/PPP2NP1/RNBQ1RK1 b - - 0 12',
+          title: 'The Immortal Game',
+          explanation: `Adolf Anderssen vs Lionel Kieseritzky, London 1851 - **The most famous game in chess history!**
+
+Anderssen sacrificed:
+- A bishop (move 11)
+- **Both rooks** (moves 18 and 19)
+- **His QUEEN** (move 22)
+
+And still delivered checkmate with just three minor pieces!
+
+**The critical moment (shown):**
+White has just played **Bxf7+!** Black's king must move. After Ke7, White's attack continues with Qb3! threatening Qxb7 and worse.
+
+**Why the sacrifices worked:**
+1. Black's pieces are passive and uncoordinated
+2. Black's king is stuck in the center
+3. Every White piece joins the attack
+4. Material is useless if you're checkmated!
+
+**Anderssen's philosophy:**
+*"I do not play chess - I make chess. The game as an art form must have beautiful combinations!"*
+
+The Immortal Game proved that **attack and initiative can outweigh any material deficit**. It inspired generations of attacking players.`,
+          highlights: [
+            { square: 'f7', color: 'red' },
+            { square: 'e8', color: 'yellow' },
+            { square: 'c4', color: 'green' },
+            { square: 'h4', color: 'blue' },
+          ],
+          arrows: [
+            { from: 'c4', to: 'f7', color: 'red' },
+            { from: 'f7', to: 'e8', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'evergreen-game',
+          type: 'explanation',
+          fen: 'r1bk2nr/p2p1pNp/n2B4/1p1NP2P/6P1/3P4/P1P1K3/q5b1 b - - 0 22',
+          title: 'The Evergreen Game - Queen Sacrifice',
+          explanation: `Anderssen vs Dufresne, Berlin 1852 - Another Anderssen masterpiece with a stunning queen sacrifice!
+
+**The position before the sacrifice:**
+White played **Qxd7+!!** - giving up the queen for a knight!
+
+After **Kxd7**, White played **Bf5+ Ke8**, then **Bd7+ Kf8**, and finally **Bxe7 CHECKMATE!**
+
+**Why sacrifice the queen for a knight?**
+- The queen sacrifice *exposed* the Black king
+- White's bishops created a deadly crossfire
+- The knight on g7 controlled key escape squares
+- Every check led to another check - forcing mate!
+
+**The "Evergreen" name:**
+This game is called "Evergreen" because its beauty never fades. Over 170 years later, it still amazes chess players.
+
+**The combination required:**
+1. Seeing that Qxd7+ exposes the king
+2. Calculating the bishop checks to mate
+3. Trusting the attack over material
+4. Perfect piece coordination
+
+**Takeaway**: The queen is worth ~9 points, but checkmate is worth infinite points!`,
+          highlights: [
+            { square: 'd7', color: 'red' },
+            { square: 'f5', color: 'green' },
+            { square: 'd5', color: 'green' },
+            { square: 'g7', color: 'blue' },
+          ],
+          arrows: [
+            { from: 'f5', to: 'd7', color: 'yellow' },
+            { from: 'd7', to: 'e8', color: 'yellow' },
+            { from: 'd5', to: 'f7', color: 'red' },
+          ],
+        },
+        {
+          id: 'tal-sacrifice',
+          type: 'explanation',
+          fen: 'r2qk2r/1b1nbppp/p3pn2/1pp1P3/3P4/2NB1N2/PP1B1PPP/R2Q1RK1 w kq - 0 12',
+          title: 'Tal\'s Intuitive Sacrifices',
+          explanation: `Mikhail Tal was called the **"Magician from Riga"**. He sacrificed pieces constantly - even when computers couldn't prove they were correct!
+
+**Tal's approach:**
+*"There are two types of sacrifices: correct ones, and mine."*
+
+**In this typical Tal position:**
+White could play **Bxh7+!?** even though the attack isn't fully calculated. Why?
+
+1. The Black king position weakens dramatically
+2. White's pieces are all ready to attack
+3. Black's queenside pieces can't help defend
+4. **Practical chances** - defense is harder than attack!
+
+**Tal's sacrifices worked because:**
+- Opponents cracked under pressure
+- Defense is psychologically difficult
+- Even "unsound" sacrifices create real problems
+- The attacker has easier decisions
+
+**Tal vs Larsen, 1965 - The famous Rxg7!! sacrifice:**
+Tal gave up his rook for seemingly nothing - but the attack was unstoppable!
+
+**The lesson**: Sometimes you must **trust your intuition**. If your pieces are active and the enemy king is weak, sacrifice!`,
+          highlights: [
+            { square: 'h7', color: 'red' },
+            { square: 'd3', color: 'green' },
+            { square: 'f3', color: 'green' },
+            { square: 'd2', color: 'green' },
+          ],
+          arrows: [
+            { from: 'd3', to: 'h7', color: 'red' },
+            { from: 'f3', to: 'g5', color: 'yellow' },
+            { from: 'd1', to: 'h5', color: 'blue' },
+          ],
+        },
+        {
+          id: 'find-queen-sacrifice',
+          type: 'puzzle',
+          fen: 'r4rk1/ppp1qppp/2np1n2/2b1p1B1/2B1P1b1/2NP1N2/PPP1QPPP/R4RK1 w - - 0 10',
+          title: 'Find the Queen Sacrifice',
+          explanation: `White has developed aggressively. Both sides have bishops on active diagonals, and Black seems well-coordinated.
+
+But there's a **stunning queen sacrifice** that leads to forced checkmate!
+
+Look at the position:
+- White's bishop on g5 pins the f6 knight
+- White's bishop on c4 eyes f7
+- The knight on f3 can jump to g5
+
+Find the move that sacrifices the queen but forces checkmate! (Hint: What if you could remove the knight that guards h7?)`,
+          correctMoves: ['Bxf6'],
+          highlights: [
+            { square: 'f6', color: 'red' },
+            { square: 'g5', color: 'green' },
+            { square: 'h7', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'g5', to: 'f6', color: 'red' },
+            { from: 'f3', to: 'g5', color: 'blue' },
+          ],
+          successMessage: 'Excellent! Bxf6! removes the key defender of h7. After gxf6 (or Qxf6), Ng5! threatens Qxh7# and Nxf7. Black cannot defend both threats. This is a classic attacking pattern - eliminate the defender, then strike!',
+          failureMessage: 'The f6 knight is Black\'s key defender. Which piece can capture it to open lines toward the king?',
+        },
+        {
+          id: 'final-puzzle',
+          type: 'puzzle',
+          fen: 'r2q1rk1/pb2bppp/1pn1pn2/2p5/2PP4/1PN1PN2/PB2BPPP/R2Q1RK1 w - - 0 11',
+          title: 'Find the Brilliant Sacrifice',
+          explanation: `A famous position from grandmaster practice. White has a solid position, but Black looks well-defended with pieces covering key squares.
+
+However, there's a **brilliant sacrifice** hiding in this position that tears Black's defense apart!
+
+Look carefully at:
+- The coordination of White's pieces
+- Black's slightly weakened kingside
+- The potential for a breakthrough
+
+Find the move that looks crazy but wins brilliantly! Sometimes the best move is the one that seems impossible.`,
+          correctMoves: ['d5'],
+          highlights: [
+            { square: 'd5', color: 'green' },
+            { square: 'e6', color: 'yellow' },
+            { square: 'c6', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'd4', to: 'd5', color: 'green' },
+            { from: 'c3', to: 'd5', color: 'blue' },
+          ],
+          successMessage: 'Brilliant! d5!! is the key pawn sacrifice. After exd5, Nxd5! threatens Nxc6 winning the queen, and Nf6+ with a fork. If Nxd5, cxd5 rips open the c-file with a crushing attack. Black cannot handle all the threats!',
+          failureMessage: 'Look for a pawn break that creates multiple threats. What happens if you advance in the center with tempo?',
+        },
+      ],
+    },
+    {
       id: 'central-control',
       title: 'Central Control',
       description: 'Dominating the center of the board',
@@ -755,7 +1126,7 @@ White's knight on g4 and potential queen maneuver to h5 create dangerous threats
         {
           id: 'rook-battery',
           type: 'explanation',
-          fen: 'r4rk1/ppp2ppp/2n1bn2/3qp3/8/2N1PN2/PP2BPPP/R2QRK1 w - - 0 12',
+          fen: 'r4rk1/ppp2ppp/2n1bn2/3qp3/8/2N1PN2/PP2BPPP/R2Q1RK1 w - - 0 12',
           title: 'Doubled Rooks - The Battery',
           explanation: `Two rooks on the same file create a "**battery**" - one of the most powerful piece configurations in chess.
 
@@ -834,12 +1205,11 @@ When doubled rooks reach the 7th rank, they often decide the game. Pawns fall li
           explanation: `White has a knight on g4 and a bishop on c4 - both eyeing Black's kingside. But the queen is still on d1, not participating in the attack.
 
 One of the fundamental rules of attacking: **bring all your pieces into the game**. Find the move that **coordinates White's pieces** for maximum pressure!`,
-          correctMoves: ['Qf3', 'Qh5'],
+          correctMoves: ['Qf3'],
           arrows: [
             { from: 'd1', to: 'f3', color: 'green' },
-            { from: 'd1', to: 'h5', color: 'blue' },
           ],
-          successMessage: 'Excellent! Both Qf3 and Qh5 bring the queen into the attack. Qf3 prepares Qg3 or threatens Qxf6, while Qh5 immediately eyes h7 and coordinates with Ng4.',
+          successMessage: 'Excellent! Qf3 brings the queen into the attack. It prepares Qg3 or threatens Qxf6, coordinating with the knight on g4 and bishop on c4.',
           failureMessage: 'The knight and bishop are ready to attack. Which piece needs to join them?',
         },
         {
@@ -884,7 +1254,7 @@ One of the fundamental rules of attacking: **bring all your pieces into the game
           explanation: `White has well-placed pieces, but they could be better coordinated. The bishop on e2 is passive, and the rooks aren't connected on an open file.
 
 Find the move that **improves White's piece coordination** the most!`,
-          correctMoves: ['Bf4', 'Qc2', 'Rc1'],
+          correctMoves: ['Bf4', 'Rc1'],
           arrows: [
             { from: 'e3', to: 'f4', color: 'green' },
           ],
@@ -1079,11 +1449,11 @@ If White had played a slow move like a3 instead of Ng5, Black would have time to
           explanation: `This position is roughly equal, but White can play to seize the initiative. The pawn structure is solid for both sides.
 
 Find the move that **creates the most dynamic possibilities** and puts Black under pressure!`,
-          correctMoves: ['cxd5', 'Bd3'],
+          correctMoves: ['cxd5'],
           arrows: [
             { from: 'c4', to: 'd5', color: 'green' },
           ],
-          successMessage: 'Well played! cxd5 opens lines and creates tension (if exd5, isolated pawn; if Nxd5, piece activity). Bd3 prepares e4 with pressure. Both seize the initiative!',
+          successMessage: 'Well played! cxd5 opens lines and creates tension. If Black recaptures exd5, they get an isolated pawn; if Nxd5, White gains piece activity. This seizes the initiative!',
           failureMessage: 'Look for a move that opens lines or creates targets for your pieces.',
         },
       ],
@@ -1645,12 +2015,11 @@ Don't spend all your time on the opening and early middlegame! Save at least 30-
 This is exactly the kind of moment where you should **invest your thinking time**.
 
 What is Black's best response?`,
-          correctMoves: ['exd4', 'Bb4'],
+          correctMoves: ['exd4'],
           arrows: [
             { from: 'e5', to: 'd4', color: 'green' },
-            { from: 'c5', to: 'b4', color: 'blue' },
           ],
-          successMessage: 'Good choices! exd4 accepts the challenge (Nxd4 Nxd4 Qxd4, or simply Nxd4). Bb4 pins the knight and keeps tension. Both are principled decisions!',
+          successMessage: 'Good choice! exd4 accepts the challenge in the center. After Nxd4, Black can recapture with Nxd4, maintaining equality. This is a principled decision!',
           failureMessage: 'White has challenged the center with d4. How should Black respond to this critical break?',
         },
       ],
@@ -1972,7 +2341,7 @@ Offering a queen trade puts a decision on your opponent. They must either accept
         {
           id: 'simplify-correctly',
           type: 'interactive',
-          fen: 'r1b2rk1/ppp2ppp/2nq1n2/4p3/4P3/2NP1N2/PPPQ1PPP/R1B2RK1 w - - 0 11',
+          fen: 'r1b2rk1/ppp2ppp/2nq1n2/4p3/4P3/2N2N2/PPPQ1PPP/R1B2RK1 w - - 0 11',
           title: 'Simplify to Win',
           explanation: `White is slightly better due to better coordination. The question is how to convert this small advantage.
 

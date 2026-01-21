@@ -167,12 +167,12 @@ In this position, White might target:
 - White's light-squared bishop could be more active
 
 What move begins a meaningful plan? Think about improving a piece while creating pressure.`,
-          correctMoves: ['Bc4', 'Bg5', 'Nd5'],
+          correctMoves: ['Bg5', 'Nd5', 'd4'],
           arrows: [
-            { from: 'e2', to: 'c4', color: 'green' },
-            { from: 'c1', to: 'g5', color: 'blue' },
+            { from: 'c1', to: 'g5', color: 'green' },
+            { from: 'c3', to: 'd5', color: 'blue' },
           ],
-          successMessage: 'Excellent thinking! Bc4 develops the bishop to its most active diagonal, targeting f7 and supporting future central play. This move has PURPOSE—it improves a piece while creating pressure.',
+          successMessage: 'Excellent thinking! Bg5 pins the knight and creates pressure on Black\'s kingside. Nd5 places a knight on a powerful central outpost. d4 challenges the center. These moves have PURPOSE—improving pieces while creating threats.',
           failureMessage: 'Think about improving your pieces while creating threats. Which piece isn\'t on its optimal square? Where would it be more active?',
         },
         {
@@ -1636,12 +1636,12 @@ The Sicilian is the most double-edged opening—both sides play for a win!`,
 - How should White develop?
 
 Find a move that follows IQP principles!`,
-          correctMoves: ['Bg5', 'Qd3', 'Rad1'],
+          correctMoves: ['Bg5', 'Qd3'],
           arrows: [
             { from: 'c1', to: 'g5', color: 'green' },
             { from: 'd1', to: 'd3', color: 'blue' },
           ],
-          successMessage: 'Excellent! In IQP positions, White must play dynamically. Bg5 develops with tempo (eyes h7), Qd3 eyes h7 and supports d4, Rad1 activates the rook. All follow IQP principles: ACTIVITY!',
+          successMessage: 'Excellent! In IQP positions, White must play dynamically. Bg5 develops with tempo (eyes h7), Qd3 eyes h7 and supports d4. Both follow IQP principles: ACTIVITY!',
           failureMessage: 'With an isolated d-pawn, White needs dynamic piece play. What develops with purpose?',
         },
         {
@@ -1869,11 +1869,12 @@ There's often no single "best" plan. Grandmasters sometimes disagree. Choose bas
 - Something else?
 
 Find a move that implements a clear plan.`,
-          correctMoves: ['Bg5', 'h3', 'O-O'],
+          correctMoves: ['Bg5', 'h3', 'd4'],
           arrows: [
             { from: 'c1', to: 'g5', color: 'green' },
+            { from: 'd3', to: 'd4', color: 'blue' },
           ],
-          successMessage: 'Good strategic thinking! Bg5 starts a plan of pinning and pressuring. h3 prepares g4 expansion. O-O is solid, completing development before committing. Each implements a coherent plan.',
+          successMessage: 'Good strategic thinking! Bg5 starts a plan of pinning and pressuring. h3 prepares g4 expansion. d4 challenges the center directly. Each implements a coherent plan.',
           failureMessage: 'Think about what long-term setup you want. Which move starts a meaningful plan?',
         },
         {
@@ -1926,13 +1927,13 @@ This back-and-forth thinking is strategic calculation—not calculating moves, b
 - What's Black's plan, and how to stop it?
 
 Find a move that makes strategic sense. Think about the FUTURE position.`,
-          correctMoves: ['e4', 'Bf4', 'b4'],
+          correctMoves: ['e4', 'b4', 'cxd5'],
           arrows: [
             { from: 'e3', to: 'e4', color: 'green' },
-            { from: 'c1', to: 'f4', color: 'blue' },
-            { from: 'b2', to: 'b4', color: 'yellow' },
+            { from: 'b2', to: 'b4', color: 'blue' },
+            { from: 'c4', to: 'd5', color: 'yellow' },
           ],
-          successMessage: 'Excellent strategic thinking! e4 is the classic break—opening the position when your pieces are better placed. Bf4 develops with pressure on d6. b4 starts queenside play. All are strategically sound.',
+          successMessage: 'Excellent strategic thinking! e4 is the classic break—opening the position when your pieces are better placed. b4 starts queenside play. cxd5 opens lines and creates an IQP target. All are strategically sound.',
           failureMessage: 'Think about what White wants to achieve. How can you improve the position or create a target?',
         },
         {
