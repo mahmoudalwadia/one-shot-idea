@@ -14,7 +14,8 @@ import LearnMode from './learn/LearnMode';
 import { TreeNode } from './types';
 import { getEvaluatedMoves, analyzeBoardLocal, Difficulty } from './services/chessEngine';
 import { useChessWorker } from './hooks/useChessWorker';
-import { Monitor, Cpu, Undo, RefreshCw, Palette, ChevronDown, BookOpen, Play } from 'lucide-react';
+import { Cpu, Undo, RefreshCw, Palette, ChevronDown, BookOpen, Play } from 'lucide-react';
+import ChessLogo from './components/ChessLogo';
 
 const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -539,7 +540,9 @@ function GambitContent() {
           <div className="flex justify-between items-center gap-2">
             <div className="flex items-center gap-2 md:gap-3">
               <h1 className="text-lg md:text-2xl uppercase terminal-text-shadow leading-none tracking-tighter flex items-center gap-1.5">
-                <Monitor className="w-4 h-4 md:w-6 md:h-6" /> Gambit
+                <ChessLogo size="sm" className="md:hidden" />
+                <ChessLogo size="md" className="hidden md:grid" />
+                Gambit
               </h1>
               {/* Mode Toggle - In learn mode, LEARN is active */}
               <div className="flex border border-[var(--term-main)]">
@@ -644,7 +647,9 @@ function GambitContent() {
         <div className="flex justify-between items-center gap-2">
           <div className="flex items-center gap-2 md:gap-3">
             <h1 className="text-lg md:text-2xl uppercase terminal-text-shadow leading-none tracking-tighter flex items-center gap-1.5">
-              <Monitor className="w-4 h-4 md:w-6 md:h-6" /> Gambit
+              <ChessLogo size="sm" className="md:hidden" />
+              <ChessLogo size="lg" className="hidden md:grid" />
+              Gambit
             </h1>
             {/* Mode Toggle */}
             <div className="flex border border-[var(--term-main)]">
