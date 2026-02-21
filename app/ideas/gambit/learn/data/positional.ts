@@ -20,7 +20,7 @@ export const positionalCourse: Course = {
           type: 'explanation',
           fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
           title: 'Pawn Structure Fundamentals',
-          explanation: `Pawn structure is often called the **"skeleton"** or **"soul"** of a chess position. The legendary Philidor declared "Pawns are the soul of chess" in the 18th century, and this wisdom remains central to modern chess understanding.
+          explanation: `Pawn structure is often called the **"skeleton"** or **"soul"** of a chess position. Philidor's famous declaration "Pawns are the soul of chess" (1749) established pawn structure as the foundation of positional play, and Steinitz later built his entire positional theory around pawn formations. This wisdom remains central to modern chess understanding.
 
 Unlike every other piece, **pawns cannot move backward**. This fundamental limitation means every pawn move permanently and irreversibly changes the nature of the position. Move a pawn forward, and you can never take it back. This is why strong players think carefully before advancing pawns.
 
@@ -229,7 +229,7 @@ Backward pawns are long-term weaknesses that strong players exploit with patient
           type: 'explanation',
           fen: 'r1bq1rk1/pp2bppp/2n1pn2/3p4/3P4/2N2N2/PPQBPPPP/R3KB1R w KQ - 4 8',
           title: 'What is an Outpost?',
-          explanation: `An **outpost** is one of the most important strategic concepts in chess. It's a square that:
+          explanation: `An **outpost** is one of the most important strategic concepts in chess. The concept of an "outpost" (Vorposten in German) was coined by Aron Nimzowitsch in "My System" (1925), where he defined it as a square in the opponent's territory that cannot be attacked by enemy pawns. It's a square that:
 
 1. **Cannot be attacked by enemy pawns** - This is the crucial requirement
 2. **Can be occupied by your piece** - Usually a knight, sometimes a bishop or rook
@@ -382,6 +382,38 @@ This strategic concept of blockade → attack is fundamental to positional chess
             { from: 'b5', to: 'c6', color: 'red' },
           ],
         },
+        {
+          id: 'knight-outpost-practice',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp2ppbp/2np2p1/8/3NP3/2N1BP2/PPP3PP/R2QKB1R w KQ - 0 10',
+          title: 'Occupy the Outpost',
+          explanation: `White has a powerful outpost available on d5. Black's pawns on e7 and c6 cannot control d5. Place your knight on this dominant square!`,
+          correctMoves: ['Nd5'],
+          successMessage: `**Brilliant!** Nd5 is a monster knight. It cannot be driven away by pawns (e6 would leave f-pawns weak, and c6 is already occupied). From d5, the knight attacks e7, c7, f6, and b6. This is a textbook outpost occupation.`,
+          failureMessage: 'Look for the square that Black\'s pawns cannot attack. Which central square on the 5th rank is permanently weak?',
+          arrows: [
+            { from: 'c3', to: 'd5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd5', color: 'green' },
+          ],
+        },
+        {
+          id: 'create-outpost-practice',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp2bppp/2n1pn2/2pp4/3PP3/2NB1N2/PPP2PPP/R1BQ1RK1 w - - 0 8',
+          title: 'Create an Outpost with a Pawn Exchange',
+          explanation: `White wants to create an outpost on d5 for a knight. The current pawn structure doesn't yet provide one. Find the pawn exchange that opens up d5 as a permanent outpost!`,
+          correctMoves: ['exd5'],
+          successMessage: `**Correct!** exd5 opens the position. After ...exd5 (or ...cxd5), the d5 square becomes a permanent outpost because Black's c and e pawns can no longer guard it. White will follow with Nf3-e5 or Nc3-e2-f4-d5 to install a knight there.`,
+          failureMessage: 'Think about which pawn exchange would leave d5 permanently unguarded by Black\'s pawns.',
+          arrows: [
+            { from: 'e4', to: 'd5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd5', color: 'yellow' },
+          ],
+        },
       ],
     },
     {
@@ -397,7 +429,7 @@ This strategic concept of blockade → attack is fundamental to positional chess
           type: 'explanation',
           fen: 'r1bqkb1r/pp3ppp/2n1pn2/2pp4/3PP3/2PB1N2/PP3PPP/RNBQK2R b KQkq - 0 5',
           title: 'What Makes a Square Weak?',
-          explanation: `A **weak square** (also called a "hole") is a square that cannot be defended by pawns. Once pawns advance past a square, they can never return to defend it—this is the fundamental source of weakness.
+          explanation: `A **weak square** (also called a "hole") is a square that cannot be defended by pawns. Nimzowitsch introduced the concept of "weak squares" as permanent deficiencies in a position, emphasizing that a weak square is only truly weak if it can be occupied. Once pawns advance past a square, they can never return to defend it—this is the fundamental source of weakness.
 
 **Characteristics of weak squares:**
 
@@ -552,6 +584,41 @@ White can play e5!, forcing Black's knight away. Then the d5 square becomes weak
             { square: 'd6', color: 'red' },
           ],
         },
+        {
+          id: 'dark-square-practice',
+          type: 'puzzle',
+          fen: 'r2q1rk1/pb2bpp1/1pn1p2p/2p5/2P1P3/1PN2N2/PB2BPPP/R2Q1RK1 w - - 0 12',
+          title: 'Exploit Dark-Square Weakness',
+          explanation: `Black's pawns are mostly on light squares (b6, c5, e6, h6) and the dark-squared bishop has been exchanged. White's bishop on b2 eyes the dark squares. Find the move that exploits Black's dark-square weakness!`,
+          correctMoves: ['Nd5'],
+          successMessage: `**Excellent!** Nd5 plants the knight on a dominant dark square that Black cannot challenge with pawns. The knight attacks e7 and c7, and the b2 bishop rakes the long diagonal. Black's dark squares are collapsing. This is a textbook exploitation of a color complex weakness.`,
+          failureMessage: 'Black\'s dark squares are weak. Which central dark square can your knight occupy permanently?',
+          arrows: [
+            { from: 'c3', to: 'd5', color: 'green' },
+            { from: 'b2', to: 'g7', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'd5', color: 'green' },
+            { square: 'f6', color: 'red' },
+          ],
+        },
+        {
+          id: 'weakness-puzzle-2',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp2ppbp/2n3p1/2p5/4P3/2N2NP1/PP2PPBP/R1BQ1RK1 w - - 0 8',
+          title: 'Identify and Target the Weakness',
+          explanation: `Black has played ...g6, creating permanent holes on f6 and h6. The dark-squared bishop on g7 is the only defender of these squares. White should prepare to exploit these weaknesses. What is the best move?`,
+          correctMoves: ['Nd5', 'Bg5'],
+          successMessage: `**Well done!** Preparing to develop pieces toward the weakened dark squares is correct. White's plan involves Bg5 (targeting the f6 and h6 holes), and potentially manoeuvring a knight to f5 or h5 via d5. Once the dark squares are infiltrated, Black's kingside becomes very vulnerable.`,
+          failureMessage: 'Black has weakened the dark squares around the king with ...g6. How can White prepare to target f6 and h6?',
+          arrows: [
+            { from: 'c1', to: 'g5', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'f6', color: 'red' },
+            { square: 'h6', color: 'red' },
+          ],
+        },
       ],
     },
     {
@@ -567,7 +634,7 @@ White can play e5!, forcing Black's knight away. Then the d5 square becomes weak
           type: 'explanation',
           fen: 'r1bqkb1r/pp3ppp/2n1pn2/2pp4/3PP3/2PB1N2/PP3PPP/RNBQK2R b KQkq - 0 5',
           title: 'Good vs Bad Bishops',
-          explanation: `The quality of a bishop depends almost entirely on **pawn structure**. This concept, developed by Wilhelm Steinitz and refined by later positional masters, is central to strategic chess.
+          explanation: `The quality of a bishop depends almost entirely on **pawn structure**. The "good bishop/bad bishop" terminology was popularized by Siegbert Tarrasch in the early 1900s, and the concept was further developed by Wilhelm Steinitz and refined by later positional masters. It is central to strategic chess.
 
 **The Good Bishop:**
 - Pawns are on **opposite colored** squares from the bishop
@@ -720,6 +787,52 @@ This trades the "bad" light-squared bishop (stuck behind e6-d5) for White's "goo
             { square: 'e2', color: 'green' },
           ],
         },
+        {
+          id: 'bishop-pair-practice',
+          type: 'interactive',
+          fen: 'r2q1rk1/ppp1bppp/2n1pn2/3p4/3P1B2/2NBPN2/PPP2PPP/R2Q1RK1 w - - 0 9',
+          title: 'Activate the Bishop Pair',
+          explanation: `White has both bishops while Black has a bishop and knight. The bishop pair thrives in open positions. Find the move that opens the position to maximize the bishops' power!`,
+          correctMoves: ['e4'],
+          successMessage: `**Excellent!** e4! opens the center, which is exactly what the bishop pair wants. After ...dxe4 Nxe4, the bishops on d3 and f4 will dominate open diagonals. The bishop pair's power increases dramatically in open positions. Always open the position when you have two bishops!`,
+          failureMessage: 'The bishop pair needs open diagonals to shine. Which central pawn advance opens the position?',
+          arrows: [
+            { from: 'e3', to: 'e4', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd3', color: 'green' },
+            { square: 'f4', color: 'green' },
+          ],
+        },
+        {
+          id: 'opposite-color-bishops',
+          type: 'explanation',
+          fen: 'r2q1rk1/pp3ppp/4p3/3pP3/1b1P4/4BN2/PP3PPP/R2Q1RK1 w - - 0 14',
+          title: 'Opposite-Color Bishops',
+          explanation: `When each side has one bishop and they travel on **different colored squares**, the position has unique characteristics.
+
+**In this position:**
+White has a dark-squared bishop (e3) and Black has a dark-squared bishop (b4). Wait—actually both are on dark squares, so this is a same-color bishop position. Let's consider what happens with opposite colors instead.
+
+**Opposite-color bishop characteristics:**
+
+1. **Attacking advantage:** The attacker's bishop controls squares the defender's bishop cannot reach. This makes attacks very dangerous.
+
+2. **Drawing tendency in endgames:** With few pawns, the defender can blockade on the color their bishop controls. The attacker's bishop cannot break through.
+
+3. **"Two different games":** Each bishop operates on its own color, creating positions where one side attacks on one color while the other defends on the opposite color.
+
+**Practical rules:**
+- In the **middlegame** with queens: Opposite-color bishops FAVOR the attacker (extra "color" advantage)
+- In **pure endgames**: Opposite-color bishops strongly tend toward draws, even with 1-2 extra pawns
+- **Key strategy:** Place your pawns on the opposite color of your bishop and the same color as your opponent's bishop, blocking their bishop while freeing yours.
+
+Understanding this duality is essential for evaluating positions correctly.`,
+          highlights: [
+            { square: 'e3', color: 'green' },
+            { square: 'b4', color: 'yellow' },
+          ],
+        },
       ],
     },
     {
@@ -735,7 +848,7 @@ This trades the "bad" light-squared bishop (stuck behind e6-d5) for White's "goo
           type: 'explanation',
           fen: 'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 w - - 6 5',
           title: 'What is Piece Activity?',
-          explanation: `**Piece activity** is one of the most fundamental concepts in chess. Simply put: **Active pieces are worth more than passive ones.**
+          explanation: `**Piece activity** is one of the most fundamental concepts in chess. Piece activity as a primary evaluation criterion was championed by Mikhail Botvinnik and the Soviet chess school, who emphasized that "a bad plan is better than no plan" because keeping pieces active and coordinated is paramount. Simply put: **Active pieces are worth more than passive ones.**
 
 **What makes a piece "active"?**
 
@@ -884,6 +997,42 @@ Silman's famous method: Find your worst-placed piece and improve it. Then find t
             { from: 'g4', to: 'h5', color: 'blue' },
           ],
         },
+        {
+          id: 'centralized-vs-edge',
+          type: 'puzzle',
+          fen: 'r1bq1rk1/ppp2ppp/3p1n2/4p3/4P3/3P4/PPPN1PPP/R1BQR1K1 w - - 0 10',
+          title: 'Centralize the Knight',
+          explanation: `White's knight on d2 is passive. It needs to reach a more active central square. Find the best route to maximize the knight's activity!`,
+          correctMoves: ['Nf1'],
+          successMessage: `**Correct!** Nf1 is the key maneuver. From f1, the knight will reroute to e3 or g3, aiming for the powerful d5 or f5 squares. This classic knight maneuver (Nd2-f1-e3/g3) is seen in many King's Indian and Spanish Game structures. The knight transforms from a passive piece to a dominant one.`,
+          failureMessage: 'The knight needs to reach a strong central square. Think about the classic rerouting maneuver: Nd2-f1-e3 or Nd2-f1-g3.',
+          arrows: [
+            { from: 'd2', to: 'f1', color: 'green' },
+            { from: 'f1', to: 'e3', color: 'blue' },
+            { from: 'f1', to: 'g3', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'f1', color: 'yellow' },
+            { square: 'e3', color: 'green' },
+            { square: 'g3', color: 'green' },
+          ],
+        },
+        {
+          id: 'piece-activity-puzzle',
+          type: 'interactive',
+          fen: 'r4rk1/ppp1qppp/2n1b3/3np3/8/1BN1P3/PPP2PPP/R1BQR1K1 w - - 0 12',
+          title: 'Activate the Passive Rook',
+          explanation: `White's rook on a1 has been idle the entire game. Find the best way to bring it into the action and improve White's piece coordination!`,
+          correctMoves: ['Nd5'],
+          successMessage: `**Excellent!** Nd5 is a powerful centralizing move that attacks Black's queen on e7 and dominates the board. The knight on d5 is a monster—it cannot be taken by the e6 bishop without allowing Bxe6 with a discovered attack. This forces Black to react, giving White time to further improve piece coordination.`,
+          failureMessage: 'Before moving the rook, consider if there is a stronger centralizing move that improves your position even more. Which piece can dominate from the center?',
+          arrows: [
+            { from: 'c3', to: 'd5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd5', color: 'green' },
+          ],
+        },
       ],
     },
     {
@@ -899,7 +1048,7 @@ Silman's famous method: Find your worst-placed piece and improve it. Then find t
           type: 'explanation',
           fen: 'rnbqkb1r/pp2pppp/2p2n2/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 1 4',
           title: 'What is Space?',
-          explanation: `**Space** in chess refers to the territory your pawns control. The side with more space has more room for their pieces to maneuver, while the opponent's pieces are cramped and restricted.
+          explanation: `**Space** in chess refers to the territory your pawns control. Wilhelm Steinitz, the first world champion, was the first to formally theorize about space advantage in the 1880s, arguing that cramped positions contain the seeds of their own destruction. The side with more space has more room for their pieces to maneuver, while the opponent's pieces are cramped and restricted.
 
 **How space is measured:**
 
@@ -1065,6 +1214,41 @@ The side with less space should seek exchanges and pawn breaks!`,
             { square: 'd5', color: 'green' },
           ],
         },
+        {
+          id: 'convert-space',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp1n1ppp/2p1p3/3pP1N1/3P4/2N5/PPP2PPP/R1BQR1K1 w - - 0 11',
+          title: 'Convert the Space Advantage',
+          explanation: `White has a massive space advantage with the e5 pawn cramping Black's position. The knight on g5 is aggressively placed. Find the move that converts White's spatial advantage into a direct attacking threat!`,
+          correctMoves: ['Qh5'],
+          successMessage: `**Brilliant!** Qh5 uses the spatial advantage to create a direct kingside attack. The queen targets h7 and works with the g5 knight. Black is so cramped that defense is extremely difficult. The threat of Qxh7# (or Qh7+ followed by Qh8#) forces Black into passive defense. This is how space advantages are converted into attacks!`,
+          failureMessage: 'With more space, your pieces have better squares. Which queen move creates immediate threats against Black\'s cramped kingside?',
+          arrows: [
+            { from: 'd1', to: 'h5', color: 'green' },
+            { from: 'h5', to: 'h7', color: 'red' },
+          ],
+          highlights: [
+            { square: 'h5', color: 'green' },
+            { square: 'h7', color: 'red' },
+          ],
+        },
+        {
+          id: 'space-restriction',
+          type: 'puzzle',
+          fen: 'r1bqk2r/pp2bppp/2n1pn2/2ppP3/3P4/2P1N3/PP1N1PPP/R1BQKB1R w KQkq - 0 7',
+          title: 'Restrict the Opponent',
+          explanation: `White has an e5 space advantage. Black wants to play ...f6 to challenge the e5 pawn. Find the move that prevents this break and locks in White's spatial advantage!`,
+          correctMoves: ['f4'],
+          successMessage: `**Correct!** f4 reinforces the e5 pawn and permanently prevents ...f6. Now Black's kingside knight is completely locked out. White has a stable space advantage and can build up slowly with Bd3, O-O, and prepare a kingside attack. The key to maintaining space: protect your advanced pawns!`,
+          failureMessage: 'Black wants to challenge e5 with ...f6. How can you reinforce the e5 pawn to prevent this break?',
+          arrows: [
+            { from: 'f2', to: 'f4', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'green' },
+            { square: 'f4', color: 'blue' },
+          ],
+        },
       ],
     },
     {
@@ -1080,7 +1264,7 @@ The side with less space should seek exchanges and pawn breaks!`,
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 2 8',
           title: 'Knight vs Bishop: The Eternal Debate',
-          explanation: `Knights and bishops are both worth approximately **3 pawns**, but they are fundamentally different pieces. Understanding when each is stronger is a cornerstone of positional chess.
+          explanation: `Knights and bishops are both worth approximately **3 pawns**, but they are fundamentally different pieces. The relative value of bishops vs knights has been debated since the time of Staunton (1847). Fischer famously preferred bishops, while Petrosian was renowned for his knight mastery. Understanding when each is stronger is a cornerstone of positional chess.
 
 **Key differences:**
 
@@ -1237,6 +1421,40 @@ Which knight should Black target, and why?`,
             { from: 'd3', to: 'b5', color: 'green' },
           ],
         },
+        {
+          id: 'bishop-vs-knight-endgame',
+          type: 'interactive',
+          fen: '8/pp3kpp/4p3/3pP3/6P1/4BK2/PP5P/5n2 w - - 0 30',
+          title: 'Bishop vs Knight: Open Endgame',
+          explanation: `This is a typical endgame where the bishop should dominate the knight. The position is open with pawns on both flanks. Find the move that maximizes the bishop's long-range advantage!`,
+          correctMoves: ['Bc5'],
+          successMessage: `**Correct!** Bc5 is a fantastic move. The bishop controls both the a3-f8 and b4-g7 diagonals, influencing both sides of the board simultaneously. The knight on f1 is passively placed and cannot match the bishop's reach. White's plan is to create threats on both flanks—the knight simply cannot defend everywhere at once.`,
+          failureMessage: 'The bishop excels at controlling both sides of the board. Where can it be placed to influence both flanks?',
+          arrows: [
+            { from: 'e3', to: 'c5', color: 'green' },
+            { from: 'c5', to: 'a7', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'c5', color: 'green' },
+          ],
+        },
+        {
+          id: 'knight-closed-practice',
+          type: 'puzzle',
+          fen: 'r2q1rk1/pb2bppp/1pn1p3/2ppP3/3P4/P1N2N2/1P2BPPP/R1BQ1RK1 w - - 0 12',
+          title: 'Knight Superiority in Closed Position',
+          explanation: `The center is locked (e5 vs e6, d4 vs d5). Black has a bishop on b7 that is blocked by its own pawns. White can capitalize by maneuvering a knight to the ideal outpost. Find the best move!`,
+          correctMoves: ['Na4'],
+          successMessage: `**Excellent!** Na4 heads for the outpost on c5 (via a4-c5 or b6). The c5 square cannot be attacked by Black's pawns, and from there the knight will be far superior to Black's blocked bishop on b7. In this closed structure, the knight dominates while the bishop stares at its own pawns.`,
+          failureMessage: 'In this locked position, the knight needs a strong outpost. Which move starts the knight\'s journey to the c5 outpost?',
+          arrows: [
+            { from: 'c3', to: 'a4', color: 'green' },
+            { from: 'a4', to: 'c5', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'c5', color: 'green' },
+          ],
+        },
       ],
     },
     {
@@ -1252,7 +1470,7 @@ Which knight should Black target, and why?`,
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/4p3/4P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 8',
           title: 'Types of Weak Pawns',
-          explanation: `Pawns cannot move backward, so **pawn weaknesses are permanent**. Understanding weak pawn types is fundamental to strategic play.
+          explanation: `Pawns cannot move backward, so **pawn weaknesses are permanent**. The study of weak pawns (isolated, doubled, backward) was systematized by Steinitz and later expanded by Nimzowitsch, who dedicated an entire chapter of "My System" to pawn weaknesses. Understanding weak pawn types is fundamental to strategic play.
 
 **The main types of weak pawns:**
 
@@ -1413,6 +1631,56 @@ The d4 square is permanently weak because neither c-pawn can control it. Black s
             { from: 'b5', to: 'c6', color: 'red' },
           ],
         },
+        {
+          id: 'backward-pawn-practice',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp3ppp/2n1p3/3p4/3P4/2P1PN2/PP3PPP/R1BQ1RK1 w - - 0 10',
+          title: 'Target the Backward Pawn',
+          explanation: `Black's e6 pawn is backward—it cannot advance because White controls e5 with the d4 pawn. How should White begin putting pressure on this weakness?`,
+          correctMoves: ['Re1'],
+          successMessage: `**Perfect!** Re1 puts the rook on the half-open e-file, directly targeting the backward e6 pawn. White's plan is to pile up on e6 with Qe2, possibly Bd2-c1-b2, and eventually Rae1. The backward pawn ties down Black's pieces to its defense.`,
+          failureMessage: 'The e6 pawn is weak and sits on a half-open file. Which piece should pressure it along that file?',
+          arrows: [
+            { from: 'f1', to: 'e1', color: 'green' },
+            { from: 'e1', to: 'e6', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'e6', color: 'red' },
+          ],
+        },
+        {
+          id: 'hanging-pawns-lesson',
+          type: 'explanation',
+          fen: 'r1bq1rk1/pp3ppp/2n1bn2/8/2Pp4/2N2NP1/PP2PPBP/R1BQ1RK1 w - - 0 10',
+          title: 'Hanging Pawns',
+          explanation: `**Hanging pawns** are two adjacent pawns (typically on c4 and d4, or c5 and d5) with no friendly pawns on adjacent files. They are a unique type of pawn weakness.
+
+**In this position, White's c4 and d4 pawns are "hanging":**
+
+**Why they can be weak:**
+1. Both must be defended by pieces, not pawns
+2. They can become targets for coordinated attack
+3. If one advances, the other becomes isolated and weak
+4. Rooks on the c and d files can pressure them
+
+**Why they can be strong:**
+1. They control key central squares (c5, d5, e5)
+2. A timely d5 or c5 advance can be powerful
+3. They provide space and active piece play
+4. Bishops and knights get excellent squares behind them
+
+**The key question:** Are the hanging pawns a dynamic strength or a static weakness? It depends on whether the pawn holder can maintain the tension and keep pieces active.
+
+**Practical tip:** When playing against hanging pawns, try to force one to advance (d5 or c5), which isolates the other. When playing with them, keep pieces active and look for the right moment to push!`,
+          highlights: [
+            { square: 'c4', color: 'yellow' },
+            { square: 'd4', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'c4', to: 'c5', color: 'blue' },
+            { from: 'd4', to: 'd5', color: 'blue' },
+          ],
+        },
       ],
     },
     {
@@ -1428,7 +1696,7 @@ The d4 square is permanently weak because neither c-pawn can control it. Black s
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/4p3/4P3/3P1N2/PPP2PPP/RNBQ1RK1 w - - 0 7',
           title: 'The Power of Open Files',
-          explanation: `Rooks are the most underutilized pieces for most players. Understanding **open files** is key to activating them.
+          explanation: `Rooks are the most underutilized pieces for most players. Nimzowitsch in "My System" (1925) declared that Rooks belong on open files - "The Rook is the piece of the open file" - and introduced the concept of "half-open" files for targeting weak pawns. Understanding **open files** is key to activating them.
 
 **Definitions:**
 
@@ -1579,6 +1847,41 @@ Before opening a file, ask yourself:
             { from: 'd2', to: 'c4', color: 'blue' },
           ],
         },
+        {
+          id: 'file-control-practice',
+          type: 'interactive',
+          fen: 'r3r1k1/ppp2ppp/3p1n2/4p3/4P3/3P1N2/PPP1BPPP/R1K1R3 w - - 0 14',
+          title: 'Double Rooks on the File',
+          explanation: `White already has one rook on the d-file and one on the e-file. To maximize pressure, White should double rooks on the most important file. Find the best rook move!`,
+          correctMoves: ['Red1'],
+          successMessage: `**Excellent!** Red1 doubles the rooks on the d-file, creating devastating pressure on the d6 pawn. Doubled rooks on an open or half-open file are one of the most powerful configurations in chess. The d6 pawn will need constant defense, and White can eventually penetrate to d7 or d8.`,
+          failureMessage: 'Look at which file has a clear target (a weak pawn). How can you double rooks to increase pressure on that weakness?',
+          arrows: [
+            { from: 'e1', to: 'd1', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd6', color: 'red' },
+            { square: 'd1', color: 'green' },
+          ],
+        },
+        {
+          id: 'rook-penetration',
+          type: 'puzzle',
+          fen: '2r3k1/pp3ppp/3p4/4p3/4P3/3P1N2/1PP2PPP/R5K1 w - - 0 18',
+          title: 'Rook Penetration',
+          explanation: `White's rook on a1 needs to get active. The a-file is open and Black's a7 and b7 pawns are potential targets. Find the best way to activate the rook!`,
+          correctMoves: ['Ra6'],
+          successMessage: `**Correct!** Ra6 penetrates to the 6th rank, attacking the d6 pawn from the side. The rook is now extremely active—it can swing along the 6th rank to attack multiple weaknesses. This is the "rook on the 6th rank" principle: almost as powerful as the 7th rank, with the bonus of attacking pawns from the flank.`,
+          failureMessage: 'The rook needs to penetrate into Black\'s position. Which rank gives the rook maximum activity while attacking a weak pawn?',
+          arrows: [
+            { from: 'a1', to: 'a6', color: 'green' },
+            { from: 'a6', to: 'd6', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'a6', color: 'green' },
+            { square: 'd6', color: 'red' },
+          ],
+        },
       ],
     },
     {
@@ -1594,7 +1897,7 @@ Before opening a file, ask yourself:
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 4 7',
           title: 'The Art of Piece Exchanges',
-          explanation: `Piece exchanges seem simple—trade a bishop for a bishop, a knight for a knight. But **when** and **which pieces** to exchange is a deep strategic decision.
+          explanation: `Piece exchanges seem simple—trade a bishop for a bishop, a knight for a knight. But **when** and **which pieces** to exchange is a deep strategic decision. The theory of when to exchange pieces was developed by Capablanca, who was known for his simplification technique. The principle "when ahead in material, exchange pieces; when behind, exchange pawns" is attributed to him.
 
 **Exchange when:**
 
@@ -1748,6 +2051,284 @@ White is building an attack with pieces aimed at the kingside. White should NOT 
           ],
           highlights: [
             { square: 'f6', color: 'red' },
+          ],
+        },
+        {
+          id: 'favorable-exchange',
+          type: 'interactive',
+          fen: 'r1bq1rk1/ppp1nppp/3p4/3Pp1B1/2P5/2N5/PP2BPPP/R2Q1RK1 w - - 0 11',
+          title: 'Exchange to Exploit Weakness',
+          explanation: `White has a space advantage and Black's knight on e7 is a key defensive piece guarding d5 and f5. Find the exchange that removes this defender and opens lines for White's pieces!`,
+          correctMoves: ['Bh4'],
+          successMessage: `**Well played!** Bh4 maintains the pressure on the dark squares. The bishop retreats to a strong diagonal, keeping pressure on d8 and preparing to exchange on e7 at the right moment. White avoids trading the bishop for the passive knight on e7 directly—instead, the bishop stays active. White's next moves might include Nd5 or f4 to increase the pressure.`,
+          failureMessage: 'Think about which exchange would benefit White the most. How can you maintain pressure while keeping your active pieces?',
+          arrows: [
+            { from: 'g5', to: 'h4', color: 'green' },
+          ],
+          highlights: [
+            { square: 'h4', color: 'green' },
+            { square: 'e7', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'exchange-endgame',
+          type: 'puzzle',
+          fen: 'r2r2k1/pp3ppp/2p1pn2/3R4/3P4/2P2N2/PP3PPP/R5K1 w - - 0 16',
+          title: 'Simplify into a Winning Endgame',
+          explanation: `White is slightly better due to the more mobile d4 pawn and active rook placement. Material is equal. Find the exchange that transitions into a favorable rook endgame!`,
+          correctMoves: ['Rxd8+'],
+          successMessage: `**Correct!** Rxd8+ simplifies the position. After ...Rxd8, White has a rook endgame where the d4 pawn is more mobile than Black's e6+c6 pawns. White can play Rd1 to control the d-file and eventually advance d5, creating a passed pawn. The key principle: exchange when the resulting endgame favors you!`,
+          failureMessage: 'When you have a structural advantage, simplifying can make it easier to exploit. Which exchange leads to a better endgame for White?',
+          arrows: [
+            { from: 'd1', to: 'd8', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd8', color: 'yellow' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'pawn-majority',
+      title: 'Pawn Majority',
+      description: 'Exploiting numerical pawn advantages on one side of the board',
+      difficulty: 'intermediate',
+      estimatedMinutes: 15,
+      tags: ['pawns', 'majority', 'endgame', 'strategy'],
+      steps: [
+        {
+          id: 'intro',
+          type: 'explanation',
+          fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+          title: 'What Is a Pawn Majority?',
+          explanation: `A **pawn majority** exists when one side has more pawns than the opponent on a particular section of the board (usually kingside or queenside).
+
+**Historical background:** The strategic concept of pawn majorities was formalized by **François-André Danican Philidor** in the 18th century, who famously declared **"Pawns are the soul of chess."** Philidor understood that pawn structure dictates the flow of the entire game. Later, the great **José Raúl Capablanca** — World Champion from 1921 to 1927 — further refined the theory of exploiting queenside majorities, making it a cornerstone of positional play.
+
+**Why majorities matter:**
+- A pawn majority can create a **passed pawn** (a pawn with no opposing pawns to block it)
+- A passed pawn ties down enemy pieces to stop it
+- In the endgame, a distant passed pawn can be decisive
+
+**Types of majorities:**
+- **Queenside majority** — often the most useful, as the king is usually on the kingside
+- **Kingside majority** — can support an attack, but the king is nearby to defend against it
+- **Central majority** — controls key squares and supports piece activity
+
+Let's see how to recognize and exploit pawn majorities.`,
+          highlights: [
+            { square: 'a2', color: 'blue' },
+            { square: 'b2', color: 'blue' },
+            { square: 'c2', color: 'blue' },
+            { square: 'd2', color: 'blue' },
+          ],
+        },
+        {
+          id: 'queenside-majority',
+          type: 'explanation',
+          fen: 'r1bq1rk1/pp3ppp/2n1pn2/3p4/3P4/2PBP3/P4PPP/RNBQ1RK1 w - - 0 1',
+          title: 'The Queenside Majority',
+          explanation: `In this position, count the pawns on each side of the board:
+
+**Queenside (a-d files):**
+- White: a2, c3, d4 = **3 pawns**
+- Black: a7, b7, d5 = **3 pawns**
+
+Wait — actually, let's look more carefully:
+- White has pawns on a2, c3, d4, and e3 = **4 pawns** on the a-e files
+- Black has pawns on a7, b7, d5, and e6 = **4 pawns** on the a-e files
+
+**Kingside (f-h files):**
+- White: f2, g2, h2 = **3 pawns**
+- Black: f7, g7, h7 = **3 pawns**
+
+The queenside is balanced here, but the **structure** matters. White's c3+d4 chain is more mobile than Black's d5+e6. White can play c4 to challenge Black's center and potentially create a passed pawn on the c or d file.
+
+**The classic queenside majority strategy:**
+1. Advance the majority pawns (b4-b5, c4-c5)
+2. Create a passed pawn
+3. Force the opponent to deal with it
+4. Use the distraction to win elsewhere
+
+**Capablanca's insight:** A queenside pawn majority is especially powerful because the kings are usually castled kingside. The passed pawn is *distant* from the defending king — a huge advantage in endgames!`,
+          highlights: [
+            { square: 'a2', color: 'green' },
+            { square: 'c3', color: 'green' },
+            { square: 'd4', color: 'green' },
+          ],
+          arrows: [
+            { from: 'c3', to: 'c4', color: 'green' },
+            { from: 'a2', to: 'a4', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'queenside-majority-practice',
+          type: 'interactive',
+          fen: 'r4rk1/pp3ppp/4pn2/8/2PP4/6P1/P4P1P/R3R1K1 w - - 0 1',
+          title: 'Advance the Queenside Majority',
+          explanation: `White has a clear queenside pawn majority: pawns on a2, c4, d4 vs Black's pawns on a7, b7.
+
+**Your task:** Start advancing the queenside majority! Find the pawn move that begins creating a passed pawn on the queenside. Think about which pawn should advance first.`,
+          correctMoves: ['c5', 'd5'],
+          successMessage: `**Excellent!** Advancing the queenside majority is the correct plan. Pushing forward starts the process of creating a passed pawn. Black will have to deal with the advancing pawns, and White's queenside majority will become a powerful asset, especially heading into the endgame.`,
+          failureMessage: 'White has more pawns on the queenside (a2, c4, d4 vs a7, b7). Advance them! Which pawn push starts creating a passed pawn?',
+          highlights: [
+            { square: 'c4', color: 'green' },
+            { square: 'd4', color: 'green' },
+            { square: 'a2', color: 'green' },
+          ],
+          arrows: [
+            { from: 'c4', to: 'c5', color: 'green' },
+            { from: 'd4', to: 'd5', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'minority-attack',
+          type: 'explanation',
+          fen: 'r1bq1rk1/pp1nbppp/2p1pn2/3p4/2PP4/1PN2NP1/P3PPBP/R1BQ1RK1 w - - 0 1',
+          title: 'The Minority Attack: Fewer Pawns, More Damage',
+          explanation: `A **minority attack** is a seemingly paradoxical idea: you advance **fewer** pawns against a **larger** group to create weaknesses in the opponent's position.
+
+**The classic example:** In the Carlsbad pawn structure (from the Queen's Gambit), White has 2 queenside pawns (a2, b3) against Black's 3 (a7, b7, c6).
+
+**How the minority attack works:**
+1. White plays a2-a4-a5, then b3-b4-b5
+2. The b5 pawn attacks Black's c6 pawn
+3. After bxc6, Black gets an isolated c-pawn or backward b-pawn
+4. These structural weaknesses become permanent targets
+
+**Why it works:**
+- The advancing pawns force the defender to make a concession
+- Black must capture (creating an isolani) or allow cxb5 (creating a backward pawn)
+- Either result gives White a clear target to attack
+
+**Historical note:** The minority attack was perfected in the 1920s-30s by players like **Akiba Rubinstein** and later became a key weapon of **Anatoly Karpov**, who used it with devastating precision in Queen's Gambit structures.
+
+**The key insight:** You don't always need MORE pawns to attack. Sometimes fewer pawns, well advanced, create permanent damage to your opponent's structure.`,
+          arrows: [
+            { from: 'a2', to: 'a4', color: 'green' },
+            { from: 'b3', to: 'b5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'c6', color: 'red' },
+            { square: 'b7', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'creating-passed-pawns',
+          type: 'explanation',
+          fen: '8/pp3k2/8/2PP4/8/8/8/4K3 w - - 0 1',
+          title: 'Creating Passed Pawns from Majorities',
+          explanation: `The ultimate goal of a pawn majority is to create a **passed pawn** — a pawn that has no opposing pawns to block its path to promotion.
+
+**The technique with connected pawns:**
+
+In this position, White has pawns on c5 and d5 against Black's a7 and b7. White's method is:
+1. **Advance the unopposed pawn first:** d5-d6 (the d-pawn has no opposing pawn on the d-file)
+2. Black cannot stop both: if ...Ke6, then c6 threatens c7; if the king goes to the c-file, the d-pawn advances
+3. One pawn will queen
+
+**Critical rule:** When advancing a pawn majority, **push the pawn that has NO opposing pawn in front of it first**. This is called the "candidate" passed pawn.
+
+**Common mistakes:**
+- Pushing the wrong pawn first can allow blockading
+- Advancing too quickly without king support
+- Forgetting about the opponent's counterplay on the other side
+
+**Capablanca's method (simplified):**
+1. Identify which pawn is the "candidate" (no direct opposition)
+2. Advance it first
+3. Use the other pawn(s) as support
+4. The candidate becomes a passed pawn
+
+This principle applies whether you have a 2 vs 1, 3 vs 2, or 4 vs 3 majority. Always advance the candidate!`,
+          arrows: [
+            { from: 'd5', to: 'd6', color: 'green' },
+            { from: 'c5', to: 'c6', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'd5', color: 'green' },
+            { square: 'c5', color: 'blue' },
+          ],
+        },
+        {
+          id: 'majority-in-endgames',
+          type: 'explanation',
+          fen: '8/pp3kpp/8/3K4/8/PPP5/8/8 w - - 0 1',
+          title: 'Pawn Majority in King-and-Pawn Endgames',
+          explanation: `Pawn majorities become **most powerful** in king-and-pawn endgames, where there are no pieces to blockade.
+
+**In this position:**
+- White has a 3 vs 2 queenside majority (a3, b3, c3 vs a7, b7)
+- Black has a 2 vs 0 kingside majority (g7, h7 — but White has no kingside pawns)
+- White's king on d5 is actively placed
+
+**White's plan:**
+1. Advance the queenside majority: b4, c4, a4, b5, etc.
+2. Create a passed pawn on the queenside
+3. Black's king must deal with it
+4. Meanwhile, White's king may attack Black's kingside pawns
+
+**Why the queenside majority is so strong here:**
+- It's a **distant passed pawn** — far from Black's king
+- Black cannot stop both the passed pawn AND protect the kingside
+- White's king is already centralized
+
+**Practical wisdom:**
+- In endgames, always count pawn majorities on each side
+- A healthy (unmixed) majority is one where all pawns can advance freely
+- A "crippled" majority (with doubled or isolated pawns) may not create a passed pawn
+- **Capablanca's rule:** Trade pieces when you have a queenside majority to reach a winning pawn endgame
+
+This is one of the most important positional concepts in chess — master it and your endgame play will improve dramatically!`,
+          highlights: [
+            { square: 'a3', color: 'green' },
+            { square: 'b3', color: 'green' },
+            { square: 'c3', color: 'green' },
+            { square: 'a7', color: 'red' },
+            { square: 'b7', color: 'red' },
+          ],
+          arrows: [
+            { from: 'b3', to: 'b5', color: 'green' },
+            { from: 'a3', to: 'a4', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'majority-puzzle',
+          type: 'puzzle',
+          fen: '8/5kpp/8/6P1/5P2/8/6K1/8 w - - 0 1',
+          title: 'Advance the Majority!',
+          explanation: `White has a kingside pawn majority: f4 and g5 against Black's g7 and h7. White's king is on g2 and Black's king is on f7.
+
+**Your task:** Start the process of creating a passed pawn. Remember the principle: advance the pawn with no direct opposition first!
+
+Which pawn should White push?`,
+          correctMoves: ['f5'],
+          successMessage: `**Correct!** f5 is the right advance. The f-pawn has no opposing pawn on the f-file, making it the "candidate." After f5, White threatens f6, which would force ...gxf6 gxf6, creating a passed f-pawn. Or if Black plays ...g6, then f6 creates a passed g-pawn after fxg7. The candidate pawn goes first!`,
+          failureMessage: 'Remember the key principle: advance the pawn that has NO opposing pawn directly in front of it. Which pawn is the "candidate" passed pawn here?',
+          highlights: [
+            { square: 'f4', color: 'green' },
+            { square: 'g5', color: 'blue' },
+          ],
+          arrows: [
+            { from: 'f4', to: 'f5', color: 'green' },
+          ],
+        },
+        {
+          id: 'crippled-majority',
+          type: 'puzzle',
+          fen: '8/8/4kpp1/8/2K1PP2/8/8/8 w - - 0 1',
+          title: 'Healthy vs Crippled Majority',
+          explanation: `Both sides have a 2 vs 2 pawn structure, but White's pawns are healthier. White's e4 and f4 pawns can advance together, while Black's f6 and g6 pawns are slightly less flexible. Find the advance that creates a passed pawn!`,
+          correctMoves: ['e5+'],
+          successMessage: `**Excellent!** e5+! is the key breakthrough. After ...fxe5 fxe5, White has a passed e-pawn supported by the king. If Black plays ...Kd7, then e6 followed by Kd5 wins. The healthy pawn majority creates a passed pawn more easily than a crippled one. This illustrates why pawn structure quality matters as much as pawn quantity!`,
+          failureMessage: 'Think about which pawn has no direct opposition. Advance the candidate pawn to create a passer!',
+          arrows: [
+            { from: 'e4', to: 'e5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e4', color: 'green' },
+            { square: 'f4', color: 'blue' },
           ],
         },
       ],

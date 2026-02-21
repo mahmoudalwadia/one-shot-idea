@@ -40,6 +40,7 @@ const initialTree: TreeNode = {
 const THEMES = [
   { id: 'theme-modern', name: 'MODERN', featured: true },
   { id: 'theme-slate', name: 'SLATE' },
+  { id: 'theme-clean', name: 'CLEAN' },
   { id: 'theme-green', name: 'MATRIX' },
   { id: 'theme-amber', name: 'AMBER' },
   { id: 'theme-cyan', name: 'CYAN' },
@@ -77,7 +78,7 @@ function GambitContent() {
   const [difficulty, setDifficulty] = useState<Difficulty>('medium');
 
   // UI State
-  const [currentTheme, setCurrentTheme] = useState('theme-slate');
+  const [currentTheme, setCurrentTheme] = useState('theme-modern');
   const [showThemes, setShowThemes] = useState(false);
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
   const [showDifficultyDropdown, setShowDifficultyDropdown] = useState(false);
@@ -545,26 +546,32 @@ function GambitContent() {
                 Gambit
               </h1>
               {/* Mode Toggle - In learn mode, LEARN is active */}
-              <div className="flex border border-[var(--term-main)]">
+              <div className="flex border border-[var(--term-main)]" role="tablist" aria-label="Mode selection">
                 <button
                   onClick={() => setMode('play')}
-                  className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors text-[var(--term-dim)] hover:text-[var(--term-main)]"
+                  role="tab"
+                  aria-selected={false}
+                  className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors text-[var(--term-dim)] hover:text-[var(--term-main)] focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-inset"
                 >
-                  <Play size={10} className="md:w-3 md:h-3" /> PLAY
+                  <Play size={10} className="md:w-3 md:h-3" aria-hidden="true" /> PLAY
                 </button>
                 <button
                   onClick={() => setMode('learn')}
-                  className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors border-l border-[var(--term-main)] bg-[var(--term-main)] text-[var(--term-bg)]"
+                  role="tab"
+                  aria-selected={true}
+                  className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors border-l border-[var(--term-main)] bg-[var(--term-main)] text-[var(--term-bg)] focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-inset"
                 >
-                  <BookOpen size={10} className="md:w-3 md:h-3" /> LEARN
+                  <BookOpen size={10} className="md:w-3 md:h-3" aria-hidden="true" /> LEARN
                 </button>
               </div>
               {/* Theme Toggle Button */}
               <button
                 onClick={() => setShowThemes(!showThemes)}
-                className={`p-0.5 border cursor-pointer ${showThemes ? 'bg-[var(--term-main)] text-[var(--term-bg)]' : 'border-[var(--term-dim)] text-[var(--term-dim)]'}`}
+                aria-label="Toggle theme selection"
+                aria-expanded={showThemes}
+                className={`p-0.5 border cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] ${showThemes ? 'bg-[var(--term-main)] text-[var(--term-bg)]' : 'border-[var(--term-dim)] text-[var(--term-dim)]'}`}
               >
-                <Palette size={14} />
+                <Palette size={14} aria-hidden="true" />
               </button>
             </div>
             <Link
@@ -578,12 +585,18 @@ function GambitContent() {
 
         {/* Expandable Theme Selection Area */}
         {showThemes && (
-          <div className="p-2 border-b border-[var(--term-main)] grid grid-cols-3 md:grid-cols-7 gap-2 bg-[rgba(var(--term-main-rgb),0.1)] flex-shrink-0">
+          <div
+            role="radiogroup"
+            aria-label="Theme selection"
+            className="p-2 border-b border-[var(--term-main)] grid grid-cols-4 md:grid-cols-8 gap-2 bg-[rgba(var(--term-main-rgb),0.1)] flex-shrink-0"
+          >
             {THEMES.map(t => (
               <button
                 key={t.id}
+                role="radio"
+                aria-checked={currentTheme === t.id}
                 onClick={() => { setCurrentTheme(t.id); setShowThemes(false); }}
-                className={`text-[10px] p-1 border text-center transition-all cursor-pointer ${
+                className={`text-[10px] p-1 border text-center transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] ${
                   currentTheme === t.id
                     ? 'bg-[var(--term-main)] text-[var(--term-bg)] font-bold'
                     : t.featured
@@ -652,26 +665,32 @@ function GambitContent() {
               Gambit
             </h1>
             {/* Mode Toggle */}
-            <div className="flex border border-[var(--term-main)]">
+            <div className="flex border border-[var(--term-main)]" role="tablist" aria-label="Mode selection">
               <button
                 onClick={() => setMode('play')}
-                className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors bg-[var(--term-main)] text-[var(--term-bg)]"
+                role="tab"
+                aria-selected={true}
+                className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors bg-[var(--term-main)] text-[var(--term-bg)] focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-inset"
               >
-                <Play size={10} className="md:w-3 md:h-3" /> PLAY
+                <Play size={10} className="md:w-3 md:h-3" aria-hidden="true" /> PLAY
               </button>
               <button
                 onClick={() => setMode('learn')}
-                className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors border-l border-[var(--term-main)] text-[var(--term-dim)] hover:text-[var(--term-main)]"
+                role="tab"
+                aria-selected={false}
+                className="px-1.5 py-0.5 text-[10px] md:text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors border-l border-[var(--term-main)] text-[var(--term-dim)] hover:text-[var(--term-main)] focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-inset"
               >
-                <BookOpen size={10} className="md:w-3 md:h-3" /> LEARN
+                <BookOpen size={10} className="md:w-3 md:h-3" aria-hidden="true" /> LEARN
               </button>
             </div>
             {/* Theme Toggle Button */}
             <button
               onClick={() => setShowThemes(!showThemes)}
-              className={`p-0.5 border cursor-pointer ${showThemes ? 'bg-[var(--term-main)] text-[var(--term-bg)]' : 'border-[var(--term-dim)] text-[var(--term-dim)]'}`}
+              aria-label="Toggle theme selector"
+              aria-expanded={showThemes}
+              className={`p-0.5 border cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-offset-1 ${showThemes ? 'bg-[var(--term-main)] text-[var(--term-bg)]' : 'border-[var(--term-dim)] text-[var(--term-dim)]'}`}
             >
-              <Palette size={14} />
+              <Palette size={14} aria-hidden="true" />
             </button>
           </div>
           <Link
@@ -685,12 +704,14 @@ function GambitContent() {
 
       {/* Expandable Theme Selection Area */}
       {showThemes && (
-          <div className="p-2 border-b border-[var(--term-main)] grid grid-cols-3 md:grid-cols-7 gap-2 bg-[rgba(var(--term-main-rgb),0.1)] flex-shrink-0">
+          <div className="p-2 border-b border-[var(--term-main)] grid grid-cols-4 md:grid-cols-8 gap-2 bg-[rgba(var(--term-main-rgb),0.1)] flex-shrink-0" role="radiogroup" aria-label="Theme selection">
                {THEMES.map(t => (
                    <button
                       key={t.id}
                       onClick={() => { setCurrentTheme(t.id); setShowThemes(false); }}
-                      className={`text-[10px] p-1 border text-center transition-all cursor-pointer ${
+                      role="radio"
+                      aria-checked={currentTheme === t.id}
+                      className={`text-[10px] p-1 border text-center transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] ${
                         currentTheme === t.id
                           ? 'bg-[var(--term-main)] text-[var(--term-bg)] font-bold'
                           : t.featured
@@ -724,8 +745,8 @@ function GambitContent() {
 
           {/* Desktop Controls Footer */}
           <div className={`grid ${isVsComputer ? 'grid-cols-4' : 'grid-cols-3'} border-t border-[var(--term-main)] bg-[var(--term-bg)] flex-shrink-0`}>
-             <button onClick={toggleComputerMode} className={`p-3 border-r border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-sm flex flex-col items-center justify-center cursor-pointer ${isVsComputer ? 'bg-[var(--term-dim)] text-black' : ''}`}>
-              <Cpu size={16} className="mb-1" />
+             <button onClick={toggleComputerMode} aria-label={isVsComputer ? 'Disable computer opponent' : 'Enable computer opponent'} aria-pressed={isVsComputer} className={`p-3 border-r border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-sm flex flex-col items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset ${isVsComputer ? 'bg-[var(--term-dim)] text-black' : ''}`}>
+              <Cpu size={16} className="mb-1" aria-hidden="true" />
               {isVsComputer ? 'CPU:ON' : 'CPU:OFF'}
             </button>
             {isVsComputer && (
@@ -733,18 +754,23 @@ function GambitContent() {
                 <button
                   onClick={() => !isComputing && setShowDifficultyDropdown(!showDifficultyDropdown)}
                   disabled={isComputing}
-                  className="p-3 w-full h-full bg-[var(--term-bg)] text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-sm disabled:opacity-50 cursor-pointer flex items-center justify-center gap-1"
+                  aria-label={`Difficulty: ${difficulty}`}
+                  aria-expanded={showDifficultyDropdown}
+                  aria-haspopup="listbox"
+                  className="p-3 w-full h-full bg-[var(--term-bg)] text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-sm disabled:opacity-50 cursor-pointer flex items-center justify-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset"
                 >
                   {difficulty.toUpperCase()}
-                  <ChevronDown size={12} className={`transition-transform ${showDifficultyDropdown ? 'rotate-180' : ''}`} />
+                  <ChevronDown size={12} className={`transition-transform ${showDifficultyDropdown ? 'rotate-180' : ''}`} aria-hidden="true" />
                 </button>
                 {showDifficultyDropdown && (
-                  <div className="absolute bottom-full left-0 right-0 bg-[var(--term-bg)] border border-[var(--term-main)] z-50">
+                  <div className="absolute bottom-full left-0 right-0 bg-[var(--term-bg)] border border-[var(--term-main)] z-50" role="listbox" aria-label="Select difficulty">
                     {(['easy', 'medium', 'hard'] as Difficulty[]).map((d) => (
                       <button
                         key={d}
                         onClick={() => { setDifficulty(d); setShowDifficultyDropdown(false); }}
-                        className={`w-full p-2 text-xs uppercase font-bold transition-colors cursor-pointer ${
+                        role="option"
+                        aria-selected={difficulty === d}
+                        className={`w-full p-2 text-xs uppercase font-bold transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset ${
                           difficulty === d
                             ? 'bg-[var(--term-main)] text-[var(--term-bg)]'
                             : 'text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)]'
@@ -757,12 +783,12 @@ function GambitContent() {
                 )}
               </div>
             )}
-            <button onClick={undoMove} disabled={isComputing} className="p-3 border-r border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-sm disabled:opacity-50 flex flex-col items-center justify-center cursor-pointer">
-              <Undo size={16} className="mb-1" />
+            <button onClick={undoMove} disabled={isComputing} aria-label="Undo last move" className="p-3 border-r border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-sm disabled:opacity-50 flex flex-col items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset">
+              <Undo size={16} className="mb-1" aria-hidden="true" />
               UNDO
             </button>
-            <button onClick={resetGame} disabled={isComputing} className="p-3 hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-sm disabled:opacity-50 flex flex-col items-center justify-center cursor-pointer">
-              <RefreshCw size={16} className="mb-1" />
+            <button onClick={resetGame} disabled={isComputing} aria-label="Start new game" className="p-3 hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-sm disabled:opacity-50 flex flex-col items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset">
+              <RefreshCw size={16} className="mb-1" aria-hidden="true" />
               NEW GAME
             </button>
           </div>
@@ -818,7 +844,7 @@ function GambitContent() {
                                  : game.isInsufficientMaterial() ? "Draw by insufficient material"
                                  : "Draw"}
                            </p>
-                           <button onClick={resetGame} className="bg-[var(--term-main)]/90 text-[var(--term-bg)] px-6 py-2 font-bold uppercase hover:scale-105 transition-transform cursor-pointer">
+                           <button onClick={resetGame} className="bg-[var(--term-main)]/90 text-[var(--term-bg)] px-6 py-2 font-bold uppercase hover:scale-105 transition-transform cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-bg)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--term-main)]">
                                Play Again
                            </button>
                        </div>
@@ -858,8 +884,8 @@ function GambitContent() {
 
       {/* Mobile Controls Footer - Only on mobile */}
       <div className={`md:hidden grid ${isVsComputer ? 'grid-cols-4' : 'grid-cols-3'} border-t border-[var(--term-main)] bg-[var(--term-bg)] flex-shrink-0`}>
-         <button onClick={toggleComputerMode} className={`p-2 border-r border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-xs flex flex-col items-center justify-center cursor-pointer ${isVsComputer ? 'bg-[var(--term-dim)] text-black' : ''}`}>
-          <Cpu size={14} className="mb-0.5" />
+         <button onClick={toggleComputerMode} aria-label={isVsComputer ? 'Disable computer opponent' : 'Enable computer opponent'} aria-pressed={isVsComputer} className={`p-2 border-r border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-xs flex flex-col items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset ${isVsComputer ? 'bg-[var(--term-dim)] text-black' : ''}`}>
+          <Cpu size={14} className="mb-0.5" aria-hidden="true" />
           {isVsComputer ? 'CPU' : 'CPU'}
         </button>
         {isVsComputer && (
@@ -867,18 +893,23 @@ function GambitContent() {
             <button
               onClick={() => !isComputing && setShowDifficultyDropdown(!showDifficultyDropdown)}
               disabled={isComputing}
-              className="p-2 w-full h-full bg-[var(--term-bg)] text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-xs disabled:opacity-50 cursor-pointer flex items-center justify-center gap-1"
+              aria-label={`Difficulty: ${difficulty}`}
+              aria-expanded={showDifficultyDropdown}
+              aria-haspopup="listbox"
+              className="p-2 w-full h-full bg-[var(--term-bg)] text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-xs disabled:opacity-50 cursor-pointer flex items-center justify-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset"
             >
               {difficulty.toUpperCase().slice(0, 3)}
-              <ChevronDown size={10} className={`transition-transform ${showDifficultyDropdown ? 'rotate-180' : ''}`} />
+              <ChevronDown size={10} className={`transition-transform ${showDifficultyDropdown ? 'rotate-180' : ''}`} aria-hidden="true" />
             </button>
             {showDifficultyDropdown && (
-              <div className="absolute bottom-full left-0 right-0 bg-[var(--term-bg)] border border-[var(--term-main)] z-50">
+              <div className="absolute bottom-full left-0 right-0 bg-[var(--term-bg)] border border-[var(--term-main)] z-50" role="listbox" aria-label="Select difficulty">
                 {(['easy', 'medium', 'hard'] as Difficulty[]).map((d) => (
                   <button
                     key={d}
                     onClick={() => { setDifficulty(d); setShowDifficultyDropdown(false); }}
-                    className={`w-full p-2 text-xs uppercase font-bold transition-colors cursor-pointer ${
+                    role="option"
+                    aria-selected={difficulty === d}
+                    className={`w-full p-2 text-xs uppercase font-bold transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset ${
                       difficulty === d
                         ? 'bg-[var(--term-main)] text-[var(--term-bg)]'
                         : 'text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)]'
@@ -891,12 +922,12 @@ function GambitContent() {
             )}
           </div>
         )}
-        <button onClick={undoMove} disabled={isComputing} className="p-2 border-r border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-xs disabled:opacity-50 flex flex-col items-center justify-center cursor-pointer">
-          <Undo size={14} className="mb-0.5" />
+        <button onClick={undoMove} disabled={isComputing} aria-label="Undo last move" className="p-2 border-r border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-xs disabled:opacity-50 flex flex-col items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset">
+          <Undo size={14} className="mb-0.5" aria-hidden="true" />
           UNDO
         </button>
-        <button onClick={resetGame} disabled={isComputing} className="p-2 hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-xs disabled:opacity-50 flex flex-col items-center justify-center cursor-pointer">
-          <RefreshCw size={14} className="mb-0.5" />
+        <button onClick={resetGame} disabled={isComputing} aria-label="Start new game" className="p-2 hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors uppercase font-bold text-center text-xs disabled:opacity-50 flex flex-col items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-inset">
+          <RefreshCw size={14} className="mb-0.5" aria-hidden="true" />
           NEW
         </button>
       </div>
@@ -909,7 +940,7 @@ export default function GambitPage() {
   return (
     <Suspense fallback={
       <div className="h-screen flex items-center justify-center bg-[var(--term-bg)]">
-        <div className="text-[var(--term-main)] animate-pulse">Loading...</div>
+        <div className="text-[var(--term-main)] animate-pulse">Loading…</div>
       </div>
     }>
       <GambitContent />

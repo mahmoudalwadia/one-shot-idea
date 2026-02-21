@@ -115,12 +115,24 @@ const MoveCell: React.FC<{
     else if (evalScore < -10000) evalText = "-M";
     else if (evalScore > 0) evalText = `+${evalText}`;
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onClick(node);
+        }
+    };
+
     return (
         <div
+            role="button"
+            tabIndex={0}
             onClick={() => onClick(node)}
+            onKeyDown={handleKeyDown}
+            aria-label={`Move ${node.name}${node.classification ? `, ${node.classification}` : ''}${isAnalyzing ? ', analyzing' : ''}`}
+            aria-current={isActive ? 'true' : undefined}
             className={`
                 relative flex items-center justify-between px-3 py-1 cursor-pointer
-                transition-colors group h-full
+                transition-colors group h-full focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-inset
                 ${hasBorderRight ? 'border-r border-[var(--term-dim)] border-opacity-30' : ''}
                 ${isActive ? 'bg-[rgba(var(--term-main-rgb),0.2)]' : 'hover:bg-[rgba(var(--term-dim-rgb),0.1)]'}
             `}
@@ -132,7 +144,7 @@ const MoveCell: React.FC<{
 
                 {Icon && (
                     <span className={`${isAnalyzing ? 'text-[var(--term-main)]' : config?.color} drop-shadow-sm`}>
-                         <Icon size={14} className={`${isAnalyzing ? 'animate-spin' : config?.fill}`} strokeWidth={2.5} />
+                         <Icon size={14} className={`${isAnalyzing ? 'motion-safe:animate-spin' : config?.fill}`} strokeWidth={2.5} aria-hidden="true" />
                     </span>
                 )}
             </div>
@@ -146,7 +158,7 @@ const MoveCell: React.FC<{
             {/* Eval Bar Indicator (Right Edge) */}
             <div className="absolute right-0 top-1 bottom-1 w-[3px] bg-[rgba(255,255,255,0.05)] overflow-hidden rounded-full mr-0.5">
                  <div
-                    className="absolute bottom-0 w-full transition-all duration-500 bg-[var(--term-main)] opacity-60"
+                    className="absolute bottom-0 w-full transition-[height] duration-500 bg-[var(--term-main)] opacity-60"
                     style={{ height: `${barHeight}%` }}
                  />
             </div>
@@ -312,9 +324,10 @@ const DeepAnalysisPanel: React.FC<DeepAnalysisPanelProps> = ({ rootNode, activeN
                      {!showHint ? (
                          <button
                              onClick={() => setShowHint(true)}
-                             className="w-full flex items-center justify-center gap-2 py-1 text-[var(--term-dim)] hover:text-[var(--term-main)] transition-colors cursor-pointer"
+                             aria-expanded={showHint}
+                             className="w-full flex items-center justify-center gap-2 py-1 text-[var(--term-dim)] hover:text-[var(--term-main)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--term-main)]"
                          >
-                             <Lightbulb size={14} />
+                             <Lightbulb size={14} aria-hidden="true" />
                              <span className="text-xs uppercase tracking-wider">Show Hint</span>
                          </button>
                      ) : (
@@ -326,10 +339,10 @@ const DeepAnalysisPanel: React.FC<DeepAnalysisPanelProps> = ({ rootNode, activeN
                                  </div>
                                  <button
                                      onClick={() => setShowHint(false)}
-                                     className="text-[var(--term-dim)] hover:text-[var(--term-main)] transition-colors cursor-pointer"
-                                     title="Hide hint"
+                                     aria-label="Hide hint"
+                                     className="text-[var(--term-dim)] hover:text-[var(--term-main)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--term-main)]"
                                  >
-                                     <EyeOff size={12} />
+                                     <EyeOff size={12} aria-hidden="true" />
                                  </button>
                              </div>
                              <div className="font-mono text-sm text-[var(--term-main)] overflow-x-auto whitespace-nowrap custom-scrollbar">

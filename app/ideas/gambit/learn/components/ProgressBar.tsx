@@ -66,7 +66,14 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       )}
 
       {/* Progress bar track */}
-      <div className={`w-full ${sizeClasses[size]} ${trackColor} rounded-full overflow-hidden`}>
+      <div
+        role="progressbar"
+        aria-valuenow={percentage}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={label || `Progress: ${percentage}%`}
+        className={`w-full ${sizeClasses[size]} ${trackColor} rounded-full overflow-hidden`}
+      >
         <div
           className={`h-full ${variantColors[variant]} transition-all duration-300 rounded-full`}
           style={{ width: `${percentage}%` }}

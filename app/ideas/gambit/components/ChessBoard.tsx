@@ -317,16 +317,36 @@ const ChessBoard: React.FC<ChessBoardProps> = ({ game, onMove, lastMove }) => {
 
                 {/* Legal Move Marker */}
                 {isLegal && !piece && (
-                  <div className={isModernTheme
-                    ? "w-[30%] h-[30%] rounded-full bg-black/20 pointer-events-none"
-                    : "w-[20%] h-[20%] rounded-full bg-[var(--term-main)] opacity-60 pointer-events-none"
-                  } />
+                  <button
+                    onClick={() => handleSquareClick(square)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleSquareClick(square);
+                      }
+                    }}
+                    aria-label={`Move to ${square}`}
+                    className={`${isModernTheme
+                      ? "w-[30%] h-[30%] rounded-full bg-black/20"
+                      : "w-[20%] h-[20%] rounded-full bg-[var(--term-main)] opacity-60"
+                    } cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--term-main)]`}
+                  />
                 )}
                  {isLegal && piece && (
-                  <div className={isModernTheme
-                    ? "absolute inset-0 rounded-full border-[6px] border-black/20 z-10 pointer-events-none"
-                    : "absolute inset-0 border-2 border-dashed border-[var(--term-main)] animate-pulse z-10 pointer-events-none"
-                  } />
+                  <button
+                    onClick={() => handleSquareClick(square)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleSquareClick(square);
+                      }
+                    }}
+                    aria-label={`Capture on ${square}`}
+                    className={isModernTheme
+                      ? "absolute inset-0 rounded-full border-[6px] border-black/20 z-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#81b64c]"
+                      : "absolute inset-0 border-2 border-dashed border-[var(--term-main)] motion-safe:animate-pulse z-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[var(--term-main)]"
+                    }
+                  />
                 )}
 
                 {/* Piece */}
@@ -335,7 +355,16 @@ const ChessBoard: React.FC<ChessBoardProps> = ({ game, onMove, lastMove }) => {
                     draggable={true}
                     onDragStart={(e) => handleDragStart(e, piece, square)}
                     onDragEnd={handleDragEnd}
-                    className={`w-full h-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-90 transition-transform ${textClass} z-20`}
+                    tabIndex={piece.color === game.turn() ? 0 : -1}
+                    role="button"
+                    aria-label={`${piece.color === 'w' ? 'White' : 'Black'} ${piece.type === 'p' ? 'pawn' : piece.type === 'n' ? 'knight' : piece.type === 'b' ? 'bishop' : piece.type === 'r' ? 'rook' : piece.type === 'q' ? 'queen' : 'king'} on ${square}${isSelected ? ', selected' : ''}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleSquareClick(square);
+                      }
+                    }}
+                    className={`w-full h-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-90 transition-transform ${textClass} z-20 focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-inset`}
                     style={{ opacity: draggedPiece?.square === square ? 0.5 : 1 }}
                   >
                     <AsciiPiece type={piece.type} color={piece.color} isModern={isModernTheme} />

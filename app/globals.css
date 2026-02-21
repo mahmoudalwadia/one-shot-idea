@@ -104,6 +104,16 @@ body.theme-slate {
   --term-border: #ffffff;
 }
 
+/* Theme: Clean (Slate colors, no ASCII/CRT effect) */
+body.theme-clean {
+  --term-main: #ffffff;
+  --term-main-rgb: 255, 255, 255;
+  --term-dim: #666666;
+  --term-dim-rgb: 102, 102, 102;
+  --term-bg: #000000;
+  --term-border: #ffffff;
+}
+
 /* Theme: Modern (Lichess-style) */
 body.theme-modern {
   --term-main: #bababa;
@@ -136,8 +146,9 @@ body.theme-slate {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Body styling for Modern Theme (no ASCII/terminal aesthetic) */
-body.theme-modern {
+/* Body styling for Modern/Clean Themes (no ASCII/terminal aesthetic) */
+body.theme-modern,
+body.theme-clean {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   background-color: var(--term-bg);
   color: var(--term-main);

@@ -97,7 +97,8 @@ const LessonPath: React.FC<LessonPathProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onBack}
-            className={`text-xs px-2 py-1 cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'} transition-colors`}
+            aria-label="Go back to courses"
+            className={`text-xs px-2 py-1 cursor-pointer focus:outline-none focus:ring-2 ${isModernTheme ? 'text-[#8b8987] hover:text-white focus:ring-[#81b64c]' : 'text-[var(--term-dim)] hover:text-[var(--term-main)] focus:ring-[var(--term-main)]'} transition-colors`}
           >
             ←
           </button>
@@ -135,9 +136,11 @@ const LessonPath: React.FC<LessonPathProps> = ({
                 {/* Lesson Row */}
                 <button
                   onClick={() => onSelectLesson(lesson.id)}
+                  aria-label={`Lesson ${index + 1}: ${lesson.title}, ${lesson.difficulty}, ${lesson.estimatedMinutes} minutes${state === 'completed' ? ', completed' : state === 'current' ? ', start this lesson' : ''}`}
                   className={`
                     w-full p-3 rounded-xl border-2 transition-all cursor-pointer
-                    flex items-center gap-3
+                    flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-offset-2
+                    ${isModernTheme ? 'focus:ring-[#81b64c] focus:ring-offset-[#262421]' : 'focus:ring-[var(--term-main)] focus:ring-offset-[var(--term-bg)]'}
                     ${getNodeStyles(state, isCurrent)}
                   `}
                 >

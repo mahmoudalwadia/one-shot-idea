@@ -50,10 +50,25 @@ const PromotionModal: React.FC<PromotionModalProps> = ({ color, onSelect, onCanc
   // White pieces get bolder stroke for better visibility
   const strokeWidth = isModernTheme ? (color === 'w' ? '5' : '3') : '0';
 
+  // Handle escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onCancel();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onCancel]);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+      style={{ overscrollBehavior: 'contain' }}
       onClick={onCancel}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="promotion-modal-title"
     >
       <div
         className={`
@@ -65,7 +80,9 @@ const PromotionModal: React.FC<PromotionModalProps> = ({ color, onSelect, onCanc
         `}
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className={`
+        <h3
+          id="promotion-modal-title"
+          className={`
           text-lg mb-3 uppercase font-bold
           ${isModernTheme ? 'text-[#bababa] font-sans' : 'text-[var(--term-main)] terminal-text-shadow'}
         `}>
@@ -77,15 +94,15 @@ const PromotionModal: React.FC<PromotionModalProps> = ({ color, onSelect, onCanc
             <button
               key={piece}
               onClick={() => onSelect(piece)}
+              aria-label={`Promote to ${PIECE_NAMES[piece]}`}
               className={`
                 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center cursor-pointer
-                transition-all duration-150 hover:scale-110
+                transition-all duration-150 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2
                 ${isModernTheme
-                  ? 'bg-[#b58863] hover:bg-[#cdd26a] rounded'
-                  : 'border border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)]'
+                  ? 'bg-[#b58863] hover:bg-[#cdd26a] rounded focus:ring-[#cdd26a]'
+                  : 'border border-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] focus:ring-[var(--term-main)]'
                 }
               `}
-              title={PIECE_NAMES[piece]}
             >
               <svg viewBox="0 0 100 100" className="w-full h-full" style={{ overflow: 'visible' }}>
                 <text
@@ -112,10 +129,10 @@ const PromotionModal: React.FC<PromotionModalProps> = ({ color, onSelect, onCanc
         <button
           onClick={onCancel}
           className={`
-            mt-3 px-4 py-1 text-sm uppercase cursor-pointer
+            mt-3 px-4 py-1 text-sm uppercase cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
             ${isModernTheme
-              ? 'text-[#8b8987] hover:text-[#bababa] font-sans'
-              : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'
+              ? 'text-[#8b8987] hover:text-[#bababa] font-sans focus-visible:ring-[#cdd26a]'
+              : 'text-[var(--term-dim)] hover:text-[var(--term-main)] focus-visible:ring-[var(--term-main)]'
             }
           `}
         >

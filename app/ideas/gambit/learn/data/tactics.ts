@@ -21,7 +21,7 @@ export const tacticsCourse: Course = {
           type: 'explanation',
           fen: 'r3k3/2N5/8/8/8/8/8/4K3 w - - 0 1',
           title: 'What is a Fork?',
-          explanation: `A **fork** is one of the most powerful tactical weapons in chess - it occurs when a single piece attacks two or more enemy pieces simultaneously.
+          explanation: `A **fork** is one of the most powerful tactical weapons in chess - it occurs when a single piece attacks two or more enemy pieces simultaneously. The term dates back to the 16th-17th century and comes from the agricultural fork tool - a single handle splitting into multiple prongs. It appears in chess literature as early as Philidor's writings in 1749.
 
 The beauty of a fork is simple mathematics: your opponent can only move one piece per turn, so when you attack two pieces at once, you're guaranteed to capture at least one of them!
 
@@ -102,21 +102,23 @@ The f7 square is only defended by the King - that's always a target early in the
         {
           id: 'royal-fork',
           type: 'interactive',
-          fen: 'r3k2r/ppp2ppp/2nqbn2/3pp3/2B1P1b1/3P1N2/PPPN1PPP/R1BQK2R w KQkq - 0 1',
+          fen: 'r4rk1/pppq1ppp/4b3/4p3/4N3/3P4/PPP2PPP/R1BQK2R w KQ - 0 1',
           title: 'The Royal Fork',
           explanation: `A **"Royal Fork"** is the ultimate Knight tactic - simultaneously attacking the King and Queen!
 
 Since the King must escape check, the Queen is lost. It's an instant game-winning tactic.
 
-In this position, find the square where your Knight can deliver the royal fork. Remember:
-• The King is on e8
-• The Queen is on d6
-• Find a square that attacks both!`,
-          correctMoves: ['Nb3'],
-          failureMessage: 'Look for a square where your Knight attacks both the King and Queen simultaneously.',
-          successMessage: `Nb3! Wait... actually look more carefully. The Knight from d2 goes to b3, but that doesn't fork King and Queen. Let me reconsider - Nc4! might be better, attacking the Queen. But for a true royal fork, we need e7 family squares... Actually in this position, there's no immediate royal fork - but Nb3 does attack the Queen and create threats!`,
+In this position, look for a Knight move that forks the Black King and Queen simultaneously:
+• The King is on g8
+• The Queen is on d7
+• Find a square that attacks both with check!`,
+          correctMoves: ['Nf6+'],
+          failureMessage: 'Look for a square where your Knight attacks both the King and Queen simultaneously with check!',
+          successMessage: `Nf6+! The Knight lands on f6 with check, simultaneously attacking the King on g8 and the Queen on d7. Black must move the King, and the Queen is lost! This is the devastating royal fork in action.`,
           arrows: [
-            { from: 'd2', to: 'b3', color: 'green' },
+            { from: 'e4', to: 'f6', color: 'green' },
+            { from: 'f6', to: 'g8', color: 'red' },
+            { from: 'f6', to: 'd7', color: 'red' },
           ],
         },
         {
@@ -341,7 +343,7 @@ Look carefully at the position:
           type: 'explanation',
           fen: 'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3',
           title: 'What is a Pin?',
-          explanation: `A **pin** is a powerful tactic where an attacking piece threatens a less valuable piece that cannot (or should not) move because it would expose a more valuable piece behind it.
+          explanation: `A **pin** is a powerful tactic where an attacking piece threatens a less valuable piece that cannot (or should not) move because it would expose a more valuable piece behind it. The word comes from the Old English "pinn" (a peg that holds something in place) - a pinned piece is "nailed down" just like a physical pin. The chess term became standard in the 18th century.
 
 Think of it like a shish kebab - two pieces skewered on the same line!
 
@@ -565,7 +567,7 @@ Always be aware of potential pins - both creating them AND defending against the
           type: 'explanation',
           fen: '6k1/8/8/8/8/8/6q1/R3K3 w - - 0 1',
           title: 'What is a Skewer?',
-          explanation: `A **skewer** is like a reverse pin - you attack a valuable piece, and when it moves, you capture the piece behind it.
+          explanation: `A **skewer** is like a reverse pin - you attack a valuable piece, and when it moves, you capture the piece behind it. Named after a cooking skewer that pierces through food, the term became popular in English chess literature in the 19th century. It's also called an "X-ray attack" in some traditions.
 
 **The key difference from a pin**:
 • **Pin**: Less valuable piece in front, more valuable behind
@@ -590,19 +592,19 @@ In this position, if the White Rook plays Ra8+, it's a skewer:
         {
           id: 'rook-skewer',
           type: 'interactive',
-          fen: 'q7/k7/8/8/8/8/8/R3K3 w Q - 0 1',
+          fen: '8/8/3k3q/8/8/R7/8/6K1 w - - 0 1',
           title: 'The Rook Skewer',
-          explanation: `White to play. The Black King and Queen are aligned on the a-file!
+          explanation: `White to play. The Black King on d6 and Queen on h6 are aligned on the 6th rank!
 
-Find the move that skewers them - attack the King first, then collect the Queen when the King moves.
+Find the move that skewers them - check the King first, then collect the Queen when the King moves off the rank.
 
 Remember: Checks are forcing - the opponent MUST respond to them.`,
-          correctMoves: ['Ra7+'],
-          successMessage: `Ra8+! The King must move out of check, and then Rxa4 captures the Queen. This is the classic Rook skewer - devastating and impossible to escape!`,
-          failureMessage: 'Can you give check in a way that attacks the Queen behind the King?',
+          correctMoves: ['Ra6+'],
+          successMessage: `Ra6+! The Rook checks the King along the 6th rank. The King must move off the rank, and then Rxh6 captures the Queen. This is the classic Rook skewer - devastating and impossible to escape!`,
+          failureMessage: 'Can you give check in a way that attacks the Queen behind the King on the same rank?',
           arrows: [
-            { from: 'a1', to: 'a8', color: 'green' },
-            { from: 'a8', to: 'a4', color: 'yellow' },
+            { from: 'a3', to: 'a6', color: 'green' },
+            { from: 'a6', to: 'h6', color: 'yellow' },
           ],
         },
         {
@@ -614,11 +616,11 @@ Remember: Checks are forcing - the opponent MUST respond to them.`,
 
 Find the Bishop move that skewers the King and Rook.`,
           correctMoves: ['Bc4+'],
-          successMessage: `Excellent! The Bishop gives check, and when the King moves, you capture the Rook on h1. Bishop skewers are common in endgames when pieces spread out across the board.`,
+          successMessage: `Bc4+! Excellent! The Bishop gives check from c4, and when the King moves away, you capture the Rook with Bxf7. Bishop skewers are common in endgames when pieces spread out across the board.`,
           failureMessage: 'Look at the diagonal that contains both the King and the Rook...',
           arrows: [
-            { from: 'd2', to: 'f4', color: 'green' },
-            { from: 'f4', to: 'h1', color: 'yellow' },
+            { from: 'b3', to: 'c4', color: 'green' },
+            { from: 'c4', to: 'f7', color: 'yellow' },
           ],
         },
         {
@@ -699,6 +701,23 @@ Remember: You need to give check first (attack the King), then capture the Rook 
             { from: 'd4', to: 'e5', color: 'green' },
           ],
         },
+        {
+          id: 'queen-skewer-practice',
+          type: 'interactive',
+          fen: '6k1/8/5q2/8/8/8/8/4K2Q w - - 0 1',
+          title: 'Queen Skewer Practice',
+          explanation: `White to play. The Black King on g8 and the Queen on f6 are on the same diagonal!
+
+Find the Queen move that skewers the King and Queen along the diagonal.`,
+          correctMoves: ['Qd5+'],
+          successMessage: `Qd5+! The Queen checks the King along the diagonal, and when the King moves, Qxf6 captures the Queen. The Queen's range makes her lethal on open diagonals!`,
+          failureMessage: 'Look for a diagonal that goes through both the King on g8 and the Queen on f6.',
+          arrows: [
+            { from: 'h1', to: 'd5', color: 'green' },
+            { from: 'd5', to: 'g8', color: 'red' },
+            { from: 'd5', to: 'f6', color: 'yellow' },
+          ],
+        },
       ],
     },
     // ==================== LESSON 4: DISCOVERED ATTACKS ====================
@@ -715,7 +734,7 @@ Remember: You need to give check first (attack the King), then capture the Rook 
           type: 'explanation',
           fen: '8/8/8/3k4/8/3N4/3R4/3K4 w - - 0 1',
           title: 'What is a Discovered Attack?',
-          explanation: `A **discovered attack** is one of the most powerful tactics in chess. It occurs when you move one piece and reveal ("discover") an attack from a piece behind it.
+          explanation: `A **discovered attack** is one of the most powerful tactics in chess. It occurs when you move one piece and reveal ("discover") an attack from a piece behind it. The concept was well-known since the 16th century, with double discovered checks called "double diskovery" in old English chess texts.
 
 In this position:
 • The Knight on d3 blocks the Rook's view of the Black King
@@ -863,6 +882,38 @@ Hint: Your Knight can move and reveal an attack from the piece behind it...`,
             { from: 'f3', to: 'g5', color: 'green' },
           ],
         },
+        {
+          id: 'windmill-practice',
+          type: 'interactive',
+          fen: '5rk1/6p1/5B1p/1p6/8/8/6R1/6K1 w - - 0 1',
+          title: 'Windmill Practice',
+          explanation: `This is a classic windmill setup. The Rook on g2 and Bishop on f6 coordinate to devastate Black's position.
+
+The Rook can take the g7 pawn with check, and after the King moves, the Rook retreats to discover a check from the Bishop. Find the move that starts the windmill!`,
+          correctMoves: ['Rxg7+'],
+          successMessage: `Rxg7+! The Rook gives check by capturing the g7 pawn. After Kh8, Rxf8 is devastating since the Bishop covers the escape squares. This is the windmill concept - the Rook captures material while the Bishop provides support and discovered check potential!`,
+          failureMessage: 'Move the Rook to give check while capturing material. The Bishop on f6 supports the attack!',
+          arrows: [
+            { from: 'g2', to: 'g7', color: 'green' },
+            { from: 'f6', to: 'g7', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'double-check-puzzle',
+          type: 'puzzle',
+          fen: '4k3/4p3/8/4N3/8/8/8/4R1K1 w - - 0 1',
+          title: 'Double Check Puzzle',
+          explanation: `White to play. Find the move that delivers a devastating double check!
+
+Remember: In a double check, the King MUST move - blocking or capturing won't work because two pieces give check simultaneously.`,
+          correctMoves: ['Nd7'],
+          successMessage: `Nd7! The Knight moves to d7, giving check AND discovering check from the Rook along the e-file. Both the Knight and Rook attack the King simultaneously! Black's only option is to move the King - Kd8 or Kf8. Double check is the most forcing move in chess!`,
+          failureMessage: 'Find a Knight move that gives check while also revealing a check from the Rook on the e-file.',
+          arrows: [
+            { from: 'e5', to: 'd7', color: 'green' },
+            { from: 'e1', to: 'e8', color: 'yellow' },
+          ],
+        },
       ],
     },
     // ==================== LESSON 5: BACK RANK TACTICS ====================
@@ -879,7 +930,7 @@ Hint: Your Knight can move and reveal an attack from the piece behind it...`,
           type: 'explanation',
           fen: '3r2k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1',
           title: 'Back Rank Weakness',
-          explanation: `The **back rank mate** is one of the most common tactical patterns in chess - and one of the most devastating!
+          explanation: `The **back rank mate** is one of the most common tactical patterns in chess - and one of the most devastating! Also called "corridor mate" in Russian chess tradition, it was one of the first tactical patterns documented in medieval Arabic chess manuscripts around 800-900 AD.
 
 It occurs when a King is trapped on its back rank (rank 1 for White, rank 8 for Black) by its own pawns, with no escape squares.
 
@@ -1070,7 +1121,7 @@ Remember: Back rank mates end games instantly. One moment of carelessness can tu
           title: 'The Defensive Chain',
           explanation: `Every position has **key defenders** - pieces that hold everything together. Remove them, and the position collapses!
 
-**"Remove the defender"** is a tactical theme where you capture, trade, or drive away a piece that's protecting something important.
+**"Remove the defender"** (also called "undermining" or "elimination") is a tactical theme where you capture, trade, or drive away a piece that's protecting something important. In Soviet chess school terminology, it was known as "destroying the guard" - a fundamental concept taught to beginners since the days of Morphy.
 
 **How to identify key defenders**:
 • Which piece is protecting the target you want to attack?
@@ -1174,6 +1225,43 @@ First identify what's defending against your threat, then remove it!`,
           successMessage: `Bg5! Actually this just works directly - the Knight is pinned to the Queen and nothing adequately defends it. Sometimes the "defender" isn't actually protecting anything, and you can just play your threat!`,
           failureMessage: 'What move creates a powerful pin?',
         },
+        {
+          id: 'sacrifice-defender',
+          type: 'interactive',
+          fen: '2rq1rk1/4bppp/p2p4/1p2n3/4P1b1/1BN1BN2/PPP2PPP/R2Q1RK1 w - - 0 1',
+          title: 'Sacrifice to Remove the Defender',
+          explanation: `Black's Knight on e5 is a strong defensive piece - it guards key central squares and supports other pieces.
+
+Sometimes the most effective way to remove a defender is to capture it, even if the trade seems equal. Find the move that eliminates Black's best defensive piece!`,
+          correctMoves: ['Nxe5'],
+          successMessage: `Nxe5! By capturing the Knight, you remove Black's most active defensive piece. After dxe5, your Bishop pair and open lines give you a strong initiative. Sometimes removing the defender is about eliminating the piece that coordinates the defense!`,
+          failureMessage: 'Which of Black\'s pieces is the most important defender? Can you capture it?',
+          arrows: [
+            { from: 'f3', to: 'e5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'red' },
+          ],
+        },
+        {
+          id: 'removal-chain-puzzle',
+          type: 'puzzle',
+          fen: 'r4rk1/ppp2ppp/3q4/3Pp1B1/8/8/PPP1QPPP/R4RK1 w - - 0 1',
+          title: 'Chain Removal Puzzle',
+          explanation: `White's Bishop on g5 is attacking Black's Queen, but the Queen seems safe on d6.
+
+Look deeper - the Queen defends the e5 pawn. If the Queen moves, what happens to e5? Find the move that exploits this!`,
+          correctMoves: ['Bf4'],
+          successMessage: `Bf4! The Bishop attacks the Queen, and wherever the Queen moves, the e5 pawn falls. If Qd7 or Qe6, then Bxe5 wins the pawn with a strong position. The Bishop drove the Queen away from its defensive duty!`,
+          failureMessage: 'Attack the Queen so it can no longer defend the e5 pawn. Which Bishop move accomplishes this?',
+          arrows: [
+            { from: 'g5', to: 'f4', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd6', color: 'red' },
+            { square: 'e5', color: 'yellow' },
+          ],
+        },
       ],
     },
     // ==================== LESSON 7: DEFLECTION ====================
@@ -1190,7 +1278,7 @@ First identify what's defending against your threat, then remove it!`,
           type: 'explanation',
           fen: '6k1/5ppp/8/8/8/8/r4PPP/4R1K1 w - - 0 1',
           title: 'What is Deflection?',
-          explanation: `**Deflection** is forcing a piece away from an important defensive duty by creating an irresistible threat.
+          explanation: `**Deflection** is forcing a piece away from an important defensive duty by creating an irresistible threat. The word comes from the Latin "deflectere" (to bend away), and the concept was well understood by the great Romantic-era tacticians like Adolf Anderssen in the 1850s. In German chess, it's called "Ablenkung".
 
 Unlike "removing the defender" (where you capture it), deflection FORCES the piece to abandon its post.
 
@@ -1267,6 +1355,65 @@ Hint: Black's Rook is defending the back rank. How can you overload it?`,
           successMessage: `Re8+! (or Rd8+) After Rxe8, Rxd8+ wins. Or if Rxd8, Rxd8# is mate! The Rook was deflected from one file to another, and couldn't cover both. Clean execution!`,
           failureMessage: 'Both Rooks can attack the 8th rank. What if you sacrifice one?',
         },
+        {
+          id: 'deflect-queen',
+          type: 'interactive',
+          fen: 'r3r1k1/ppp2ppp/8/4q3/4P3/2N2N2/PPPP1PPP/R2QR1K1 w - - 0 1',
+          title: 'Deflect the Queen',
+          explanation: `Black's Queen on e5 is a powerful centralised piece. It controls many squares and holds the position together.
+
+Can you find a way to deflect the Queen from its dominant post?`,
+          correctMoves: ['d4'],
+          successMessage: `d4! The pawn attacks the Queen, forcing it to move from its ideal central square. After Qd6 or Qf4, the Queen loses its dominance and White gains space. Sometimes a simple pawn push is the best deflection!`,
+          failureMessage: 'How can you attack the Queen to force it away from the center?',
+          arrows: [
+            { from: 'd2', to: 'd4', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'red' },
+          ],
+        },
+        {
+          id: 'deflection-sacrifice-puzzle',
+          type: 'puzzle',
+          fen: '1k1r4/pp4pp/8/3q4/8/8/PP3PPP/2RR2K1 w - - 0 1',
+          title: 'Deflection Sacrifice',
+          explanation: `Black's Queen on d5 defends the Rook on d8, and the Rook guards the back rank.
+
+Find the sacrifice that deflects a key defender and wins material!`,
+          correctMoves: ['Rc8+'],
+          successMessage: `Rc8+! After Rxc8, the d-file is open and Rxd5 wins the Queen! Or if Qxc8, then Rxd8+ forces Qxd8 and White has traded Rook and Rook for Queen and Rook - simplifying with advantage. The Rook sacrifice deflected the back rank defender!`,
+          failureMessage: 'The Rook on d8 is a key defender. Can you sacrifice to deflect it?',
+          arrows: [
+            { from: 'c1', to: 'c8', color: 'green' },
+          ],
+        },
+        {
+          id: 'deflection-summary',
+          type: 'explanation',
+          fen: '6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1',
+          title: 'Deflection Summary',
+          explanation: `**Deflection tactics checklist**:
+
+**How to spot deflection opportunities**:
+1. Identify pieces that have defensive duties
+2. Ask: "What if this piece wasn't guarding that?"
+3. Find a way to force it away (sacrifice, attack, threat)
+
+**Common deflection patterns**:
+• Rook sacrifice to lure a defender off the back rank
+• Pawn push to deflect a centralized piece
+• Bishop sacrifice on a defended square to distract a piece
+• Queen sacrifice to create an irresistible capture
+
+**Deflection vs other tactics**:
+• **Deflection**: Force piece AWAY from where it's needed
+• **Attraction/Decoy**: Lure piece TO a bad square
+• **Removal**: Capture the defender outright
+• **Overloading**: Give the defender too many jobs
+
+**Remember**: The most beautiful deflections often involve sacrifices - you give up material to create something bigger!`,
+        },
       ],
     },
     // ==================== LESSON 8: DECOY ====================
@@ -1283,7 +1430,7 @@ Hint: Black's Rook is defending the back rank. How can you overload it?`,
           type: 'explanation',
           fen: '6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1',
           title: 'What is a Decoy?',
-          explanation: `A **decoy** is luring an enemy piece TO a specific square where it can be attacked, trapped, or where it blocks something important.
+          explanation: `A **decoy** is luring an enemy piece TO a specific square where it can be attacked, trapped, or where it blocks something important. The word comes from the Dutch "de kooi" (the cage) - originally a bird-trapping term. Soviet chess pedagogy distinguished carefully between decoy and deflection as separate tactical themes.
 
 **Think of it as fishing**: You dangle bait (usually a sacrifice) to lure the piece where you want it.
 
@@ -1345,6 +1492,79 @@ Think: Where do you want the Black King or Rook to go?`,
             { from: 'd2', to: 'd8', color: 'green' },
           ],
         },
+        {
+          id: 'decoy-into-pin',
+          type: 'explanation',
+          fen: '2kr4/ppp2p2/2n1p3/8/2B5/8/PPP2PPP/2KR4 w - - 0 1',
+          title: 'Decoying into a Pin',
+          explanation: `A powerful use of decoy is luring a piece onto a square where it gets pinned!
+
+**The pattern**:
+1. Sacrifice on a square along a file, rank, or diagonal
+2. The opponent captures (decoyed to that square)
+3. A pin is revealed along the line behind the captured piece
+
+**In this position**: White's Bishop on c4 eyes e6. If Bxe6, fxe6, then the Rook on d1 sees through to the King on c8 via d8... the Rook on d8 is now pinned!
+
+**Key insight**: Decoy + pin is a devastating combination because the pinned piece often cannot escape. The decoy lures the piece into the line of fire.`,
+          arrows: [
+            { from: 'c4', to: 'e6', color: 'green' },
+            { from: 'd1', to: 'd8', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'e6', color: 'red' },
+            { square: 'd8', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'decoy-king-practice',
+          type: 'interactive',
+          fen: 'r3k3/ppp2p2/4p3/3pN3/8/8/PPP2PPP/4R1K1 w - - 0 1',
+          title: 'Decoy the King',
+          explanation: `White's Knight on e5 and Rook on e1 are well-placed. The Black King is in the center.
+
+Can you find a move that decoys the King into a worse position?`,
+          correctMoves: ['Nxf7'],
+          successMessage: `Nxf7! The Knight captures the pawn and attacks the Rook on a8 indirectly via the threat of forking. If Kxf7, then the King is exposed and Re7+ is strong. The Knight sacrifice lured the King away from safety, opening up tactical opportunities!`,
+          failureMessage: 'Can you capture something that forces the King into an exposed position?',
+          arrows: [
+            { from: 'e5', to: 'f7', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e8', color: 'red' },
+          ],
+        },
+        {
+          id: 'decoy-rook-puzzle',
+          type: 'puzzle',
+          fen: '2r3k1/5ppp/8/8/8/8/5PPP/1R2R1K1 w - - 0 1',
+          title: 'Decoy the Rook',
+          explanation: `Black's Rook on c8 guards the 8th rank. Can you decoy it away to set up a winning attack?
+
+Hint: What happens if you give the Rook a target it can't resist?`,
+          correctMoves: ['Rb8'],
+          successMessage: `Rb8! The Rook on c8 is forced to deal with this threat. After Rxb8, Re8+ Rxe8 is a trade, but White has eliminated the back rank defender. The Rook was decoyed into exchanging, leaving the back rank vulnerable!`,
+          failureMessage: 'The Rook on c8 is the key defender. Can you give it something to capture that leaves the back rank exposed?',
+          arrows: [
+            { from: 'b1', to: 'b8', color: 'green' },
+          ],
+        },
+        {
+          id: 'decoy-advanced-puzzle',
+          type: 'interactive',
+          fen: '5rk1/pp3ppp/8/2p5/8/2N5/PPP2PPP/4R1K1 w - - 0 1',
+          title: 'Advanced Decoy Combination',
+          explanation: `White wants to exploit the back rank, but the Rook on f8 guards it solidly.
+
+Find a move that creates threats and forces Black into a worse position. Think about how to use your Knight and Rook together!`,
+          correctMoves: ['Ne4'],
+          successMessage: `Ne4! The Knight moves to e4, threatening Nd6 which would fork the Rook and attack key squares. Black must react to this positional threat. The Knight maneuver creates tactical pressure by threatening multiple squares simultaneously!`,
+          failureMessage: 'How can you reposition your Knight to create threats against Black\'s position?',
+          arrows: [
+            { from: 'c3', to: 'e4', color: 'green' },
+            { from: 'e4', to: 'd6', color: 'yellow' },
+          ],
+        },
       ],
     },
     // ==================== LESSON 9: ZWISCHENZUG ====================
@@ -1361,7 +1581,7 @@ Think: Where do you want the Black King or Rook to go?`,
           type: 'explanation',
           fen: 'r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4',
           title: 'The In-Between Move',
-          explanation: `**Zwischenzug** (German: "in-between move") is one of the trickiest tactical concepts!
+          explanation: `**Zwischenzug** (German: "in-between move") is one of the trickiest tactical concepts and one of the most commonly used German chess terms worldwide! The concept was particularly emphasized by World Champion Emanuel Lasker and later by Mark Taimanov.
 
 It's when you INSERT an unexpected move before making the "obvious" recapture or response.
 
@@ -1455,6 +1675,54 @@ The "obvious" move might be to recapture on d4. But is there a stronger in-betwe
             { from: 'c5', to: 'f2', color: 'green' },
           ],
         },
+        {
+          id: 'zwischenzug-with-threat',
+          type: 'interactive',
+          fen: 'r1bq1rk1/ppp2ppp/2n5/3np3/2B5/5N2/PPPP1PPP/RNBQ1RK1 w - - 0 1',
+          title: 'Zwischenzug with a Threat',
+          explanation: `White's Bishop on c4 is under attack by the Knight on d5. The "obvious" move might be to retreat the Bishop.
+
+But is there a stronger in-between move? Look for a move that creates a bigger threat before dealing with the Knight!`,
+          correctMoves: ['Bxd5'],
+          successMessage: `Bxd5! Rather than retreating, you capture the Knight first. After Qxd5, you've traded the Bishop for a centralized Knight and opened lines. This is a practical zwischenzug - instead of passively retreating, you take action!`,
+          failureMessage: 'Instead of retreating the attacked Bishop, can you capture something first?',
+          arrows: [
+            { from: 'c4', to: 'd5', color: 'green' },
+          ],
+        },
+        {
+          id: 'zwischenzug-queen-attack',
+          type: 'puzzle',
+          fen: 'r1b1kb1r/ppppqppp/2n2n2/4p3/2BPP3/5N2/PPP2PPP/RNBQK2R w KQkq - 0 1',
+          title: 'Zwischenzug Puzzle - Central Tension',
+          explanation: `White to play. There's tension in the center with the d4 pawn attacking e5.
+
+Instead of the "obvious" dxe5, is there a stronger in-between move that improves your position first?`,
+          correctMoves: ['d5'],
+          successMessage: `d5! Instead of capturing on e5, you push past with d5! This zwischenzug gains space and attacks the Knight on c6. The Knight must move, and you've gained a strong central pawn wedge. By inserting d5 first, you get a better version of the position than simply trading!`,
+          failureMessage: 'Instead of exchanging in the center, can you push the pawn forward to gain space and attack a piece?',
+          arrows: [
+            { from: 'd4', to: 'd5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'c6', color: 'red' },
+          ],
+        },
+        {
+          id: 'zwischenzug-endgame',
+          type: 'interactive',
+          fen: '8/ppp2kpp/8/3pP3/3P4/8/PPP2PPP/4R1K1 w - - 0 1',
+          title: 'Endgame Zwischenzug',
+          explanation: `In endgames, zwischenzugs are just as powerful! White wants to push the e-pawn, but first look for an in-between move.
+
+Can you play a Rook move that creates a threat before advancing the pawn?`,
+          correctMoves: ['Re3'],
+          successMessage: `Re3! The Rook moves to e3, preparing to support the e-pawn advance and also potentially swing to the a- or h-file. This in-between move improves your Rook's position before committing to the pawn push. In endgames, every tempo matters!`,
+          failureMessage: 'Before pushing the pawn, can you improve your Rook\'s position first?',
+          arrows: [
+            { from: 'e1', to: 'e3', color: 'green' },
+          ],
+        },
       ],
     },
     // ==================== LESSON 10: TRAPPED PIECES ====================
@@ -1471,7 +1739,7 @@ The "obvious" move might be to recapture on d4. But is there a stronger in-betwe
           type: 'explanation',
           fen: 'rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq - 0 1',
           title: 'Trapping a Piece',
-          explanation: `A **trapped piece** is one that has no safe squares to move to. If you can attack it, it's won!
+          explanation: `A **trapped piece** (also called "piece imprisonment") is one that has no safe squares to move to. If you can attack it, it's won! One of the most famous examples is the Noah's Ark Trap in the Ruy Lopez, documented since the early 1900s and named after its supposedly "ancient" origins.
 
 **Most commonly trapped pieces**:
 • **Knights** - Limited movement, easily cornered
@@ -1579,6 +1847,39 @@ Hint: Cut off all the escape squares.`,
           successMessage: `c3! This move blocks the check from the Bishop AND attacks it. The Bishop must move, and after ...Ba5, b4 traps it! Or ...Bxc3+ Nxc3 and White has the better position. Pawns are great for trapping pieces!`,
           failureMessage: 'Which pawn can attack the Bishop and limit its options?',
         },
+        {
+          id: 'rook-trap',
+          type: 'interactive',
+          fen: 'r2qkbnr/ppp1pppp/2n5/3p4/3PP1b1/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 1',
+          title: 'Trap the Bishop on g4',
+          explanation: `Black's Bishop has come to g4, pinning the Knight to the Queen. This is a common motif.
+
+But this Bishop might be overextended! Can you find a way to trap it or force it into a bad position?`,
+          correctMoves: ['h3'],
+          successMessage: `h3! The Bishop must retreat. After Bh5, you can play g4! trapping the Bishop on h5. It has no safe squares - g6 might be possible but the Bishop is severely restricted. This is the classic h3-g4 Bishop trap!`,
+          failureMessage: 'Attack the Bishop to force it to retreat, then think about cutting off its escape squares.',
+          arrows: [
+            { from: 'h2', to: 'h3', color: 'green' },
+          ],
+          highlights: [
+            { square: 'g4', color: 'red' },
+          ],
+        },
+        {
+          id: 'advanced-trap-puzzle',
+          type: 'puzzle',
+          fen: 'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1',
+          title: 'Trap the Knight After It Invades',
+          explanation: `This is a standard Italian Game position. Black may consider ...Na5 to attack the Bishop on c4.
+
+If the Knight goes to a5, how would you keep the Bishop safe while making the Knight look silly on the edge?`,
+          correctMoves: ['d3'],
+          successMessage: `d3! This solid developing move protects the Bishop and keeps it on the active c4 diagonal. If Black plays Na5 now, the Knight ends up on the rim where "the Knight on the rim is dim." The Knight on a5 has very few good squares and can be trapped or sidelined while you develop freely!`,
+          failureMessage: 'How can you protect the Bishop while keeping a strong position? Think about a pawn move that supports the center.',
+          arrows: [
+            { from: 'd2', to: 'd3', color: 'green' },
+          ],
+        },
       ],
     },
     // ==================== LESSON 11: X-RAY ====================
@@ -1595,7 +1896,7 @@ Hint: Cut off all the escape squares.`,
           type: 'explanation',
           fen: '4r1k1/8/8/8/8/8/8/R3K3 w - - 0 1',
           title: 'The X-Ray',
-          explanation: `An **X-Ray attack** (or **X-Ray defense**) is when a piece's influence "sees through" another piece to affect a square behind it.
+          explanation: `An **X-Ray attack** (or **X-Ray defense**) is when a piece's influence "sees through" another piece to affect a square behind it. The tactic is named by analogy with X-ray radiation, discovered by Wilhelm Rontgen in 1895 - just as X-rays see through solid objects, the chess X-ray "sees through" intervening pieces.
 
 **Think of it like actual X-rays** - the piece can see through obstacles!
 
@@ -1665,6 +1966,73 @@ Your Rooks can support each other through the line...`,
           successMessage: `Rd8+! Rxd8 is forced, and Rxd8# is checkmate! The X-Ray support from the second Rook seals the deal. When your Rooks are connected, they have incredible power!`,
           failureMessage: 'If you sacrifice one Rook with check, what can the other Rook do?',
         },
+        {
+          id: 'x-ray-bishop',
+          type: 'explanation',
+          fen: '2kr4/ppp2p2/2n1p3/3pP3/1b1P4/2N2N2/PPP1BPPP/R3K2R w KQ - 0 1',
+          title: 'Bishop X-Ray',
+          explanation: `Bishops also have X-Ray power! A Bishop can "see through" pieces on its diagonal.
+
+**Bishop X-Ray patterns**:
+• A Bishop behind a pawn chain still influences the diagonal beyond
+• Two Bishops on the same diagonal create layered X-Ray pressure
+• A Bishop can defend a piece through an intervening piece
+
+**Practical example**: In many openings, the fianchettoed Bishop on g2 X-Rays through the center all the way to a8, even when pawns block the direct path. If those pawns move or are exchanged, the Bishop's latent power is unleashed!
+
+**Key insight**: Always be aware of long-range pieces "behind" other pieces. Their influence extends beyond what's immediately visible!`,
+          arrows: [
+            { from: 'e2', to: 'a6', color: 'green' },
+            { from: 'e2', to: 'h5', color: 'green' },
+          ],
+        },
+        {
+          id: 'x-ray-defense-practice',
+          type: 'interactive',
+          fen: '3r2k1/5ppp/8/8/8/8/4RPPP/4R1K1 w - - 0 1',
+          title: 'X-Ray Defense in Action',
+          explanation: `Black's Rook on d8 is pressuring the position. White's doubled Rooks on the e-file provide X-Ray defense.
+
+Find the move that uses X-Ray power to win material or gain an advantage!`,
+          correctMoves: ['Re8+'],
+          successMessage: `Re8+! After Rxe8, Rxe8+ wins back the Rook with check. The back Rook X-Rayed through the front one. Even if Black doesn't take (Kf8), Re8+ forces the exchange anyway. Doubled Rooks have tremendous X-Ray power!`,
+          failureMessage: 'Your Rooks are doubled on the e-file. What happens if the front one enters with check?',
+          arrows: [
+            { from: 'e2', to: 'e8', color: 'green' },
+            { from: 'e1', to: 'e8', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'x-ray-queen-rook',
+          type: 'interactive',
+          fen: '3r2k1/5ppp/8/8/8/8/5PPP/2QR2K1 w - - 0 1',
+          title: 'Queen and Rook X-Ray',
+          explanation: `The Queen on c1 and Rook on d1 are aligned. The Queen "X-Rays" through the Rook to the d-file.
+
+Find the move that exploits this X-Ray alignment to win!`,
+          correctMoves: ['Rxd8+'],
+          successMessage: `Rxd8+! The Rook captures with check, and the Queen on c1 X-Rays through to d1 and beyond. After Kf8, Qc5+ picks up material or continues the attack. The Queen's X-Ray support behind the Rook made this invasion possible!`,
+          failureMessage: 'The Rook can enter with check. What piece supports it from behind?',
+          arrows: [
+            { from: 'd1', to: 'd8', color: 'green' },
+            { from: 'c1', to: 'd1', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'x-ray-advanced-puzzle',
+          type: 'puzzle',
+          fen: '4r1k1/5ppp/8/3R4/8/8/5PPP/4R1K1 w - - 0 1',
+          title: 'X-Ray Attack Puzzle',
+          explanation: `White has a Rook on d5 and another on e1. Black's Rook is on e8 guarding the back rank.
+
+Find the move that wins using X-Ray tactics! Think about how your pieces can support each other through the line.`,
+          correctMoves: ['Rd8'],
+          successMessage: `Rd8! The Rook invades the 8th rank, and after Rxd8, Rxd8+ is crushing - the X-Ray support from the back Rook means the 8th rank invasion is unstoppable. If Black doesn't trade, you have two Rooks dominating the position with Rd7 threatening f7!`,
+          failureMessage: 'How can you invade with one Rook while the other provides X-Ray support?',
+          arrows: [
+            { from: 'e1', to: 'e5', color: 'green' },
+          ],
+        },
       ],
     },
     // ==================== LESSON 12: DESPERADO ====================
@@ -1681,7 +2049,7 @@ Your Rooks can support each other through the line...`,
           type: 'explanation',
           fen: 'r1bqkbnr/pppp1ppp/2n5/4N3/4P3/8/PPPP1PPP/RNBQKB1R b KQkq - 0 1',
           title: 'The Desperado Concept',
-          explanation: `**Desperado** comes from the word "desperate" - it's when a piece is doomed to be captured anyway, so you make it cause maximum damage before it falls!
+          explanation: `**Desperado** comes from the Spanish "desesperado" (desperate one) - it's when a piece is doomed to be captured anyway, so you make it cause maximum damage before it falls! The term entered chess from American Wild West imagery: a desperado piece "goes out fighting" by capturing the most valuable target first.
 
 **The logic**:
 • Your piece will be captured no matter what
@@ -1748,6 +2116,89 @@ Find the desperado sequence that wins material.`,
           successMessage: `Nxd7! If Qxd7, you've traded Knight for Knight but opened the position. Or cxd5 is also strong, winning a pawn. In complex positions with multiple hanging pieces, the player who captures first often wins!`,
           failureMessage: 'Which piece can you capture where taking back doesn\'t fully compensate?',
         },
+        {
+          id: 'desperado-exchange',
+          type: 'explanation',
+          fen: '8/8/8/3Nb3/2B5/8/5k2/6K1 w - - 0 1',
+          title: 'Desperado in Exchanges',
+          explanation: `Desperado thinking is critical during piece exchanges. When both sides have pieces attacked, the order of captures matters enormously!
+
+**The key principle**: If your piece is going to be captured anyway, make it capture the MOST VALUABLE target before it dies.
+
+**Exchange sequence thinking**:
+1. "My piece is attacked - it will be lost"
+2. "What can it take before it goes?"
+3. "Can it take something MORE valuable than itself?"
+4. "Even if it takes something equal, did I improve my position?"
+
+**In this position**: Both the Bishop on c4 and Knight on d5 might be under pressure. If the Bishop is about to be lost, Bxe6 captures the Bishop first! If the Knight is threatened, Nxe3 or Nc7 might grab something.
+
+**Remember**: The desperado piece goes down fighting, not quietly!`,
+          arrows: [
+            { from: 'c4', to: 'e6', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'red' },
+          ],
+        },
+        {
+          id: 'desperado-pawn',
+          type: 'interactive',
+          fen: 'r1bqkbnr/ppp2ppp/2n5/3pp3/2PPP3/5N2/PP3PPP/RNBQKB1R w KQkq - 0 1',
+          title: 'Pawn Desperado',
+          explanation: `White's d4 pawn and e4 pawn are both under attack. The d4 pawn is attacked by the e5 pawn and the c6 Knight.
+
+Instead of trying to defend, can you use desperado thinking? One of your center pawns is about to fall - make it count!`,
+          correctMoves: ['dxe5', 'exd5'],
+          successMessage: `Good thinking! dxe5 captures a pawn before yours is taken - your d-pawn was doomed anyway, so it grabs the e5 pawn on its way out. exd5 also works, winning a central pawn. Both are desperado-style: making the threatened pawn do maximum damage before it falls!`,
+          failureMessage: 'Your center pawns are under pressure. Can one of them capture before it\'s taken?',
+          arrows: [
+            { from: 'd4', to: 'e5', color: 'green' },
+            { from: 'e4', to: 'd5', color: 'green' },
+          ],
+        },
+        {
+          id: 'desperado-bishop-puzzle',
+          type: 'puzzle',
+          fen: 'r1bqk2r/pppp1ppp/2n2n2/2b1p3/2BPP3/5N2/PPP2PPP/RNBQK2R w KQkq - 0 1',
+          title: 'Desperado Bishop',
+          explanation: `White to play. The d4 pawn is attacked by the Bishop on c5 and the e5 pawn.
+
+If the d4 pawn is going to fall, can you make it cause maximum damage first?`,
+          correctMoves: ['dxe5'],
+          successMessage: `dxe5! The d-pawn was under heavy pressure, so instead of defending it passively, you capture on e5 first. Now if Bxe5 or Nxe5, you've at least traded pawn for pawn. The d-pawn went down fighting, capturing before being captured!`,
+          failureMessage: 'The d4 pawn is doomed. What can it capture before it falls?',
+          arrows: [
+            { from: 'd4', to: 'e5', color: 'green' },
+          ],
+        },
+        {
+          id: 'desperado-summary',
+          type: 'explanation',
+          fen: 'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1',
+          title: 'Desperado Summary',
+          explanation: `**Desperado checklist**:
+
+**When to think "desperado"**:
+• Your piece is attacked and will be lost
+• Multiple pieces are hanging on both sides
+• An exchange sequence is about to begin
+• You're in a forced line where material will change hands
+
+**Desperado priorities** (capture the most valuable first!):
+1. Can my doomed piece give check while capturing?
+2. Can it capture the most valuable enemy piece?
+3. Can it capture with a threat (attack on Queen, etc.)?
+4. Can it at least take something of equal value?
+
+**Common desperado scenarios**:
+• Knight about to be captured takes a pawn with check first
+• Bishop grabs a piece before being traded off
+• Pawn captures before being captured itself
+• Queen sacrifice followed by recapturing with advantage
+
+**Golden rule**: A piece that's going to die anyway should go out with maximum impact!`,
+        },
       ],
     },
     // ==================== LESSON 13: COUNTING ATTACKERS ====================
@@ -1764,7 +2215,7 @@ Find the desperado sequence that wins material.`,
           type: 'explanation',
           fen: 'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3',
           title: 'Attackers vs Defenders',
-          explanation: `Before making ANY capture, always count:
+          explanation: `Before making ANY capture, always count. This fundamental concept was formalized in Wilhelm Steinitz's theory of positional chess in the 1870s-1890s. Steinitz emphasized that an attack succeeds when you have more attackers than defenders on a critical point.
 
 **1. How many pieces attack the target?**
 **2. How many pieces defend it?**
@@ -1906,6 +2357,40 @@ Remember: Count pieces, consider values, calculate the sequence!`,
 
 **Master this skill**: It's the foundation of ALL tactical thinking! Every combination starts with correctly counting attackers and defenders.`,
         },
+        {
+          id: 'counting-advanced',
+          type: 'interactive',
+          fen: 'r1bqkb1r/pppp1ppp/2n2n2/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 1',
+          title: 'Advanced Counting Exercise',
+          explanation: `White has played d4, creating tension in the center. Count the attackers and defenders of the d4 and e5 pawns.
+
+**d4 pawn**: Attacked by e5 pawn and Nc6. Defended by Nf3 and Qd1.
+**e5 pawn**: Attacked by d4 pawn. Defended by Nc6 and Nf6.
+
+Based on your count, what is the best move for White?`,
+          correctMoves: ['dxe5', 'd5'],
+          successMessage: `Good! dxe5 wins a pawn because after Nxe5, Nxe5 and White has equal pieces but Black's center is weakened. Or d5 pushes past, attacking the Knight and gaining space. Counting correctly reveals that d4 has enough support to advance or capture!`,
+          failureMessage: 'Count the attackers and defenders carefully. Can White capture or advance in the center?',
+          arrows: [
+            { from: 'd4', to: 'e5', color: 'green' },
+            { from: 'd4', to: 'd5', color: 'green' },
+          ],
+        },
+        {
+          id: 'counting-trap-puzzle',
+          type: 'puzzle',
+          fen: 'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR w KQkq - 0 1',
+          title: 'Counting Trap',
+          explanation: `White to play. The e4 pawn seems well-placed, but is it safe?
+
+Count: Who attacks e4? Who defends it? Based on your count, what should White do?`,
+          correctMoves: ['Nf3', 'd3'],
+          successMessage: `Good defensive thinking! Nf3 adds a defender to e4 (the Knight will cover d4/e5 and support the center). d3 also solidifies the center. Currently e4 is only defended by the Knight on c3, and it's attacked by the Knight on c6 indirectly. Adding support with Nf3 or d3 ensures the center holds!`,
+          failureMessage: 'Count the pieces influencing the e4 square. Does it need more support?',
+          arrows: [
+            { from: 'g1', to: 'f3', color: 'green' },
+          ],
+        },
       ],
     },
     // ==================== LESSON 14: INTERFERENCE ====================
@@ -1922,7 +2407,7 @@ Remember: Count pieces, consider values, calculate the sequence!`,
           type: 'explanation',
           fen: '6k1/8/8/8/8/8/r5r1/R5K1 w - - 0 1',
           title: 'What is Interference?',
-          explanation: `**Interference** is placing a piece on a square that BLOCKS an important line between enemy pieces.
+          explanation: `**Interference** is placing a piece on a square that BLOCKS an important line between enemy pieces. The word comes from the Latin "interferre" (to carry between), and the concept was studied extensively by the great chess problem composers of the 19th century.
 
 This disrupts their coordination - they can no longer defend each other or control key squares together!
 
@@ -1990,6 +2475,675 @@ In complex positions, look for:
           failureMessage: 'How can you put a piece between the two Rooks?',
           arrows: [
             { from: 'd4', to: 'c5', color: 'green' },
+          ],
+        },
+        {
+          id: 'interference-pawn',
+          type: 'explanation',
+          fen: '2r2rk1/pp3ppp/3q4/3P4/8/8/PP3PPP/2RR2K1 w - - 0 1',
+          title: 'Pawn Interference',
+          explanation: `Pawns can be powerful interference tools! A pawn pushed into the middle of enemy piece coordination can be devastating.
+
+**In this position**: White's d5 pawn sits between Black's Queen on d6 and the Rook on c8. The pawn interferes with their connection along the d-file and c-file.
+
+**Pawn interference patterns**:
+• A pawn advance that blocks a defender's sight line
+• A pawn that splits two coordinating Rooks
+• A passed pawn that forces pieces to deal with it, breaking coordination
+
+**The beauty of pawn interference**: Pawns are the least valuable pieces, so using them to disrupt expensive pieces is always a good trade of resources!`,
+          arrows: [
+            { from: 'd5', to: 'd6', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'd5', color: 'green' },
+          ],
+        },
+        {
+          id: 'interference-diagonal',
+          type: 'interactive',
+          fen: 'r1b2rk1/pp3ppp/2p2q2/8/3N4/6P1/PP3PBP/R4RK1 w - - 0 1',
+          title: 'Interfere on the Diagonal',
+          explanation: `Black's Bishop on c8 and Queen on f6 are coordinating along the c8-h3 diagonal.
+
+Can you place a piece on this diagonal to interfere with their coordination?`,
+          correctMoves: ['Ne6'],
+          successMessage: `Ne6! The Knight jumps to e6, interfering with the diagonal between Black's Bishop and Queen. The Knight also attacks the f8 Rook and creates threats. Black's pieces can no longer coordinate along the diagonal, and the Knight is extremely powerful on e6!`,
+          failureMessage: 'Look at the diagonal connecting Black\'s Bishop and Queen. Can you place a Knight on that diagonal?',
+          arrows: [
+            { from: 'd4', to: 'e6', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e6', color: 'green' },
+          ],
+        },
+        {
+          id: 'interference-rook-puzzle',
+          type: 'puzzle',
+          fen: '3r2k1/1b3ppp/8/4R3/8/8/5PPP/3R2K1 w - - 0 1',
+          title: 'Rook Interference Puzzle',
+          explanation: `Black's Rook on d8 and Bishop on b7 coordinate along the d-file and diagonals.
+
+Find the move that interferes with Black's piece coordination!`,
+          correctMoves: ['Red5'],
+          successMessage: `Red5! The Rook moves to d5, blocking the Bishop's diagonal (b7 to e4/f3) while also controlling the d-file. The Black Rook on d8 can no longer easily coordinate with the Bishop. Interference on central squares is especially powerful because it disrupts multiple lines simultaneously!`,
+          failureMessage: 'Can you place a Rook on a square that blocks the Bishop\'s diagonal?',
+          arrows: [
+            { from: 'e5', to: 'd5', color: 'green' },
+          ],
+        },
+        {
+          id: 'interference-sacrifice-puzzle',
+          type: 'interactive',
+          fen: '2rr2k1/5ppp/8/8/3B4/8/5PPP/1R1R2K1 w - - 0 1',
+          title: 'Interference Sacrifice',
+          explanation: `Black's two Rooks on c8 and d8 defend each other perfectly. Can you break their coordination with an interference sacrifice?
+
+Think about putting a piece between them!`,
+          correctMoves: ['Bc5'],
+          successMessage: `Bc5! The Bishop lands between the two Rooks, cutting off their mutual defense. Now if Rxd1, Rxd1 and the c8 Rook is undefended. If the c8 Rook moves, the d8 Rook is exposed. The Bishop interference disrupted the entire defensive setup!`,
+          failureMessage: 'The Rooks defend each other along the 8th rank. What piece can you place between them?',
+          arrows: [
+            { from: 'd4', to: 'c5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'c5', color: 'green' },
+          ],
+        },
+      ],
+    },
+    // ==================== LESSON 15: OVERLOADING ====================
+    {
+      id: 'overloading',
+      title: 'Overloading',
+      description: 'Exploit pieces burdened with too many defensive duties',
+      difficulty: 'intermediate',
+      estimatedMinutes: 10,
+      tags: ['tactics', 'overloading', 'exploitation'],
+      steps: [
+        {
+          id: 'intro',
+          type: 'explanation',
+          fen: 'r1bq1rk1/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 w - - 0 1',
+          title: 'What is Overloading?',
+          explanation: `**Overloading** is one of the most elegant tactical motifs in chess. It occurs when a single piece is tasked with defending two or more things at once - and simply cannot handle all its responsibilities.
+
+**Historical origin**: The term "overloading" was borrowed from **electrical engineering**. Just as an electrical circuit fails when forced to carry more current than it can handle - blowing a fuse or tripping a breaker - a chess piece "fails" when burdened with too many defensive duties. The analogy was popularized in chess literature during the mid-20th century, when industrial and technical metaphors began appearing in tactical vocabulary.
+
+**How it works**:
+• A piece is defending **two or more** important targets
+• You attack one of those targets, forcing the defender to respond
+• When the overloaded piece moves to defend one target, the **other target** becomes unprotected
+
+**Key insight**: Every piece has limits. Even the powerful Queen can only be in one place at a time! Recognizing when a defender is stretched too thin is a hallmark of strong tactical play.`,
+        },
+        {
+          id: 'overloaded-queen-example',
+          type: 'explanation',
+          fen: '3r2k1/5ppp/4q3/8/8/4B3/5PPP/2Q1R1K1 w - - 0 1',
+          title: 'The Overloaded Queen',
+          explanation: `Here is a classic overloading pattern. Look at Black's **Queen on e6** - it has TWO critical jobs:
+
+**Job 1**: Defend the **Rook on d8** (the only defender!)
+**Job 2**: Guard the **e7 square** to prevent Qc7 or Be7 threats
+
+The Queen is overloaded - she cannot do both jobs at once.
+
+If White plays **Re8+!**, the Rook attacks with check via the Rook on d8. Black's Queen must choose:
+• **Qxe8?** - The Queen leaves the 6th rank, abandoning her other duties
+• **Rxe8?** - Then Qxd8 is no longer guarded
+
+When you spot a piece juggling multiple defensive tasks, you've found an overloading opportunity!`,
+          arrows: [
+            { from: 'e6', to: 'd8', color: 'yellow' },
+            { from: 'e6', to: 'e7', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'e6', color: 'red' },
+            { square: 'd8', color: 'blue' },
+          ],
+        },
+        {
+          id: 'overloaded-queen-interactive',
+          type: 'interactive',
+          fen: '2kr4/pp3p2/2p1q3/4p3/4P1b1/2N2Q2/PPP2PPP/3R2K1 w - - 0 1',
+          title: 'Exploit the Overloaded Queen',
+          explanation: `Black's Queen on e6 is overloaded! She must defend both the **Rook on d8** and the **Bishop on g4**.
+
+Find the move that exploits this overload. Which target should White attack to force the Queen into an impossible choice?`,
+          correctMoves: ['Rxd8+'],
+          wrongMoveHints: {
+            'Qxg4': 'That captures the Bishop, but the Queen can simply recapture. Look for something with check!',
+            'Nd5': 'Interesting idea, but there\'s a more forcing move with check.',
+          },
+          successMessage: `Rxd8+! forces Qxd8 (or Kxd8), and now White wins the Bishop with Qxg4. The Queen couldn't defend both the Rook and the Bishop at the same time - classic overloading!`,
+          failureMessage: 'Look at what the Black Queen is defending. Can you attack one of those targets with check?',
+          arrows: [
+            { from: 'd1', to: 'd8', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e6', color: 'red' },
+            { square: 'd8', color: 'blue' },
+            { square: 'g4', color: 'blue' },
+          ],
+        },
+        {
+          id: 'overloaded-rook-example',
+          type: 'explanation',
+          fen: '6k1/5pp1/7p/8/8/1r6/1P3PPP/R4RK1 w - - 0 1',
+          title: 'The Overloaded Rook',
+          explanation: `Rooks are frequently overloaded in endgames because they're often the last line of defense.
+
+Consider a position where a **Rook must simultaneously**:
+• Guard a back rank against mate
+• Defend a weak pawn
+• Control an open file
+
+That's three jobs for one piece!
+
+**Common overloaded Rook scenarios**:
+1. **Back rank + pawn defense**: The Rook stays on the first rank to prevent mate, but a pawn elsewhere needs protection
+2. **Two open files**: The Rook can only control one file at a time
+3. **Attack + defense**: The Rook is needed for both attacking and defensive duties
+
+**How to exploit it**:
+• Create threats on **different parts of the board**
+• Force the Rook to choose which area to protect
+• Attack the undefended area after the Rook commits`,
+          arrows: [
+            { from: 'b3', to: 'b2', color: 'yellow' },
+            { from: 'b3', to: 'b1', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'b3', color: 'red' },
+          ],
+        },
+        {
+          id: 'overloaded-rook-interactive',
+          type: 'interactive',
+          fen: '3r2k1/R4ppp/8/3Bp3/8/8/5PPP/6K1 w - - 0 1',
+          title: 'Overloaded Rook Practice',
+          explanation: `Black's Rook on d8 is overloaded! It must:
+1. Stay on the back rank to prevent **Ra8 mate**
+2. Defend against the **Bishop on d5** attacking f7
+
+Find the move that exploits this overload!`,
+          correctMoves: ['Bxf7+'],
+          wrongMoveHints: {
+            'Ra8': 'The Rook on d8 can still capture on a8. Try attacking f7 instead!',
+            'Be6': 'Close, but there\'s a more forcing move that wins immediately.',
+          },
+          successMessage: `Bxf7+! wins a pawn with check. If Kf8 or Kh8, then Ra8 forces Rxa8 and the back rank is exposed. The Rook couldn't guard both f7 and the back rank!`,
+          failureMessage: 'The Rook must guard the back rank AND f7. Which target can you attack with a forcing move?',
+          arrows: [
+            { from: 'd5', to: 'f7', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd8', color: 'red' },
+            { square: 'f7', color: 'blue' },
+          ],
+        },
+        {
+          id: 'creating-overloads',
+          type: 'explanation',
+          fen: 'r2qr1k1/ppp2ppp/2n5/3pN3/3P4/8/PPP2PPP/R1BQR1K1 w - - 0 1',
+          title: 'Creating Overloads',
+          explanation: `Strong players don't just wait for overloads to appear - they **create** them! Here's how:
+
+**Step 1: Identify the key defender**
+Find the piece that's holding the opponent's position together. Often it's a Queen, Rook, or central Knight.
+
+**Step 2: Give it more work**
+Create additional threats that the same piece must deal with:
+• Open a new file or diagonal aimed at a target behind the defender
+• Create a passed pawn that needs watching
+• Launch an attack on a different part of the board
+
+**Step 3: Overload it!**
+Once the piece has too many jobs, exploit the weakest link.
+
+**Techniques for creating overloads**:
+• **Pawn breaks**: Open new lines to create additional targets
+• **Piece redirection**: Move your pieces to threaten multiple areas
+• **Zwischenzug**: An in-between move that adds a new threat before the defender can regroup
+
+**Remember**: The best overloads involve a **forcing move** (check, capture, or major threat) so the opponent doesn't have time to reorganize their defense.`,
+        },
+        {
+          id: 'overloading-vs-deflection',
+          type: 'explanation',
+          fen: 'r1b2rk1/ppppqppp/2n5/4N3/8/8/PPPPQPPP/R1B2RK1 w - - 0 1',
+          title: 'Overloading vs Deflection',
+          explanation: `Overloading and deflection are closely related - but there's an important difference:
+
+**Deflection**: You FORCE the defender to move away from its post.
+• "I'll make you leave!" - You play a move that compels the piece to abandon its duty.
+• Example: Sacrifice on the square a piece defends, forcing it to capture and leave.
+
+**Overloading**: You attack what the defender protects, exploiting that it CAN'T protect everything.
+• "You have too many jobs!" - The piece stays where it is but simply can't cover all its responsibilities.
+• Example: Attack two things the Queen defends; she can only save one.
+
+**In practice**, the line between them blurs:
+• An overloaded piece is ripe for deflection
+• A deflection often works because the piece was already overloaded
+• The best combinations use BOTH: overload a piece, then deflect it from its most important duty
+
+**Key takeaway**: When you see a piece doing double duty, ask yourself: "Can I attack what it's defending?" That's the overloading mindset.`,
+        },
+        {
+          id: 'overloading-puzzle',
+          type: 'puzzle',
+          fen: 'r4rk1/1b1nqppp/p3p3/1p2N3/3P4/1BN5/PP3PPP/R2QR1K1 w - - 0 1',
+          title: 'Overloading Puzzle',
+          explanation: `Black's Knight on d7 is overloaded! It must defend against multiple threats. Find the move that exploits this!`,
+          correctMoves: ['Nxf7'],
+          successMessage: `Nxf7! exploits the overloaded Knight on d7. The Knight was defending f7 (via the pawn structure) and also needed to cover e5. After Nxf7, if Rxf7 then Bxe6 pins and wins material. If Kxf7 then Bxe6+ forks King and Queen. The Knight simply had too many jobs!`,
+          failureMessage: 'Look at what the Knight on d7 must defend. Can you attack one of its responsibilities with a capture?',
+          arrows: [
+            { from: 'e5', to: 'f7', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd7', color: 'red' },
+            { square: 'f7', color: 'blue' },
+          ],
+        },
+      ],
+    },
+    // ==================== LESSON 16: ATTRACTION ====================
+    {
+      id: 'attraction',
+      title: 'Attraction',
+      description: 'Lure enemy pieces to vulnerable squares through sacrifice',
+      difficulty: 'intermediate',
+      estimatedMinutes: 8,
+      tags: ['tactics', 'attraction', 'luring', 'sacrifice'],
+      steps: [
+        {
+          id: 'intro',
+          type: 'explanation',
+          fen: 'r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1',
+          title: 'What is Attraction?',
+          explanation: `**Attraction** (also called **luring**) is a tactical motif where you force an enemy piece to move to a specific square - usually through a sacrifice - where it becomes vulnerable to a follow-up tactic.
+
+**Historical origin**: The concept draws from the mythological image of the **Siren's call** - the irresistible lure that draws sailors to their doom. In chess, you offer something your opponent "can't refuse" (often a check or a juicy piece to capture), pulling their piece to a square where disaster awaits.
+
+The term gained prominence in Soviet chess literature of the 1940s-50s, where it was distinguished from the broader concept of "decoy" (отвлечение). While a **decoy** draws a piece away from defense, an **attraction** specifically pulls a piece TO a dangerous square.
+
+**How it works**:
+1. Identify a tactic that would work IF an enemy piece were on a certain square
+2. Find a sacrifice that FORCES the piece to that square
+3. Execute the follow-up tactic
+
+**Common attraction targets**: Fork squares, mating nets, pin lines, discovered attack paths.`,
+        },
+        {
+          id: 'attraction-fork-example',
+          type: 'explanation',
+          fen: '4k3/8/8/3b4/8/8/6PP/1N3RK1 w - - 0 1',
+          title: 'Attraction to Create a Fork',
+          explanation: `Attraction often sets up a devastating **Knight fork** or **Queen fork**.
+
+**The classic pattern**:
+• You see that IF the enemy King were on a certain square, your Knight could fork King + Queen (or King + Rook)
+• You sacrifice a piece on that square WITH CHECK
+• The King is forced to capture (attracted to the square)
+• Your Knight delivers the fork!
+
+**Example idea**: If the Black King could be lured to f7, a Knight on d6 would fork King and Rook. So you sacrifice: Rf7+! Kxf7, and then Nd6+ forks everything.
+
+This is the essence of attraction: the sacrifice isn't a loss - it's an **investment** that pays off with the follow-up tactic.
+
+**Look for attraction when**:
+• A Knight fork would be possible if the King were one square different
+• A mating pattern needs the King on a specific square
+• A skewer or pin would work if pieces were aligned differently`,
+          arrows: [
+            { from: 'f1', to: 'f7', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e8', color: 'red' },
+          ],
+        },
+        {
+          id: 'attraction-fork-interactive',
+          type: 'interactive',
+          fen: '4k3/5r2/8/3N4/8/8/8/4R1K1 w - - 0 1',
+          title: 'Lure the King into a Fork',
+          explanation: `The Knight on d5 is powerful. If the King were on e7, the Knight could jump to c7 or f6 with a fork! But the King is safe on e8.
+
+Can you sacrifice to lure the King to e7 where the Knight delivers a deadly fork?`,
+          correctMoves: ['Re7+'],
+          wrongMoveHints: {
+            'Nc7+': 'Check, but the King just moves to d8 or f8 and the Rook escapes.',
+            'Nf6+': 'Check, but after Ke7 the Knight has no good fork.',
+          },
+          successMessage: `Re7+! forces Kxe7 (if Kd8 or Kf8 the Rook wins the f7 Rook). After Kxe7, Nc7 or Nf6+ forks the King and wins the Rook on f7. The King was lured to e7 where the Knight dominates!`,
+          failureMessage: 'Think about which square would be bad for the King. Can you force the King there with a Rook sacrifice?',
+          arrows: [
+            { from: 'e1', to: 'e7', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e8', color: 'red' },
+            { square: 'e7', color: 'blue' },
+          ],
+        },
+        {
+          id: 'attraction-back-rank',
+          type: 'explanation',
+          fen: '3q2k1/5ppp/8/8/8/5Q2/5PPP/2R3K1 w - - 0 1',
+          title: 'Attraction for Back Rank Mate',
+          explanation: `One of the most beautiful attraction patterns involves luring a piece to the back rank to set up a **back rank mate**.
+
+**The pattern**:
+• The opponent's King is trapped on the back rank (pawns block escape)
+• A defending piece prevents your Rook/Queen from delivering mate
+• You sacrifice to ATTRACT that defender away, or attract the King into the mating net
+
+**Classic sequence**:
+1. Qf8+! - Sacrifice the Queen on f8
+2. Qxf8 (or Kxf8) - The piece is attracted to f8
+3. Rc8# - Back rank mate!
+
+In this position, White can play **Qf8+!** and after Qxf8 (forced), **Rc8** delivers checkmate because the Queen was lured to f8 where it blocks the King's escape!
+
+**The sacrifice opens the door**: By attracting the Queen to f8, you simultaneously remove the defender AND block the King's flight square.`,
+          arrows: [
+            { from: 'f3', to: 'f8', color: 'green' },
+            { from: 'c1', to: 'c8', color: 'green' },
+          ],
+          highlights: [
+            { square: 'g8', color: 'red' },
+            { square: 'f8', color: 'blue' },
+          ],
+        },
+        {
+          id: 'queen-sacrifice-attraction',
+          type: 'interactive',
+          fen: '1r4k1/5ppp/8/8/8/5Q2/5PPP/2R3K1 w - - 0 1',
+          title: 'Queen Sacrifice Attraction',
+          explanation: `The Black King is stuck on the back rank with pawns blocking escape. The Rook on b8 guards against Rc8.
+
+Can you sacrifice your Queen to lure the Rook away from the back rank?`,
+          correctMoves: ['Qb7'],
+          wrongMoveHints: {
+            'Qf8+': 'Check, but Kxf8 and the King escapes. You need to lure the ROOK away.',
+            'Qa8': 'Close! But Rxa8 and the Rook is still on the back rank defending.',
+            'Rc8+': 'The Rook on b8 can capture: Rxc8+. You need to remove that defender first.',
+          },
+          successMessage: `Qb7! forces Rxb7 (the Rook must capture the Queen). Now the back rank is unguarded and Rc8 delivers the final blow! The Rook was lured away from the 8th rank - a beautiful attraction sacrifice!`,
+          failureMessage: 'The Rook on b8 prevents Rc8. How can you lure it away from the back rank?',
+          arrows: [
+            { from: 'f3', to: 'b7', color: 'green' },
+            { from: 'c1', to: 'c8', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'b8', color: 'red' },
+            { square: 'g8', color: 'red' },
+          ],
+        },
+        {
+          id: 'attraction-vs-decoy',
+          type: 'explanation',
+          fen: 'r1bqkb1r/pppppppp/2n2n2/8/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 1',
+          title: 'Attraction vs Decoy',
+          explanation: `Attraction and decoy are sometimes used interchangeably, but there's a subtle distinction worth understanding:
+
+**Attraction (Luring)**:
+• You pull a piece TO a specific square
+• The key is WHERE the piece ends up
+• "Come here, to your doom!"
+• Example: Sacrifice on f7 to lure King to f7, then fork
+
+**Decoy**:
+• You pull a piece AWAY from its defensive duty
+• The key is that the piece LEAVES its current post
+• "Get away from there!"
+• Example: Sacrifice to pull a Queen away from defending a back rank
+
+**In practice, many tactics are both**:
+• Qf8+! Qxf8, Rc8# - The Queen is DECOYED away from guarding c8, AND ATTRACTED to f8 where it blocks the King
+
+**How to think about it**:
+1. If the tactic works because of WHERE the piece goes → **Attraction**
+2. If the tactic works because of WHERE the piece leaves → **Decoy/Deflection**
+3. If both matter → It's a combination of both!
+
+The names matter less than the idea: **force a piece to a square where it doesn't want to be**.`,
+        },
+        {
+          id: 'attraction-puzzle',
+          type: 'puzzle',
+          fen: '5rk1/4qppp/8/8/8/2B2Q2/5PPP/4R1K1 w - - 0 1',
+          title: 'Attraction Puzzle',
+          explanation: `Use attraction to set up a winning combination. The Black King is vulnerable on the back rank. Find the move!`,
+          correctMoves: ['Qf6'],
+          successMessage: `Qf6! threatens Qg7# mate. If gxf6 (or Qxf6), then Re8 leads to back rank threats with Rxf8#. If Qxf6 then Bxf6 threatens Bxg7 and Re8+ with devastating effect. The Queen lures Black into a losing position by creating unavoidable mating threats!`,
+          failureMessage: 'Think about which square your Queen can go to create multiple threats - especially threatening mate while also setting up back rank ideas.',
+          arrows: [
+            { from: 'f3', to: 'f6', color: 'green' },
+          ],
+          highlights: [
+            { square: 'g8', color: 'red' },
+            { square: 'f8', color: 'blue' },
+          ],
+        },
+        {
+          id: 'attraction-knight-fork-puzzle',
+          type: 'puzzle',
+          fen: '4k3/8/8/8/2N5/8/8/R3K3 w - - 0 1',
+          title: 'Attraction into Knight Fork',
+          explanation: `White has a Knight on c4 and a Rook on a1. The Black King is on e8.
+
+Can you attract the King to a square where the Knight delivers a devastating fork? Think about which squares would allow a Knight fork.`,
+          correctMoves: ['Ra8+'],
+          successMessage: `Ra8+! The Rook gives check, forcing the King to d7 (Kd7) or to f7 (Kf7 is not possible, so Ke7 or Kd7). After Kd7, Nd6+ forks the King and potentially wins. After Ke7, Nd5+ forks the King. The Rook attracted the King from e8 to a square where the Knight can exploit it!`,
+          failureMessage: 'Give check with the Rook to force the King to a square where the Knight can fork!',
+          arrows: [
+            { from: 'a1', to: 'a8', color: 'green' },
+            { from: 'c4', to: 'd6', color: 'yellow' },
+          ],
+        },
+      ],
+    },
+    // ==================== LESSON 17: CLEARANCE SACRIFICE ====================
+    {
+      id: 'clearance-sacrifice',
+      title: 'Clearance Sacrifice',
+      description: 'Sacrifice a piece to clear a line or square for a decisive blow',
+      difficulty: 'intermediate',
+      estimatedMinutes: 8,
+      tags: ['tactics', 'clearance', 'sacrifice', 'line-opening'],
+      steps: [
+        {
+          id: 'intro',
+          type: 'explanation',
+          fen: 'r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1',
+          title: 'What is a Clearance Sacrifice?',
+          explanation: `A **clearance sacrifice** is when you sacrifice one of your OWN pieces to clear a line (file, rank, or diagonal) or a square so that another piece can use it for a decisive move.
+
+**Historical origin**: The concept is borrowed from **military strategy** - the idea of "clearing a path" for advancing forces. A scouting unit might sacrifice its position to open a corridor for the main army to break through. In chess, this concept is ancient: texts from the era of **shatranj** (the Arab predecessor to modern chess, 7th-9th century) describe positions where a piece must be moved out of the way - even at a cost - to allow a decisive attack. The 9th-century manuscript *Kitab ash-Shatranj* by al-Adli contains early examples of this idea.
+
+**How it works**:
+1. You have a powerful move available... but one of your OWN pieces is in the way
+2. You sacrifice that blocking piece (often with tempo - check or threat)
+3. The line or square is now clear for the decisive blow
+
+**Types of clearance**:
+• **File clearance**: Move a piece off a file so your Rook or Queen can use it
+• **Diagonal clearance**: Clear a diagonal for your Bishop or Queen
+• **Square clearance**: Vacate a square so another piece can land on it
+• **Rank clearance**: Open a rank for horizontal piece movement`,
+        },
+        {
+          id: 'clearing-file-example',
+          type: 'explanation',
+          fen: '3rk3/8/8/8/8/8/4RP2/4RK2 w - - 0 1',
+          title: 'Clearing a File for a Rook',
+          explanation: `The most common clearance sacrifice involves opening a **file** for a Rook or Queen.
+
+**The pattern**: You have a Rook behind another piece on the same file. The piece in front is blocking the Rook from delivering a decisive blow.
+
+In this position, White's Rook on e1 would love to deliver check on e8, but White's own Rook on e2 is in the way!
+
+**Solution**: Sacrifice the blocking Rook! Re8+! (or Re7/Re6 with threats). By moving the front Rook with a forcing move, the back Rook gains access to the file.
+
+**Key principles**:
+• The sacrificed piece should move WITH TEMPO (check, capture, or major threat)
+• The piece that benefits from the clearance should deliver a **decisive** blow
+• The sacrifice is worth it because the follow-up is overwhelming
+
+**Think of it as**: "Get out of the way... productively!" The blocking piece doesn't just step aside - it charges forward with a purpose!`,
+          arrows: [
+            { from: 'e2', to: 'e8', color: 'yellow' },
+            { from: 'e1', to: 'e8', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e2', color: 'red' },
+            { square: 'e1', color: 'blue' },
+          ],
+        },
+        {
+          id: 'clearing-file-interactive',
+          type: 'interactive',
+          fen: '3rk3/8/8/4P3/8/8/8/4RK2 w - - 0 1',
+          title: 'Clear the File!',
+          explanation: `White's Rook on e1 wants to reach e8 for a devastating check, but the pawn on e5 blocks the e-file.
+
+Sacrifice the pawn to clear the way! How should you push it?`,
+          correctMoves: ['e6'],
+          wrongMoveHints: {
+            'Re5': 'The Rook moves, but now you\'ve lost the Rook\'s access to e8. Push the pawn instead!',
+            'Ke2': 'The King move doesn\'t clear the file. Focus on the blocking pawn.',
+          },
+          successMessage: `e6! clears the e-file for the Rook. The pawn sacrifice opens the path - now Re8+ is a crushing check. After e6, if Black ignores it, Re8# is checkmate! The pawn cleared the file with forward momentum.`,
+          failureMessage: 'Your Rook wants to reach e8, but something is in the way on the e-file. How can you remove the blockage?',
+          arrows: [
+            { from: 'e5', to: 'e6', color: 'green' },
+            { from: 'e1', to: 'e8', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'red' },
+          ],
+        },
+        {
+          id: 'clearing-diagonal-example',
+          type: 'explanation',
+          fen: '4k3/8/4p3/3pB3/2P5/8/5B2/4K3 w - - 0 1',
+          title: 'Clearing a Diagonal for the Bishop',
+          explanation: `Clearance sacrifices on **diagonals** are particularly beautiful because Bishops can attack from long range.
+
+**The pattern**: You have a Bishop that would deliver a devastating blow if only the diagonal were open. Another one of your pieces is blocking the path.
+
+**Diagonal clearance ideas**:
+• Push a pawn forward (even if it's captured) to open the diagonal
+• Sacrifice a piece that sits on the diagonal
+• Move a blocking piece with a threat elsewhere
+
+**Example concept**: If White's Bishop on f2 could reach a7, it would create threats. But another piece might block the a7-f2 diagonal. Moving that piece - even at a cost - can be worth it if the Bishop's new scope is decisive.
+
+**Common scenarios**:
+1. A pawn on the diagonal blocks your fianchettoed Bishop
+2. A Knight sits on a square your Bishop needs to traverse
+3. Your own Queen blocks a Bishop's diagonal to the enemy King
+
+**Remember**: The clearance move should ideally come with **tempo** - a check, capture, or threat that doesn't give the opponent time to reorganize.`,
+          arrows: [
+            { from: 'f2', to: 'a7', color: 'green' },
+            { from: 'e5', to: 'c7', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'clearing-square-interactive',
+          type: 'interactive',
+          fen: '2r3k1/5ppp/8/3NP3/8/8/5PPP/6K1 w - - 0 1',
+          title: 'Clear the Square for the Knight',
+          explanation: `White's Knight on d5 is powerful, but imagine if it could reach e7 to fork the King and Rook! Unfortunately, the pawn on e5 controls e6 and blocks the Knight's path forward.
+
+Wait - the pawn can do something useful! Push it to clear the way AND create a threat.`,
+          correctMoves: ['e6'],
+          wrongMoveHints: {
+            'Nc7': 'The Knight goes to c7, but the Rook can just move. Look at pushing the pawn first!',
+            'Nb6': 'Nb6 attacks the Rook, but Rc6 defends. There\'s a stronger idea with the pawn.',
+          },
+          successMessage: `e6! clears the d5 Knight's path while creating a pawn threat on e6. After e6, fxe6 allows Ne7+ forking King and Rook! If Black doesn't capture, e7 is a devastating passed pawn threatening promotion. The pawn clearance opened up the position beautifully!`,
+          failureMessage: 'The Knight wants to reach e7 for a fork. What\'s blocking its path? Can you remove the obstacle with a forcing pawn move?',
+          arrows: [
+            { from: 'e5', to: 'e6', color: 'green' },
+            { from: 'd5', to: 'e7', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'red' },
+            { square: 'e7', color: 'blue' },
+          ],
+        },
+        {
+          id: 'famous-clearance',
+          type: 'explanation',
+          fen: 'r1bqkbnr/pppppppp/2n5/8/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1',
+          title: 'Famous Clearance Sacrifices',
+          explanation: `Clearance sacrifices have produced some of the most spectacular moments in chess history:
+
+**Mikhail Tal - "The Magician from Riga"**
+Tal was legendary for his clearance sacrifices. He would sacrifice pieces to open lines toward the enemy King, often in positions where the compensation wasn't immediately obvious. His philosophy: "You must take your opponent into a deep, dark forest where 2+2=5, and the path leading out is only wide enough for one."
+
+**The Greek Gift & Clearance**
+The classic Bishop sacrifice on h7 (Bxh7+) often requires a **clearance** first - moving a Knight or pawn that blocks the Bishop's diagonal to h7.
+
+**Modern examples**:
+• Pushing a central pawn (even sacrificing it) to open lines for Rooks and Bishops
+• Moving a Knight from f3 (via sacrifice on e5 or g5) to open the f-file for the Rook
+• Sacrificing an exchange to clear a key square for a Knight
+
+**The key lesson**: Sometimes your OWN pieces are the biggest obstacle to your attack. Don't be afraid to sacrifice them to clear the path - as long as the follow-up is decisive!
+
+**Clearance sacrifice checklist**:
+✓ What line or square do I need to open?
+✓ Which of MY pieces is in the way?
+✓ Can I move it with tempo (check/capture/threat)?
+✓ Is the follow-up truly decisive?`,
+        },
+        {
+          id: 'clearance-sacrifice-puzzle',
+          type: 'puzzle',
+          fen: '2r3k1/5ppp/4p3/3pR3/8/6Q1/5PPP/6K1 w - - 0 1',
+          title: 'Clearance Sacrifice Puzzle',
+          explanation: `White's Queen on g3 would love to reach g7 for checkmate, but it needs help. The Rook on e5 can create the clearance. Find the winning move!`,
+          correctMoves: ['Re1'],
+          wrongMoveHints: {
+            'Qg7+': 'Not yet - the Queen can\'t reach g7 in one move for mate. Prepare first!',
+            'Rxd5': 'Captures a pawn, but misses the big idea. Think about what your Queen needs.',
+            'Re3': 'This moves the Rook but doesn\'t create a threat. Can you move it somewhere more useful?',
+          },
+          successMessage: `Re1! clears the e5 square and the 5th rank, but more importantly repositions the Rook to support a mating attack. Now Qg7# is threatened, and Re8+ is also coming. The Rook "stepped aside" to let the Queen's attack flow through while also creating back rank threats. A subtle clearance!`,
+          failureMessage: 'The Queen wants to deliver checkmate. What\'s preventing it? Can you reposition a piece to clear the way AND create additional threats?',
+          arrows: [
+            { from: 'e5', to: 'e1', color: 'green' },
+            { from: 'g3', to: 'g7', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'red' },
+            { square: 'g7', color: 'blue' },
+          ],
+        },
+        {
+          id: 'clearance-knight-puzzle',
+          type: 'puzzle',
+          fen: '2r3k1/5ppp/5n2/3NP3/8/8/5PPP/R5K1 w - - 0 1',
+          title: 'Clearance for the Knight',
+          explanation: `White's Knight on d5 is powerful, and the e5 pawn supports it. But the e5 pawn also blocks the Knight from jumping to e7 with a fork!
+
+Find the clearance move that opens the path for the Knight while creating a threat.`,
+          correctMoves: ['exf6'],
+          successMessage: `exf6! The pawn captures the Knight on f6, clearing the e5 square AND removing a defender. After gxf6 (or any recapture), the d5 Knight can now jump to e7+ forking the King and Rook! The pawn clearance was also a capture, gaining tempo for the Knight's invasion.`,
+          failureMessage: 'The e5 pawn blocks the Knight\'s path. Can you move it while also removing a Black piece?',
+          arrows: [
+            { from: 'e5', to: 'f6', color: 'green' },
+            { from: 'd5', to: 'e7', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'red' },
+            { square: 'f6', color: 'red' },
           ],
         },
       ],

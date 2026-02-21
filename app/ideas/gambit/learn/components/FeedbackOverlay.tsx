@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 interface FeedbackOverlayProps {
   type: 'correct' | 'incorrect' | 'hint' | 'complete';
@@ -20,6 +20,11 @@ const FeedbackOverlay: React.FC<FeedbackOverlayProps> = ({
   const [isVisible, setIsVisible] = useState(true);
   const [isModernTheme, setIsModernTheme] = useState(false);
 
+  const handleDismiss = useCallback(() => {
+    setIsVisible(false);
+    setTimeout(() => onDismiss?.(), 200);
+  }, [onDismiss]);
+
   useEffect(() => {
     const checkTheme = () => {
       setIsModernTheme(document.body.classList.contains('theme-modern'));
@@ -29,6 +34,17 @@ const FeedbackOverlay: React.FC<FeedbackOverlayProps> = ({
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
     return () => observer.disconnect();
   }, []);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleDismiss();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleDismiss]);
 
   useEffect(() => {
     if (autoDismiss) {
@@ -88,15 +104,16 @@ const FeedbackOverlay: React.FC<FeedbackOverlayProps> = ({
 
   return (
     <div
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="feedback-title"
       className={`
         absolute inset-0 flex items-center justify-center z-50
         transition-opacity duration-200
         ${isVisible ? 'opacity-100' : 'opacity-0'}
       `}
-      onClick={() => {
-        setIsVisible(false);
-        setTimeout(() => onDismiss?.(), 200);
-      }}
+      style={{ overscrollBehavior: 'contain' }}
+      onClick={handleDismiss}
     >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/40" />
@@ -119,7 +136,7 @@ const FeedbackOverlay: React.FC<FeedbackOverlayProps> = ({
 
           {/* Content */}
           <div>
-            <h3 className={`font-bold text-lg ${config.textClass}`}>
+            <h3 id="feedback-title" className={`font-bold text-lg ${config.textClass}`}>
               {config.title}
             </h3>
             {displayMessage && (

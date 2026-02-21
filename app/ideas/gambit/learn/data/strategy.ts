@@ -20,7 +20,7 @@ export const strategyCourse: Course = {
           type: 'explanation',
           fen: 'r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4',
           title: 'Why Plans Matter',
-          explanation: `Chess without a plan is like driving without a destination—you might move, but you won't get anywhere meaningful.
+          explanation: `Chess without a plan is like driving without a destination—you might move, but you won't get anywhere meaningful. The concept of strategic planning in chess was revolutionized by Wilhelm Steinitz in the 1880s, who replaced the Romantic era's "attack at all costs" with systematic evaluation and long-term plans.
 
 **A plan gives you:**
 - **Direction and purpose** for every move
@@ -275,7 +275,7 @@ Before each move in your games, ask: "What's my plan? Does this move fit it?" Th
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 7',
           title: 'Think for Your Opponent',
-          explanation: `**Prophylaxis** (from Greek: "to guard against") is one of the most powerful concepts in chess. It means **preventing your opponent's plans** before they become dangerous.
+          explanation: `**Prophylaxis** (from Greek: "to guard against") is one of the most powerful concepts in chess. The term was coined by Aron Nimzowitsch and later perfected by Tigran Petrosian, the 9th World Champion (1963-1969), who was nicknamed "Iron Tigran" for his impenetrable defensive style. It means **preventing your opponent's plans** before they become dangerous.
 
 **The prophylactic mindset:**
 - What would my opponent play if it were their turn?
@@ -510,7 +510,7 @@ In every position, BEFORE planning your own moves, spend 30 seconds as your oppo
           type: 'explanation',
           fen: 'r1bqkb1r/pp1n1ppp/2p1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq - 0 6',
           title: 'What is a Pawn Break?',
-          explanation: `A **pawn break** is a pawn advance that challenges the enemy pawn structure, typically by capturing or threatening to capture.
+          explanation: `A **pawn break** is a pawn advance that challenges the enemy pawn structure, typically by capturing or threatening to capture. The theory of pawn breaks was developed alongside pawn structure theory by Philidor and Steinitz, with central pawn breaks (d4-d5, e4-e5, c4-c5, f4-f5) recognized as the most important strategic tools.
 
 **Why pawn breaks matter:**
 - **Open lines** for your pieces (rooks especially)
@@ -777,7 +777,7 @@ In each opening you play, learn the **typical pawn breaks** for both sides. This
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 7',
           title: 'The Right Square',
-          explanation: `Every piece has squares where it belongs—and squares where it doesn't. Finding the optimal squares for your pieces is a core strategic skill.
+          explanation: `Every piece has squares where it belongs—and squares where it doesn't. The concept of ideal piece placement was formalized by Steinitz's theory of accumulating small advantages, and Capablanca later refined this into his famous technique of placing every piece on its best square. Finding the optimal squares for your pieces is a core strategic skill.
 
 **Questions to ask about each piece:**
 
@@ -1084,7 +1084,7 @@ Five well-coordinated pieces beat five scattered ones every time.
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 7',
           title: 'The Exchange Decision',
-          explanation: `Every exchange changes the position. The question isn't "are these pieces equal value?" but **"who benefits from this trade?"**
+          explanation: `Every exchange changes the position. Exchange strategy was elevated to an art form by Jose Raul Capablanca, who would simplify positions to exploit tiny advantages, and Anatoly Karpov later became the modern master of exchanges. The question isn't "are these pieces equal value?" but **"who benefits from this trade?"**
 
 **The strategic exchange:**
 - Changes the character of the position
@@ -1344,7 +1344,7 @@ Before every trade, ask:
           type: 'explanation',
           fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1',
           title: 'Pawn Structure Dictates Strategy',
-          explanation: `The pawn structure is the **skeleton** of the chess position. It determines:
+          explanation: `The pawn structure is the **skeleton** of the chess position. The study of typical pawn structures as a basis for middlegame planning was pioneered by the Botvinnik school, and Andrew Soltis's book "Pawn Structure Chess" (1976) was influential in popularizing this approach. It determines:
 - Where pieces belong
 - What plans make sense
 - Which side of the board to play on
@@ -2268,6 +2268,239 @@ Intuition isn't magic—it's accumulated experience. The more quality chess you 
 *"Chess is 99% tactics... but the 1% of strategy tells you where to look for tactics!"*
 
 Keep studying, keep playing, and your strategic understanding will grow!`,
+        },
+      ],
+    },
+    {
+      id: 'tempo-and-time',
+      title: 'Tempo and Time',
+      description: 'Understanding how every move counts in chess',
+      difficulty: 'intermediate',
+      estimatedMinutes: 15,
+      tags: ['tempo', 'time', 'opening', 'strategy'],
+      steps: [
+        {
+          id: 'intro',
+          type: 'explanation',
+          fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
+          title: 'What Is a Tempo?',
+          explanation: `**"Tempo"** comes from the Italian and Latin word meaning **"time."** In chess, it entered widespread usage in the 19th century through the **German chess school** — theorists like **Siegbert Tarrasch** and later **Aaron Nimzowitsch** made it a central concept of chess strategy.
+
+**A tempo is one unit of time — one move.** Since chess is a game of alternating moves, every single move matters. Gaining a tempo means effectively getting an "extra" move; losing a tempo means wasting one.
+
+**Why tempi matter:**
+- In the **opening**, developing a piece in one move is better than two — you're a tempo ahead
+- In the **middlegame**, attacking with tempo (forcing responses) maintains initiative
+- In the **endgame**, a single tempo can decide whether a pawn promotes or not
+
+**Gaining tempo** means making a useful move that also forces your opponent to waste a move (usually by creating a threat).
+
+**Losing tempo** means making a move that doesn't accomplish anything new — like moving a piece to a square, then back, then to the same square again.
+
+After 1.e4, White has used one tempo to control the center and open lines for the bishop and queen. Black must now respond efficiently to avoid falling behind in development.`,
+          highlights: [
+            { square: 'e4', color: 'green' },
+            { square: 'f1', color: 'yellow' },
+            { square: 'd1', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'gaining-tempo-threats',
+          type: 'explanation',
+          fen: 'r1bqkbnr/pppppppp/2n5/1B6/4P3/8/PPPP1PPP/RNBQK1NR b KQkq - 3 2',
+          title: 'Gaining Tempo with Threats',
+          explanation: `The most common way to gain a tempo is to **develop a piece with a threat**. The opponent must respond to the threat, giving you time to continue your plan.
+
+**Classic example: The Ruy Lopez**
+After 1.e4 e5 2.Nf3 Nc6 3.Bb5 — White develops the bishop AND threatens the knight on c6 (which defends e5). This is development with tempo!
+
+Black must respond to the threat:
+- 3...a6 (challenging the bishop — but this is a pawn move, not development)
+- 3...Nf6 (counterattacking e4 — developing with tempo!)
+- 3...d6 (passive but solid)
+
+**Notice:** White's Bb5 accomplished two things at once — development AND a threat. This is the essence of tempo play.
+
+**Key principles for gaining tempo:**
+1. **Develop with threats** — attack something while improving your pieces
+2. **Force retreats** — make the opponent move a piece twice
+3. **Create multiple threats** — the opponent can only answer one per move
+4. **Counterattack** — instead of defending, create a bigger threat
+
+**Tarrasch wrote:** *"One piece developed is better than ten pieces not developed."* Every tempo spent developing brings you closer to a strong position.`,
+          arrows: [
+            { from: 'b5', to: 'c6', color: 'yellow' },
+            { from: 'c6', to: 'e5', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'b5', color: 'green' },
+            { square: 'c6', color: 'red' },
+          ],
+        },
+        {
+          id: 'gaining-tempo-practice',
+          type: 'interactive',
+          fen: 'r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4',
+          title: 'Develop with Tempo',
+          explanation: `This is the Ruy Lopez after 1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6. White has developed efficiently. Now White wants to castle and continue development.
+
+**Your task:** Find the move that develops White's position while maintaining pressure. What is the most natural developing move that also prepares for the middlegame?
+
+Think about what White should prioritize: king safety, central control, and piece coordination.`,
+          correctMoves: ['O-O'],
+          successMessage: `**Correct!** Castling (O-O) is the best move — it's arguably the most efficient tempo in chess! In one move, you: (1) bring the king to safety, (2) activate the rook by connecting it to the center, and (3) complete kingside development. White is now ready to play d3 or d4 with a strong position. Castling is a "free" developing move that accomplishes multiple goals!`,
+          failureMessage: 'Think about king safety. White has developed the knight and bishop — what is the most efficient next step that improves the position while keeping up the pace of development?',
+          highlights: [
+            { square: 'e1', color: 'yellow' },
+            { square: 'g1', color: 'green' },
+          ],
+          arrows: [
+            { from: 'e1', to: 'g1', color: 'green' },
+          ],
+        },
+        {
+          id: 'losing-tempo',
+          type: 'explanation',
+          fen: 'r1bqkb1r/pppppppp/2n2n2/8/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 2 3',
+          title: 'Losing Tempo: The Cost of Wasted Moves',
+          explanation: `Just as gaining tempi is powerful, **losing tempi** can be devastating, especially in the opening.
+
+**Common ways to lose tempo:**
+1. **Moving a piece twice** before finishing development
+   - Playing Nf3, then Nd2, then Nf3 again = 2 wasted tempi
+2. **Making unnecessary pawn moves** instead of developing
+   - h3 "just in case" wastes a tempo if there's no real threat
+3. **Chasing pieces that can retreat efficiently**
+   - Spending 3 moves to chase a bishop that just goes back to safety
+4. **Undoing your own moves**
+   - Play d4, then d3 (impossible), or developing a piece then retreating it
+
+**The "two-tempo rule" in openings:**
+Being two tempi behind in the opening is roughly equivalent to being a pawn down. This is why gambits work — sacrificing a pawn for 2-3 tempi of development can give a winning attack.
+
+**Example:** If White plays 1.e4, 2.d4, 3.Nf3, 4.Bc4 — four developing moves. If Black plays 1...a6, 2...b6, 3...h6, 4...g6 — four pawn moves with zero pieces developed. White has a massive lead in development (tempo advantage) and can launch a devastating attack.
+
+**Morphy's genius:** Paul Morphy (1837-1884) was perhaps the first player to truly understand tempo. He consistently sacrificed material to gain development time, launching attacks before opponents could catch up.`,
+          highlights: [
+            { square: 'd4', color: 'green' },
+            { square: 'e4', color: 'green' },
+          ],
+          arrows: [
+            { from: 'g1', to: 'f3', color: 'green' },
+            { from: 'f1', to: 'c4', color: 'green' },
+          ],
+        },
+        {
+          id: 'fast-vs-slow',
+          type: 'explanation',
+          fen: 'r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4',
+          title: 'When to Play Fast vs Slow',
+          explanation: `Not every position requires rapid tempo play. Knowing **when to rush** and **when to slow down** is a critical strategic skill.
+
+**Play FAST (maximize tempo) when:**
+- You have a **lead in development** — attack before they catch up!
+- The **center is open** — pieces can quickly reach active squares
+- The opponent's **king is uncastled** — every tempo brings you closer to a mating attack
+- You've sacrificed material — you need compensation NOW before they consolidate
+
+**Play SLOW (don't worry about tempo) when:**
+- The **position is closed** — pawns block the center, so development lead matters less
+- You need to **reorganize** — sometimes retreating a piece to a better square is worth a tempo
+- Both sides are **fully developed** — tempo matters less when everyone's out
+- You're playing for a **long-term advantage** — positional edges don't expire
+
+**The Italian Game example (shown):**
+After 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 — both sides have developed equally. Now White can play either:
+- **d3** (slow, solid) — preparing to develop calmly
+- **d4** (fast, aggressive) — opening the center immediately
+
+Neither is "wrong" — it depends on your style and the specific position. But understanding WHY you choose fast or slow play is what separates good players from great ones.`,
+          highlights: [
+            { square: 'c4', color: 'green' },
+            { square: 'c5', color: 'red' },
+            { square: 'f3', color: 'green' },
+            { square: 'f6', color: 'red' },
+          ],
+          arrows: [
+            { from: 'd2', to: 'd4', color: 'green' },
+            { from: 'd2', to: 'd3', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'critical-tempo',
+          type: 'explanation',
+          fen: '5k2/8/5K2/5P2/8/8/8/8 w - - 0 1',
+          title: 'When One Tempo Decides Everything',
+          explanation: `In the endgame, **a single tempo** can be the difference between winning and drawing. This is where the concept of tempo reaches its purest form.
+
+**In this position:**
+- White has king on f6 and pawn on f5
+- Black has king on f8
+- **If White moves:** f7 is stalemate! (Ke6 allows Ke8 with a draw)
+- White needs to find a way to advance without stalemate
+
+This shows that even with an overwhelming advantage, the wrong tempo can throw everything away.
+
+**Other endgame tempo examples:**
+1. **King opposition** — the player NOT on move has the opposition and controls the position
+2. **Pawn races** — one tempo faster = your pawn queens first
+3. **Triangulation** — using 3 king moves to "lose" a tempo and put the opponent in zugzwang
+
+**The deeper lesson:**
+Tempo is not just an opening concept — it permeates every phase of chess. In the opening, it's about development speed. In the middlegame, it's about initiative. In the endgame, it's about precise timing.
+
+**As the great Mikhail Tal said:** *"You must take your opponent into a deep dark forest where 2+2=5, and the path leading out is only wide enough for one."* Tempo is how you get there — move by move, threat by threat, you build an irresistible advantage.`,
+          highlights: [
+            { square: 'f5', color: 'green' },
+            { square: 'f6', color: 'blue' },
+            { square: 'f8', color: 'red' },
+          ],
+          arrows: [
+            { from: 'f5', to: 'f6', color: 'red' },
+          ],
+        },
+        {
+          id: 'tempo-puzzle',
+          type: 'puzzle',
+          fen: 'rnbqk2r/pppp1ppp/5n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 5 4',
+          title: 'Find the Tempo Move!',
+          explanation: `Black has just seen White castle kingside. Black has the bishop on c5 and knight on f6 developed, but hasn't castled yet.
+
+**Your task:** Find the move that develops Black's position with tempo — making a threat while improving a piece. Look for a move that attacks something while advancing Black's development.
+
+Remember: the best moves accomplish TWO things at once!`,
+          correctMoves: ['d5'],
+          successMessage: `**Excellent!** d5 is a powerful tempo move! It strikes at the center immediately, attacking White's e4 pawn AND opening the diagonal for Black's c8-bishop — all in one move. White must respond to the central tension (exd5, e5, or defend), giving Black time to continue developing. This is a classic example of playing in the center with tempo: you improve your position while forcing your opponent to react.`,
+          failureMessage: 'Look for a move that creates a central threat while also improving Black\'s position. Which pawn move attacks White\'s center and opens lines for Black\'s pieces?',
+          highlights: [
+            { square: 'e4', color: 'red' },
+            { square: 'c5', color: 'blue' },
+          ],
+          arrows: [
+            { from: 'd7', to: 'd5', color: 'green' },
+            { from: 'd5', to: 'e4', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'tempo-endgame-puzzle',
+          type: 'puzzle',
+          fen: '8/8/8/8/3k4/8/3KP3/8 w - - 0 1',
+          title: 'Win the Tempo Race',
+          explanation: `In this pawn endgame, tempo is everything. White has a pawn on e2 and king on d2. Black's king is on d4, directly in front of the pawn.
+
+White needs to advance the pawn, but the black king is blocking. Find the move that **gains a crucial tempo** by using triangulation or a waiting move to put Black in zugzwang (forced to move to a worse square).
+
+Think about how to "lose" a move so that Black must step aside!`,
+          correctMoves: ['Ke1'],
+          successMessage: `**Perfect tempo play!** Ke1 is the key triangulation move. White "wastes" a tempo by going Ke1, then after Black must move (say ...Kd5), White plays Kd3 and has gained the critical tempo. Now after ...Kd6, White plays e4 and the pawn advances. This is the purest form of tempo in chess — winning by understanding who needs to move when.`,
+          failureMessage: 'Direct approaches don\'t work because Black\'s king blocks. Think about triangulation — can you make a king move that forces Black to give ground?',
+          highlights: [
+            { square: 'e2', color: 'green' },
+            { square: 'd4', color: 'red' },
+          ],
+          arrows: [
+            { from: 'd2', to: 'e1', color: 'green' },
+          ],
         },
       ],
     },

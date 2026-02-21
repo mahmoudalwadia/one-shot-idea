@@ -127,7 +127,7 @@ const LearnMode: React.FC<LearnModeProps> = ({ onBack, urlCourse, urlLesson, onU
   if (!isLoaded) {
     return (
       <div className="h-full flex items-center justify-center">
-        <div className="text-[var(--term-main)] animate-pulse">Loading...</div>
+        <div className="text-[var(--term-main)] motion-safe:animate-pulse">Loading…</div>
       </div>
     );
   }

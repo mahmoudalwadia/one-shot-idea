@@ -50,10 +50,12 @@ const TimeSelector: React.FC<TimeSelectorProps> = ({ onStartGame }) => {
                             <button
                                 key={tc.id}
                                 onClick={() => setSelectedId(tc.id)}
+                                aria-pressed={isSelected}
                                 className={`
-                                    py-3 px-2 text-center border transition-all duration-200 font-mono font-bold text-sm
-                                    ${isSelected 
-                                        ? 'bg-[var(--term-main)] text-[var(--term-bg)] border-[var(--term-main)] shadow-[0_0_8px_rgba(var(--term-main-rgb),0.5)] scale-[1.02]' 
+                                    py-3 px-2 text-center border transition-all duration-200 font-mono font-bold text-sm cursor-pointer
+                                    focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-offset-2 focus:ring-offset-[var(--term-bg)]
+                                    ${isSelected
+                                        ? 'bg-[var(--term-main)] text-[var(--term-bg)] border-[var(--term-main)] shadow-[0_0_8px_rgba(var(--term-main-rgb),0.5)] scale-[1.02]'
                                         : 'bg-[var(--term-bg)] text-[var(--term-dim)] border-[var(--term-dim)] hover:border-[var(--term-main)] hover:text-[var(--term-main)]'
                                     }
                                 `}
@@ -73,22 +75,22 @@ const TimeSelector: React.FC<TimeSelectorProps> = ({ onStartGame }) => {
     };
 
     return (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" style={{ overscrollBehavior: 'contain' }}>
             <div className="w-full max-w-md bg-[var(--term-bg)] border-2 border-[var(--term-main)] shadow-[0_0_20px_rgba(var(--term-main-rgb),0.3)] p-6 flex flex-col max-h-[90vh] overflow-y-auto">
                 <h2 className="text-2xl text-[var(--term-main)] mb-6 text-center uppercase tracking-widest terminal-text-shadow border-b-2 border-[var(--term-main)] pb-2">
                     Select Time Control
                 </h2>
                 
-                {renderCategory('Bullet', <Rocket size={14} />)}
-                {renderCategory('Blitz', <Zap size={14} />)}
-                {renderCategory('Rapid', <Clock size={14} />)}
-                {renderCategory('Unlimited', <InfinityIcon size={14} />)}
+                {renderCategory('Bullet', <Rocket size={14} aria-hidden="true" />)}
+                {renderCategory('Blitz', <Zap size={14} aria-hidden="true" />)}
+                {renderCategory('Rapid', <Clock size={14} aria-hidden="true" />)}
+                {renderCategory('Unlimited', <InfinityIcon size={14} aria-hidden="true" />)}
 
-                <button 
+                <button
                     onClick={handleStart}
-                    className="mt-6 w-full py-4 bg-[var(--term-main)] text-[var(--term-bg)] font-bold text-xl uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(var(--term-main-rgb),0.4)]"
+                    className="mt-6 w-full py-4 bg-[var(--term-main)] text-[var(--term-bg)] font-bold text-xl uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(var(--term-main-rgb),0.4)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-offset-2 focus:ring-offset-[var(--term-bg)]"
                 >
-                    <Play size={24} fill="currentColor" /> Start Game
+                    <Play size={24} fill="currentColor" aria-hidden="true" /> Start Game
                 </button>
             </div>
         </div>

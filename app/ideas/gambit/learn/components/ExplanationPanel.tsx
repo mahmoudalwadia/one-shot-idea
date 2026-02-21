@@ -94,7 +94,14 @@ const ExplanationPanel: React.FC<ExplanationPanelProps> = ({
       </div>
 
       {/* Progress Bar */}
-      <div className={`h-1 ${isModernTheme ? 'bg-[#3d3a37]' : 'bg-[var(--term-dim)]'}`}>
+      <div
+        role="progressbar"
+        aria-valuenow={currentStepIndex + 1}
+        aria-valuemin={1}
+        aria-valuemax={totalSteps}
+        aria-label={`Step ${currentStepIndex + 1} of ${totalSteps}`}
+        className={`h-1 ${isModernTheme ? 'bg-[#3d3a37]' : 'bg-[var(--term-dim)]'}`}
+      >
         <div
           className={`h-full transition-all duration-300 ${isModernTheme ? 'bg-[#81b64c]' : 'bg-[var(--term-main)]'}`}
           style={{ width: `${((currentStepIndex + 1) / totalSteps) * 100}%` }}
@@ -176,13 +183,13 @@ const ExplanationPanel: React.FC<ExplanationPanelProps> = ({
         {(step.type === 'interactive' || step.type === 'puzzle') && !isComplete && (
           <div className="flex gap-2 justify-center mb-2">
             {showHintButton && onHint && (
-              <button onClick={onHint} className={secondaryButtonClass}>
-                💡 Hint
+              <button onClick={onHint} className={`${secondaryButtonClass} focus:outline-none focus:ring-2 focus:ring-offset-2 ${isModernTheme ? 'focus:ring-[#81b64c] focus:ring-offset-[#262421]' : 'focus:ring-[var(--term-main)] focus:ring-offset-[var(--term-bg)]'}`}>
+                <span aria-hidden="true">💡</span> Hint
               </button>
             )}
             {showAnswerButton && onShowAnswer && (
-              <button onClick={onShowAnswer} className={secondaryButtonClass}>
-                👁 Show Answer
+              <button onClick={onShowAnswer} className={`${secondaryButtonClass} focus:outline-none focus:ring-2 focus:ring-offset-2 ${isModernTheme ? 'focus:ring-[#81b64c] focus:ring-offset-[#262421]' : 'focus:ring-[var(--term-main)] focus:ring-offset-[var(--term-bg)]'}`}>
+                <span aria-hidden="true">👁</span> Show Answer
               </button>
             )}
           </div>
@@ -193,7 +200,7 @@ const ExplanationPanel: React.FC<ExplanationPanelProps> = ({
           <button
             onClick={onPrevious}
             disabled={currentStepIndex === 0}
-            className={buttonClass}
+            className={`${buttonClass} focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${isModernTheme ? 'focus-visible:ring-[#81b64c] focus-visible:ring-offset-[#262421]' : 'focus-visible:ring-[var(--term-main)] focus-visible:ring-offset-[var(--term-bg)]'}`}
           >
             ← Previous
           </button>
@@ -202,7 +209,7 @@ const ExplanationPanel: React.FC<ExplanationPanelProps> = ({
             <button
               onClick={onNext}
               disabled={currentStepIndex === totalSteps - 1 && !isComplete}
-              className={buttonClass}
+              className={`${buttonClass} focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${isModernTheme ? 'focus-visible:ring-[#81b64c] focus-visible:ring-offset-[#262421]' : 'focus-visible:ring-[var(--term-main)] focus-visible:ring-offset-[var(--term-bg)]'}`}
             >
               {currentStepIndex === totalSteps - 1 ? 'Finish →' : 'Next →'}
             </button>

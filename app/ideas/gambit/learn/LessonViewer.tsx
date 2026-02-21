@@ -209,7 +209,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
       <div className={`md:hidden sticky top-0 z-30 px-3 py-1.5 flex justify-between items-center ${isModernTheme ? 'bg-[#262421] border-b border-[#3d3a37]' : 'bg-[var(--term-bg)] border-b border-[var(--term-dim)]'}`}>
         <button
           onClick={onExit}
-          className={`text-xs py-1 px-2 rounded cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'}`}
+          className={`text-xs py-1 px-2 rounded cursor-pointer focus:outline-none focus-visible:ring-2 ${isModernTheme ? 'text-[#8b8987] hover:text-white focus-visible:ring-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)] focus-visible:ring-[var(--term-main)]'}`}
         >
           ← Exit
         </button>
@@ -257,7 +257,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
             <div className={`hidden lg:flex px-4 py-2 justify-end ${isModernTheme ? 'border-b border-[#3d3a37]' : 'border-b border-[var(--term-dim)]'}`}>
               <button
                 onClick={onExit}
-                className={`text-sm cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'}`}
+                className={`text-sm cursor-pointer focus:outline-none focus-visible:ring-2 ${isModernTheme ? 'text-[#8b8987] hover:text-white focus-visible:ring-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)] focus-visible:ring-[var(--term-main)]'}`}
               >
                 ✕ Exit Lesson
               </button>
@@ -316,10 +316,10 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
             <button
               onClick={onExit}
               className={`
-                px-6 py-2 font-bold rounded cursor-pointer
+                px-6 py-2 font-bold rounded cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
                 ${isModernTheme
-                  ? 'bg-[#81b64c] text-white hover:bg-[#9ac964]'
-                  : 'border-2 border-[var(--term-main)] text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)]'
+                  ? 'bg-[#81b64c] text-white hover:bg-[#9ac964] focus-visible:ring-[#81b64c] focus-visible:ring-offset-[#312e2b]'
+                  : 'border-2 border-[var(--term-main)] text-[var(--term-main)] hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] focus-visible:ring-[var(--term-main)] focus-visible:ring-offset-[var(--term-bg)]'
                 }
               `}
             >

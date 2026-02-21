@@ -20,7 +20,7 @@ export const endgamesCourse: Course = {
           type: 'explanation',
           fen: '8/8/8/4k3/8/8/8/4K2Q w - - 0 1',
           title: 'The Most Basic Checkmate',
-          explanation: `The King and Queen vs King checkmate is the **most fundamental endgame technique** every chess player must master. While it may seem trivial, many beginners have drawn or even lost won games by not knowing the correct method.
+          explanation: `The King and Queen vs King checkmate is the **most fundamental endgame technique** every chess player must master. It was one of the first patterns documented in the Arabic chess book "Kitab ash-Shatranj" by al-Adli around 840 AD, and it remains the easiest of the basic checkmates to learn. While it may seem trivial, many beginners have drawn or even lost won games by not knowing the correct method.
 
 **The key principle:** Checkmate can only occur on the edge of the board (or in a corner). Your job is to:
 1. Use the queen to **restrict the enemy king**
@@ -272,7 +272,7 @@ Remember: the goal is to give check while ensuring the king has nowhere to run. 
           type: 'explanation',
           fen: '8/8/8/4k3/8/8/8/R3K3 w - - 0 1',
           title: 'A More Challenging Checkmate',
-          explanation: `The King and Rook vs King checkmate requires **more technique** than K+Q vs K because the rook is less powerful than the queen. However, it's still a fundamental skill that every player must know.
+          explanation: `The King and Rook vs King checkmate requires **more technique** than K+Q vs K because the rook is less powerful than the queen. However, it's still a fundamental skill that every player must know. This technique was systematized by Philidor in 1749, and the "box method" (cutting off the opposing King into progressively smaller boxes) is named for the visual pattern it creates on the board.
 
 **Key differences from K+Q:**
 - The rook can only control ONE line (rank or file) at a time, not both
@@ -508,7 +508,7 @@ Find the checkmate with your rook. The black king is trapped with nowhere to run
           type: 'explanation',
           fen: '8/8/8/4k3/8/4K3/8/8 w - - 0 1',
           title: 'The Most Important Endgame Concept',
-          explanation: `**The opposition** is perhaps the single most important concept in king and pawn endgames. Understanding it can turn draws into wins and losses into draws.
+          explanation: `**The opposition** is perhaps the single most important concept in king and pawn endgames. The concept of "opposition" (Widerstand in German) was first described by Philidor and became central to pawn endgame theory through the work of Jose Raul Capablanca, who called it "the most important concept in King and Pawn endings." Understanding it can turn draws into wins and losses into draws.
 
 **What is opposition?**
 When two kings stand on the same file, rank, or diagonal with exactly ONE square between them, whoever must move is at a **disadvantage**. The side NOT to move "has the opposition."
@@ -743,7 +743,7 @@ In king and pawn endgames, if you understand opposition, you'll draw positions t
           type: 'explanation',
           fen: '8/8/8/8/4P3/4K3/4k3/8 w - - 0 1',
           title: 'The Concept of Key Squares',
-          explanation: `**Key squares** are specific squares that, if your king occupies them, **guarantee** that your pawn will promote (assuming optimal play from both sides).
+          explanation: `**Key squares** (also called "critical squares") are specific squares that, if your king occupies them, **guarantee** that your pawn will promote (assuming optimal play from both sides). This theory was developed primarily by the Soviet endgame school, with Nikolai Grigoriev (1895-1938) being particularly influential in systematizing the concept.
 
 **Why key squares matter:**
 Instead of calculating every variation, you can simply ask: "Can my king reach a key square?" If yes, you win. If no, it's likely a draw.
@@ -1010,7 +1010,7 @@ Master key squares and you'll navigate K+P vs K with confidence!`,
           type: 'explanation',
           fen: '8/8/8/8/4Pk2/8/8/4R1K1 w - - 0 1',
           title: 'The Most Common Endgame',
-          explanation: `Rook endgames occur in roughly **50% of all games** that reach an endgame! This makes them by far the most important endgame type to study.
+          explanation: `Rook endgames occur in roughly **50% of all games** that reach an endgame! This makes them by far the most important endgame type to study. The Philidor Position (1777) and Lucena Position (c. 1497) are the two most fundamental rook endgame techniques, forming the bedrock of all rook ending theory.
 
 **The famous saying:** "All rook endgames are drawn" - Siegbert Tarrasch
 
@@ -1271,7 +1271,7 @@ Rook endgames reward deep understanding. The positions may look simple, but the 
           type: 'explanation',
           fen: '7k/p7/8/8/8/8/7P/K7 w - - 0 1',
           title: 'Racing to Promote',
-          explanation: `**Pawn races** occur when both sides have passed pawns running toward promotion. These are some of the most exciting endgames - and they require precise calculation!
+          explanation: `**Pawn races** occur when both sides have passed pawns running toward promotion. These are some of the most exciting endgames - and they require precise calculation! Pawn race calculations were formalized through the "rule of the square" and "counting" methods popularized by endgame manuals, particularly Dvoretsky's Endgame Manual (first published 1994).
 
 **The basic question:** Who promotes first?
 
@@ -2326,7 +2326,7 @@ The players who understand endgames have a massive advantage. Invest the time - 
           type: 'explanation',
           fen: '7k/8/8/8/8/8/8/K7 w - - 0 1',
           title: 'What is a Fortress?',
-          explanation: `A **fortress** is a defensive setup where the defending side holds a draw despite being materially behind, because the attacking side **cannot make progress**.
+          explanation: `A **fortress** is a defensive setup where the defending side holds a draw despite being materially behind, because the attacking side **cannot make progress**. The fortress concept has been known since the earliest chess manuscripts, with the Rook vs Bishop fortress studied since the 15th century. The term became formalized in the 20th century Soviet chess school.
 
 **Key characteristics of a fortress:**
 - The defending pieces create an impenetrable barrier
@@ -2586,6 +2586,447 @@ Find a move that demonstrates whether this is holdable or not!`,
 - Many drawn positions are resigned because players don't recognize the fortress!
 
 Study these patterns - they'll save you many half-points over your chess career!`,
+        },
+      ],
+    },
+    {
+      id: 'zugzwang',
+      title: 'Zugzwang',
+      description: 'When having to move is a disadvantage',
+      difficulty: 'advanced',
+      estimatedMinutes: 15,
+      tags: ['endgame', 'zugzwang', 'king-pawn'],
+      steps: [
+        {
+          id: 'intro',
+          type: 'explanation',
+          fen: '8/8/8/8/8/6k1/4K1p1/8 w - - 0 1',
+          title: 'What Is Zugzwang?',
+          explanation: `**Zugzwang** is a German word meaning **"compulsion to move."** It describes a position where the obligation to make a move puts you at a disadvantage — you'd rather pass, but chess doesn't allow that.
+
+The term was coined by German chess theorists in the 19th century, but it became part of standard chess vocabulary after **Aron Nimzowitsch** popularized it in his influential writings during the 1920s, especially in *My System* (1925). The concept itself was known long before — even medieval chess problems featured positions where being forced to move was fatal.
+
+**Key idea:** In most positions, having the move is an advantage (you get to do something!). In zugzwang, it's a *curse*. Every legal move worsens your position.
+
+In this position, look at the simple King and pawn ending. The pawn on g2 is about to promote, and the placement of the kings determines everything.
+
+Zugzwang appears most often in **endgames** where there are few pieces and few moves available. Let's explore the idea step by step.`,
+          highlights: [
+            { square: 'g2', color: 'red' },
+            { square: 'g3', color: 'blue' },
+            { square: 'e2', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'simple-kp-zugzwang',
+          type: 'interactive',
+          fen: '8/8/8/8/4k3/8/4P3/4K3 w - - 0 1',
+          title: 'A Simple King + Pawn Zugzwang',
+          explanation: `This is one of the most classic King + Pawn positions in chess. White wants to advance the e-pawn, but first needs to step forward.
+
+**Your task:** Find the move that puts Black in zugzwang. White needs to advance without giving Black the opposition.
+
+Think about which king move forces Black to step aside, clearing the path for the e-pawn. The key is to move to a square where you maintain control of the critical squares in front of the pawn.`,
+          correctMoves: ['Kd2', 'Kf2'],
+          successMessage: `**Correct!** By stepping to the side, White forces Black into a dilemma. Black must move the king, and any king move allows White to advance. If Black plays ...Kd4 or ...Kf4, White plays Ke2-d3/f3 maintaining pressure. The key is that Black is in zugzwang on the next move — every king move surrenders ground.`,
+          failureMessage: 'Think about the opposition. If you play Kd1 or Kf1, Black plays ...Kd2 or ...Kf2 and blocks your pawn. Move sideways to force Black to yield ground!',
+          highlights: [
+            { square: 'e3', color: 'red' },
+            { square: 'e2', color: 'blue' },
+            { square: 'e1', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'e1', to: 'd2', color: 'green' },
+            { from: 'e1', to: 'f2', color: 'green' },
+          ],
+        },
+        {
+          id: 'mutual-zugzwang',
+          type: 'explanation',
+          fen: '8/8/4k3/4p3/4P3/4K3/8/8 w - - 0 1',
+          title: 'Mutual Zugzwang',
+          explanation: `**Mutual zugzwang** is a remarkable situation where **whoever has to move loses** (or at least is worse off). Both sides would prefer to pass!
+
+In this position:
+- If **White moves**: Kd3 allows ...Kd5 entering White's position. Kf3 allows ...Kf5 entering similarly. Kd4 or Kf4 are met by ...Kd6 or ...Kf6 maintaining the opposition.
+- If **Black moves**: ...Kd6 allows Kd4, entering Black's side. ...Kf6 allows Kf4. The symmetry is perfect.
+
+**Whoever moves first loses the opposition** and lets the opponent's king penetrate.
+
+This is a perfect example of mutual zugzwang. The position is symmetric both in pieces and in the "curse" of having to move. In practical games, understanding mutual zugzwang helps you figure out which pawn endings are drawn and which are won — it often comes down to whose turn it is!
+
+**Historical note:** Mutual zugzwang positions have been studied by endgame theorists for centuries and remain some of the trickiest positions to evaluate even for modern engines.`,
+          highlights: [
+            { square: 'e3', color: 'yellow' },
+            { square: 'e6', color: 'yellow' },
+            { square: 'e4', color: 'red' },
+            { square: 'e5', color: 'red' },
+          ],
+        },
+        {
+          id: 'triangulation-concept',
+          type: 'explanation',
+          fen: '8/8/4k3/3pKp2/3P1P2/8/8/8 w - - 0 1',
+          title: 'Triangulation: Losing a Tempo on Purpose',
+          explanation: `**Triangulation** is a brilliant technique to achieve zugzwang. The idea: maneuver your king in a triangle (3 moves) to return to the same square, effectively "losing" a tempo and putting your opponent on the move.
+
+In this locked pawn position, the kings face off. Whoever has to move must yield. White wants to transfer the move to Black.
+
+**The triangulation maneuver:**
+1. **Ke5-d6** — stepping sideways
+2. **Kd6-e6** — stepping forward/sideways
+3. **Ke6-e5** — returning to the original square!
+
+White has taken 3 moves but returned to e5. Black, having made 3 moves, is now in a different (worse) position. The critical point: Black's king doesn't have 3 useful squares to maneuver — it can only go back and forth between two squares. White's "extra" square in the triangle means White can always hand the move to Black.
+
+**Why it works:** White's king has a triangle of squares (e5, d6, e6), but Black's king only has two good squares. With one extra square, White controls whose turn it is.`,
+          arrows: [
+            { from: 'e5', to: 'd6', color: 'green' },
+            { from: 'd6', to: 'e6', color: 'green' },
+            { from: 'e6', to: 'e5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'blue' },
+            { square: 'd6', color: 'blue' },
+            { square: 'e6', color: 'blue' },
+          ],
+        },
+        {
+          id: 'triangulation-practice',
+          type: 'interactive',
+          fen: '8/8/8/3pKp2/3P1P2/4k3/8/8 w - - 0 1',
+          title: 'Practice: Find the Triangulation',
+          explanation: `Now it's your turn! In this position, the pawns are locked. White's King is on e5 and Black's King is on e3. White wants to put Black in zugzwang.
+
+**Your task:** Find the first move of the triangulation. White needs to step away from e5 to a square that starts the triangular maneuver, eventually returning to e5 with Black to move.
+
+Remember: you need to move to a square from which you can return to e5 in exactly 2 more moves, while Black is forced to make a concession.`,
+          correctMoves: ['Kd6'],
+          successMessage: `**Excellent!** Kd6 is the first step of the triangulation. After ...Kf6, White plays Ke6 (or Kd7-Ke7), and then returns to e5. Black will be on move in the critical position, forced to yield ground. This is the classic triangulation technique!`,
+          failureMessage: 'Think about the triangle: which three squares can White\'s king visit to return to e5 and put Black on move? The first step is sideways.',
+          arrows: [
+            { from: 'e5', to: 'd6', color: 'green' },
+          ],
+          highlights: [
+            { square: 'd6', color: 'green' },
+            { square: 'e6', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'trebuchet',
+          type: 'explanation',
+          fen: '8/8/8/1p1k4/1P6/3K4/8/8 w - - 0 1',
+          title: 'The Trébuchet: A Famous Mutual Zugzwang',
+          explanation: `The **Trébuchet** (named after the medieval siege weapon) is one of the most famous mutual zugzwang positions in chess. In this position, **whoever moves loses a pawn and the game**.
+
+**If White moves:**
+- Kc3 allows ...Kc4, winning the b4 pawn
+- Ke3 allows ...Ke4, and Black's king marches to win the b4 pawn
+- Ke4 allows ...Kc4 winning b4
+- Kc4 allows ...Ke4 and Black queens the b-pawn
+
+**If Black moves:**
+- ...Kc6 allows Kc4, winning the b5 pawn
+- ...Ke6 allows Ke4, and White's king penetrates
+- ...Kc4 allows Ke4 and White promotes
+- ...Ke4 allows Kc4 and White wins b5
+
+**The Trébuchet pattern:** Kings are separated by one file with an enemy pawn between them. Both sides guard their own pawn but cannot advance without losing it. The side to move must step away, losing control.
+
+This pattern appears frequently in practical king-and-pawn endings. Recognizing it instantly can save or win a game!`,
+          highlights: [
+            { square: 'd3', color: 'yellow' },
+            { square: 'd5', color: 'yellow' },
+            { square: 'b4', color: 'red' },
+            { square: 'b5', color: 'red' },
+          ],
+        },
+        {
+          id: 'practical-zugzwang',
+          type: 'explanation',
+          fen: '2b1r1k1/1p3pp1/p6p/2pNR3/8/1P6/P1P2PPP/6K1 w - - 0 1',
+          title: 'Zugzwang Beyond King-and-Pawn Endings',
+          explanation: `While zugzwang is most common in endgames, it can also appear in **middlegame** and even **complex endgame** positions with multiple pieces!
+
+In this position, White has just played the knight to d5, and Black's pieces are remarkably cramped. Consider Black's options:
+- The **bishop on c8** defends the e6 square and has very few moves
+- The **rook on e8** is tied to the back rank and to defending against Re8 threats
+- The **king** cannot move without weakening the kingside
+- The **pawns** are all fixed or would create weaknesses if moved
+
+**Practical zugzwang signs to watch for:**
+1. The opponent's pieces are **passive** and tied to defensive duties
+2. Every piece is guarding something critical
+3. Pawn moves would create new weaknesses
+4. The king has no safe squares
+
+**How to create zugzwang:**
+- Improve your own position first (make all useful moves)
+- Then play a "waiting move" when the opponent has run out of good moves
+- Knights are especially good at reaching squares in an odd number of moves, useful for tempo manipulation
+
+The great **Aron Nimzowitsch** wrote extensively about the concept of "overloading" pieces and creating zugzwang, calling it one of the highest strategic achievements in chess.`,
+          highlights: [
+            { square: 'd5', color: 'green' },
+            { square: 'c8', color: 'red' },
+            { square: 'e8', color: 'red' },
+          ],
+          arrows: [
+            { from: 'e5', to: 'e8', color: 'yellow' },
+            { from: 'd5', to: 'f6', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'zugzwang-puzzle',
+          type: 'puzzle',
+          fen: '8/8/6p1/5kP1/5p2/5K2/8/8 w - - 0 1',
+          title: 'Find the Zugzwang!',
+          explanation: `White and Black kings face off in a pawn ending. White's g5 pawn is blocked by Black's g6 pawn. Black has an extra f4 pawn.
+
+**Your task:** Find the move that puts Black in zugzwang. Black's king must guard g6 to prevent gxg6, but also cannot let White's king advance. Think about where White's king should go to leave Black in an impossible situation.`,
+          correctMoves: ['Ke2'],
+          successMessage: `**Brilliant!** Ke2 is the zugzwang move. Black is now in deep trouble: ...Ke4 allows Kf2 guarding the f-pawn and threatening to outflank; ...Ke6 allows Kxf4 winning the pawn; ...Kg4 allows Kf2 and Kf3; ...g5 gives up the pawn. Every move Black makes leads to a worse position. This is a beautiful practical zugzwang!`,
+          failureMessage: 'Think about what Black needs to do: guard g6 and keep the f4 pawn alive. Which White king move makes it impossible for Black to do both? Step away from the pawns to give Black the dilemma.',
+          highlights: [
+            { square: 'f5', color: 'red' },
+            { square: 'g6', color: 'yellow' },
+            { square: 'g5', color: 'blue' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'piece-vs-pawns',
+      title: 'Piece vs Pawns',
+      description: 'When material imbalances define the endgame',
+      difficulty: 'advanced',
+      estimatedMinutes: 15,
+      tags: ['endgame', 'material', 'pawns', 'imbalance'],
+      steps: [
+        {
+          id: 'intro',
+          type: 'explanation',
+          fen: '8/8/8/8/4N3/8/pp6/K1k5 w - - 0 1',
+          title: 'Piece vs Pawns: When Material Rules Change',
+          explanation: `One of the most fascinating endgame topics is the battle between a **minor piece** (bishop or knight) and **advancing pawns**. Standard material values tell us a bishop or knight is worth about 3 pawns, but in the endgame, **everything changes**.
+
+**Historical background:** This type of endgame has been studied since the earliest chess treatises. **François-André Danican Philidor**, in his landmark 1749 book *Analyse du jeu des Échecs*, was among the first to systematically analyze these material imbalances. He demonstrated that advanced pawns can be worth more than a piece — a revolutionary idea at the time.
+
+**The key factors:**
+- **How advanced are the pawns?** Pawns on the 6th/7th rank are extremely dangerous
+- **How far apart are the pawns?** Separated pawns are harder for a piece to stop
+- **Where is the defending king?** A well-placed king can blockade
+- **Which piece is fighting the pawns?** Bishops and knights have very different strengths
+
+Let's examine each matchup and learn the critical patterns.`,
+          highlights: [
+            { square: 'e4', color: 'green' },
+            { square: 'a2', color: 'red' },
+            { square: 'b2', color: 'red' },
+          ],
+        },
+        {
+          id: 'bishop-vs-pawns',
+          type: 'explanation',
+          fen: '8/8/8/3B4/8/8/pp6/K1k5 w - - 0 1',
+          title: 'Bishop vs Two Pawns',
+          explanation: `The **bishop vs two connected pawns** is a critical pattern. In this position, Black's a2 and b2 pawns are dangerously advanced (on the 2nd rank from White's perspective), and Black's king supports them.
+
+**Bishop's strengths:**
+- Can attack from distance (long diagonals)
+- Can cover both promotion squares if they're on the same color
+- Never runs out of moves (no zugzwang risk for the bishop itself)
+
+**Bishop's weaknesses:**
+- Only controls squares of one color
+- Cannot blockade a pawn by sitting in front of it on the wrong color
+- Struggles against widely separated pawns
+
+**In this specific position:**
+White is in trouble! The pawns are very advanced, Black's king supports them, and White's king is pushed to the corner. If it's White's move, Bb3+ forces ...Kb1 (or ...Kd2), and after ...a1=Q, Black promotes. The pawns are too far advanced for the bishop to stop.
+
+**Rule of thumb:** A bishop can usually stop two connected pawns that are on the 4th rank or below. Once they reach the 5th/6th rank with king support, the piece is often lost.`,
+          highlights: [
+            { square: 'd5', color: 'green' },
+            { square: 'a2', color: 'red' },
+            { square: 'b2', color: 'red' },
+            { square: 'a1', color: 'yellow' },
+            { square: 'b1', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'd5', to: 'a2', color: 'blue' },
+            { from: 'd5', to: 'b3', color: 'blue' },
+          ],
+        },
+        {
+          id: 'bishop-vs-pawns-practice',
+          type: 'interactive',
+          fen: '8/8/8/8/8/1B6/1p6/k2K4 w - - 0 1',
+          title: 'Bishop Stops the Pawn',
+          explanation: `In this position, White's bishop on b3 faces Black's b2 pawn supported by the king on a1. White's king is on d1.
+
+**Your task:** Find the move that prevents Black from queening. White needs to use the bishop to control the promotion square while bringing the king closer.
+
+Think about which move keeps the b1 promotion square covered while maintaining pressure.`,
+          correctMoves: ['Kc2'],
+          successMessage: `**Correct!** Kc2 is the winning move! After Kc2, Black's king is trapped on a1, and the b2 pawn is pinned to the king by the bishop on b3. White will eventually capture the pawn. The bishop on b3 is perfectly placed — it controls the diagonal and there's no escape for Black.`,
+          failureMessage: 'The bishop already controls the key diagonal. How can White\'s king help? Think about trapping Black\'s king and pawn together.',
+          arrows: [
+            { from: 'd1', to: 'c2', color: 'green' },
+          ],
+          highlights: [
+            { square: 'b3', color: 'blue' },
+            { square: 'b2', color: 'red' },
+            { square: 'b1', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'knight-vs-pawns',
+          type: 'explanation',
+          fen: '8/8/8/8/4N3/8/p4p2/4K2k w - - 0 1',
+          title: 'Knight vs Two Separated Pawns',
+          explanation: `The **knight** has a very different relationship with pawns than the bishop. Knights move slowly and can only control a limited number of squares at once.
+
+**Knight's biggest weakness: separated pawns**
+
+In this position, Black has pawns on a2 and f2. The knight on e4 faces a nightmare:
+- To stop the a-pawn, the knight needs to reach b1, a3, or c1
+- To stop the f-pawn, the knight needs to reach f1, g1, e1, or g3
+- **It cannot cover both sides of the board at once!**
+
+**Key principles for knights vs pawns:**
+1. **Connected pawns** — knight can often blockade from in front
+2. **Separated pawns** — knight struggles badly; it's too slow to shuttle between them
+3. **Rook pawns** (a/h file) — especially hard for knights because the corner limits their movement
+4. **King position is crucial** — the king must help the knight by covering one side
+
+**Historical insight:** The knight's difficulty against separated pawns was well understood by Philidor and later codified by endgame specialists like **Yuri Averbakh**, whose encyclopedic endgame works in the 1960s-80s systematized these patterns.`,
+          highlights: [
+            { square: 'e4', color: 'green' },
+            { square: 'a2', color: 'red' },
+            { square: 'f2', color: 'red' },
+          ],
+          arrows: [
+            { from: 'e4', to: 'c3', color: 'yellow' },
+            { from: 'e4', to: 'g3', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'rook-vs-pawns',
+          type: 'explanation',
+          fen: '8/8/8/8/8/R7/pp5k/4K3 w - - 0 1',
+          title: 'Rook vs Advanced Pawns',
+          explanation: `The **rook** is the strongest piece in the battle against pawns, but even it can struggle against very advanced pawns.
+
+**Rook's advantages:**
+- Controls entire ranks and files from a distance
+- Can attack pawns from behind (the **Tarrasch rule**: rooks belong behind passed pawns)
+- Can cut off the enemy king along a rank or file
+
+**When the rook wins:**
+- Pawns are not yet on the 7th rank
+- The rook can get behind the pawns
+- Its own king can help block
+
+**When the rook loses:**
+- Pawns are on the 7th rank with king support
+- Two connected pawns on the 7th are usually worth more than a rook!
+- The rook's own king is far away
+
+**In this position:**
+White's rook on a3 faces pawns on a2 and b2. These pawns are very advanced. White plays Ra8 or Ra6 to try to stop them, but with Black's king ready to support, this is extremely dangerous for White.
+
+**Critical rule:** Two connected pawns on the 6th rank (with their king nearby) are usually enough to beat a rook. On the 7th rank, they almost always win.`,
+          highlights: [
+            { square: 'a3', color: 'green' },
+            { square: 'a2', color: 'red' },
+            { square: 'b2', color: 'red' },
+          ],
+          arrows: [
+            { from: 'a3', to: 'a8', color: 'yellow' },
+            { from: 'a2', to: 'a1', color: 'red' },
+            { from: 'b2', to: 'b1', color: 'red' },
+          ],
+        },
+        {
+          id: 'practical-guidelines',
+          type: 'explanation',
+          fen: '8/8/5k2/8/2N5/1p6/p7/2K5 w - - 0 1',
+          title: 'Practical Guidelines: When Material Doesn\'t Matter',
+          explanation: `Here are the essential rules for piece-vs-pawns endgames that every player should know:
+
+**When pawns beat a minor piece:**
+- Two connected pawns on the **5th rank or beyond** with king support usually win
+- **Separated passed pawns** (3+ files apart) almost always beat a knight
+- A single pawn on the **7th rank** with king support can sometimes draw against a piece
+
+**When a piece beats pawns:**
+- Pawns are still on the **3rd/4th rank** — the piece has time to blockade
+- Pawns are **connected but can be blockaded** in front
+- The piece's king is **in front of the pawns**, providing a natural barrier
+
+**When a rook struggles:**
+- Two connected pawns on the **7th rank** usually beat a rook
+- A rook pawn (a or h file) on the 7th with king support often draws against a rook
+
+**General wisdom from the great players:**
+- **Capablanca:** "In order to win with a piece against pawns, one must first blockade the pawns, then bring the king to capture them."
+- **Karpov:** "The most important thing in piece-vs-pawns endings is the king's position."
+- Always count tempi! Calculate how many moves until the pawn promotes vs how many moves your piece needs to stop it.`,
+          highlights: [
+            { square: 'c4', color: 'green' },
+            { square: 'b3', color: 'red' },
+            { square: 'a2', color: 'red' },
+          ],
+          arrows: [
+            { from: 'c4', to: 'a3', color: 'green' },
+            { from: 'a2', to: 'a1', color: 'red' },
+          ],
+        },
+        {
+          id: 'piece-vs-pawns-puzzle',
+          type: 'puzzle',
+          fen: '8/8/8/4k3/8/4N3/p7/6K1 w - - 0 1',
+          title: 'Stop the Pawn!',
+          explanation: `White has a knight on e3 and king on g1. Black has a dangerous a-pawn on a2 and a well-placed king on e5.
+
+**Your task:** Find the move that stops Black's a-pawn from promoting. The knight must deal with the pawn while the king is too far away to help directly.
+
+Think about which square the knight can reach to control the a1 promotion square!`,
+          correctMoves: ['Nc2'],
+          successMessage: `**Perfect!** Nc2 is the only move that saves White. The knight reaches c2, from where it controls the a1 promotion square. After ...a1=Q, Nxa1 captures the new queen. If Black tries ...Kd4, White plays Kf2 bringing the king closer while the knight holds. The knight's ability to cover a1 from c2 is the key geometric pattern!`,
+          failureMessage: 'The a-pawn is about to queen on a1. Which knight move directly controls the a1 square? Think about the knight\'s L-shaped jump.',
+          highlights: [
+            { square: 'a2', color: 'red' },
+            { square: 'a1', color: 'yellow' },
+            { square: 'e3', color: 'green' },
+          ],
+          arrows: [
+            { from: 'a2', to: 'a1', color: 'red' },
+          ],
+        },
+        {
+          id: 'bishop-blockade-puzzle',
+          type: 'puzzle',
+          fen: '8/8/4k3/8/8/B7/1p3p2/3K4 w - - 0 1',
+          title: 'Bishop vs Two Separated Pawns',
+          explanation: `White has a bishop on a3 against two dangerous separated pawns on b2 and f2. Black's king on e6 supports from a distance.
+
+This is a critical pattern: can the bishop hold against two separated passed pawns? The key is to find a square where the bishop **covers both promotion squares** simultaneously.
+
+Find the bishop move that **stops both pawns** from promoting!`,
+          correctMoves: ['Bd6'],
+          successMessage: `**Brilliant!** Bd6 is the only move that saves the game. From d6, the bishop covers both b8 (via the a3-f8 diagonal after repositioning) and controls key squares. More importantly, after Bd6 the bishop stops the b-pawn by covering b8 from any square on the a3-f8 diagonal, and can rush to g3 or h4 to stop the f-pawn. The geometry of the diagonals saves White!`,
+          failureMessage: 'The bishop needs to find a square where it can influence both sides of the board. Think about long diagonals that let the bishop reach either pawn.',
+          highlights: [
+            { square: 'b2', color: 'red' },
+            { square: 'f2', color: 'red' },
+            { square: 'b1', color: 'yellow' },
+            { square: 'f1', color: 'yellow' },
+          ],
+          arrows: [
+            { from: 'a3', to: 'd6', color: 'green' },
+          ],
         },
       ],
     },

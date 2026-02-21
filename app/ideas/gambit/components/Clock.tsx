@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Clock as ClockIcon, Infinity as InfinityIcon } from 'lucide-react';
 
 interface ClockProps {
@@ -10,6 +10,15 @@ interface ClockProps {
 }
 
 const Clock: React.FC<ClockProps> = ({ timeMs, isActive, isLowTime, label }) => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handleChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
   // Format milliseconds to mm:ss, or mm:ss.d if low on time
   const formatTime = (ms: number) => {
     if (ms === Infinity) return "NO LIMIT";
@@ -40,10 +49,10 @@ const Clock: React.FC<ClockProps> = ({ timeMs, isActive, isLowTime, label }) => 
                 ? 'bg-[var(--term-main)] text-[var(--term-bg)] border-[var(--term-main)] shadow-[0_0_5px_var(--term-main)]'
                 : 'bg-[var(--term-bg)] text-[var(--term-dim)] border-[var(--term-dim)] opacity-80'
             }
-            ${isLowTime && isActive ? 'animate-pulse' : ''}
+            ${isLowTime && isActive && !prefersReducedMotion ? 'animate-pulse' : ''}
         `}
     >
-        {timeMs === Infinity ? <InfinityIcon size={12} className="flex-shrink-0" /> : <ClockIcon size={12} className={`flex-shrink-0 ${isActive ? 'animate-spin-slow' : ''}`} />}
+        {timeMs === Infinity ? <InfinityIcon size={12} className="flex-shrink-0" aria-hidden="true" /> : <ClockIcon size={12} className={`flex-shrink-0 ${isActive && !prefersReducedMotion ? 'animate-spin-slow' : ''}`} aria-hidden="true" />}
         <span className="font-mono text-sm md:text-base font-bold tracking-widest leading-none tabular-nums min-w-[60px] text-right">
             {formatTime(timeMs)}
         </span>

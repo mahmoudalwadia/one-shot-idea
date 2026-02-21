@@ -76,6 +76,13 @@ const coordsToPercent = (row: number, col: number): { x: number; y: number } => 
   };
 };
 
+// Detect if a move is a knight move (L-shape: 2+1 or 1+2)
+const isKnightMove = (from: { row: number; col: number }, to: { row: number; col: number }): boolean => {
+  const dRow = Math.abs(to.row - from.row);
+  const dCol = Math.abs(to.col - from.col);
+  return (dRow === 2 && dCol === 1) || (dRow === 1 && dCol === 2);
+};
+
 // Default starting position FEN
 const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -276,21 +283,52 @@ const LessonBoard: React.FC<LessonBoardProps> = ({
 
                 {/* Legal move marker */}
                 {interactive && isLegal && !piece && (
-                  <div className={isModernTheme
-                    ? "w-[30%] h-[30%] rounded-full bg-black/20 pointer-events-none"
-                    : "w-[20%] h-[20%] rounded-full bg-[var(--term-main)] opacity-60 pointer-events-none"
-                  } />
+                  <button
+                    onClick={() => handleSquareClick(square)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleSquareClick(square);
+                      }
+                    }}
+                    aria-label={`Move to ${square}`}
+                    className={`${isModernTheme
+                      ? "w-[30%] h-[30%] rounded-full bg-black/20"
+                      : "w-[20%] h-[20%] rounded-full bg-[var(--term-main)] opacity-60"
+                    } cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--term-main)]`}
+                  />
                 )}
                 {interactive && isLegal && piece && (
-                  <div className={isModernTheme
-                    ? "absolute inset-0 rounded-full border-[6px] border-black/20 z-10 pointer-events-none"
-                    : "absolute inset-0 border-2 border-dashed border-[var(--term-main)] animate-pulse z-10 pointer-events-none"
-                  } />
+                  <button
+                    onClick={() => handleSquareClick(square)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleSquareClick(square);
+                      }
+                    }}
+                    aria-label={`Capture on ${square}`}
+                    className={isModernTheme
+                      ? "absolute inset-0 rounded-full border-[6px] border-black/20 z-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#81b64c]"
+                      : "absolute inset-0 border-2 border-dashed border-[var(--term-main)] motion-safe:animate-pulse z-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[var(--term-main)]"
+                    }
+                  />
                 )}
 
                 {/* Piece */}
                 {piece && (
-                  <div className={`w-full h-full flex items-center justify-center ${interactive ? 'cursor-pointer hover:scale-110 active:scale-90' : ''} transition-transform ${textClass} z-20`}>
+                  <div
+                    tabIndex={interactive && piece.color === game.turn() ? 0 : -1}
+                    role={interactive ? "button" : undefined}
+                    aria-label={interactive ? `${piece.color === 'w' ? 'White' : 'Black'} ${piece.type === 'p' ? 'pawn' : piece.type === 'n' ? 'knight' : piece.type === 'b' ? 'bishop' : piece.type === 'r' ? 'rook' : piece.type === 'q' ? 'queen' : 'king'} on ${square}${isSelected ? ', selected' : ''}` : undefined}
+                    onKeyDown={interactive ? (e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleSquareClick(square);
+                      }
+                    } : undefined}
+                    className={`w-full h-full flex items-center justify-center ${interactive ? 'cursor-pointer hover:scale-110 active:scale-90 focus:outline-none focus:ring-2 focus:ring-[var(--term-main)] focus:ring-inset' : ''} transition-transform ${textClass} z-20`}
+                  >
                     <AsciiPiece type={piece.type} color={piece.color} isModern={isModernTheme} />
                   </div>
                 )}
@@ -331,6 +369,31 @@ const LessonBoard: React.FC<LessonBoardProps> = ({
             const toCoords = squareToCoords(arrow.to);
             const from = coordsToPercent(fromCoords.row, fromCoords.col);
             const to = coordsToPercent(toCoords.row, toCoords.col);
+
+            if (isKnightMove(fromCoords, toCoords)) {
+              // L-shaped arrow for knight moves
+              const dRow = Math.abs(toCoords.row - fromCoords.row);
+              // If vertical distance is 2, go vertical first then horizontal
+              // Otherwise go horizontal first then vertical
+              const midCoords = dRow === 2
+                ? { row: toCoords.row, col: fromCoords.col }
+                : { row: fromCoords.row, col: toCoords.col };
+              const mid = coordsToPercent(midCoords.row, midCoords.col);
+
+              return (
+                <polyline
+                  key={i}
+                  points={`${from.x},${from.y} ${mid.x},${mid.y} ${to.x},${to.y}`}
+                  fill="none"
+                  stroke={ANNOTATION_COLORS[arrow.color]}
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  markerEnd={`url(#arrowhead-${arrow.color})`}
+                  opacity="0.8"
+                />
+              );
+            }
 
             return (
               <line

@@ -79,7 +79,8 @@ const JourneyMap: React.FC<JourneyMapProps> = ({
           {onBack && (
             <button
               onClick={onBack}
-              className={`text-sm cursor-pointer ${isModernTheme ? 'text-[#8b8987] hover:text-white' : 'text-[var(--term-dim)] hover:text-[var(--term-main)]'} transition-colors`}
+              aria-label="Go back"
+              className={`text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 ${isModernTheme ? 'text-[#8b8987] hover:text-white focus:ring-[#81b64c] focus:ring-offset-[#262421]' : 'text-[var(--term-dim)] hover:text-[var(--term-main)] focus:ring-[var(--term-main)] focus:ring-offset-[var(--term-bg)]'} transition-colors`}
             >
               ← Previous
             </button>
@@ -126,9 +127,11 @@ const JourneyMap: React.FC<JourneyMapProps> = ({
                 {/* Course Node */}
                 <button
                   onClick={() => onSelectCourse(course)}
+                  aria-label={`${course.title}, ${progress.completed} of ${progress.total} lessons completed${state === 'completed' ? ', completed' : state === 'in-progress' ? ', in progress' : ''}`}
                   className={`
                     w-full p-4 rounded-xl border-2 transition-all cursor-pointer
-                    flex items-center gap-4
+                    flex items-center gap-4 focus:outline-none focus:ring-2 focus:ring-offset-2
+                    ${isModernTheme ? 'focus:ring-[#81b64c] focus:ring-offset-[#262421]' : 'focus:ring-[var(--term-main)] focus:ring-offset-[var(--term-bg)]'}
                     ${getNodeStyles(state, isCurrentNode)}
                   `}
                 >

@@ -27,11 +27,11 @@ export default function ModeSelector({ onSelectPlay, onSelectLearn }: ModeSelect
           {/* Play Mode */}
           <button
             onClick={onSelectPlay}
-            className="group border-2 border-[var(--term-main)] p-4 md:p-6 hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-all cursor-pointer text-left"
+            className="group border-2 border-[var(--term-main)] p-4 md:p-6 hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--term-bg)]"
           >
             <div className="flex items-center gap-3 mb-3">
               <div className="p-2 border border-current">
-                <Swords size={24} />
+                <Swords size={24} aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-lg md:text-xl font-bold uppercase">Play</h3>
@@ -44,7 +44,7 @@ export default function ModeSelector({ onSelectPlay, onSelectLearn }: ModeSelect
               Challenge the engine with adjustable difficulty. Analyze your moves with real-time evaluation.
             </p>
             <div className="mt-3 flex items-center gap-2 text-[10px] uppercase">
-              <Play size={12} />
+              <Play size={12} aria-hidden="true" />
               <span>Start Game</span>
             </div>
           </button>
@@ -52,11 +52,11 @@ export default function ModeSelector({ onSelectPlay, onSelectLearn }: ModeSelect
           {/* Learn Mode */}
           <button
             onClick={onSelectLearn}
-            className="group border-2 border-[var(--term-main)] p-4 md:p-6 hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-all cursor-pointer text-left"
+            className="group border-2 border-[var(--term-main)] p-4 md:p-6 hover:bg-[var(--term-main)] hover:text-[var(--term-bg)] transition-colors cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--term-main)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--term-bg)]"
           >
             <div className="flex items-center gap-3 mb-3">
               <div className="p-2 border border-current">
-                <GraduationCap size={24} />
+                <GraduationCap size={24} aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-lg md:text-xl font-bold uppercase">Learn</h3>
@@ -69,7 +69,7 @@ export default function ModeSelector({ onSelectPlay, onSelectLearn }: ModeSelect
               Master chess with 7 courses covering openings, tactics, strategy, and endgames.
             </p>
             <div className="mt-3 flex items-center gap-2 text-[10px] uppercase">
-              <BookOpen size={12} />
+              <BookOpen size={12} aria-hidden="true" />
               <span>Browse Courses</span>
             </div>
           </button>

@@ -2157,6 +2157,874 @@ export const sacrificePuzzles: Puzzle[] = [
 ];
 
 
+// Overloading Puzzles (12)
+export const overloadingPuzzles: Puzzle[] = [
+  {
+    "id": "OL001a",
+    "fen": "r1b2rk1/ppq2ppp/2n1p3/8/2B1N3/8/PPP2PPP/R2Q1RK1 w - - 0 14",
+    "solution": [
+      "Nd6",
+      "Qxd6",
+      "Bxe6"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1200
+  },
+  {
+    "id": "OL002b",
+    "fen": "2r3k1/5ppp/4p3/8/1q6/1B6/PPP2PPP/R2Q2K1 w - - 0 20",
+    "solution": [
+      "Qd7",
+      "Qe7",
+      "Qxc8+"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1250
+  },
+  {
+    "id": "OL003c",
+    "fen": "3r2k1/pp3ppp/8/3Nb3/8/8/PPP2PPP/3RR1K1 w - - 0 22",
+    "solution": [
+      "Nf6+",
+      "Kf8",
+      "Rxd8+"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1300
+  },
+  {
+    "id": "OL004d",
+    "fen": "r4rk1/pp2qppp/2p5/4N3/8/2P5/PP3PPP/R2QR1K1 w - - 0 18",
+    "solution": [
+      "Nd7",
+      "Qxd7",
+      "Qxd7"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1250
+  },
+  {
+    "id": "OL005e",
+    "fen": "2rq1rk1/pp3ppp/3bp3/8/3N4/8/PPP2PPP/R1BQR1K1 w - - 0 16",
+    "solution": [
+      "Nxe6",
+      "fxe6",
+      "Qxd6"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1350
+  },
+  {
+    "id": "OL006f",
+    "fen": "r1b2rk1/pp3ppp/2q1p3/3n4/3P4/5N2/PP2QPPP/R1B2RK1 w - - 0 14",
+    "solution": [
+      "d5",
+      "exd5",
+      "Qxc6"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1300
+  },
+  {
+    "id": "OL007g",
+    "fen": "3r1rk1/ppq2ppp/4b3/4N3/8/6P1/PPP1QP1P/R4RK1 w - - 0 20",
+    "solution": [
+      "Nxf7",
+      "Rxf7",
+      "Qxe6"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1400
+  },
+  {
+    "id": "OL008h",
+    "fen": "r3r1k1/pp3pp1/2p4p/3qN3/8/6P1/PPP2P1P/R2QR1K1 w - - 0 22",
+    "solution": [
+      "Nxc6",
+      "Qxc6",
+      "Qd8"
+    ],
+    "themes": [
+      "overloading",
+      "endgame"
+    ],
+    "rating": 1450
+  },
+  {
+    "id": "OL009i",
+    "fen": "2r2rk1/pp1q1ppp/4pn2/3N4/8/6P1/PPP1QPKP/3RR3 w - - 0 18",
+    "solution": [
+      "Nxf6+",
+      "Qxf6",
+      "Qxe6"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1350
+  },
+  {
+    "id": "OL010j",
+    "fen": "r4rk1/ppq1bppp/2n1p3/3pN3/3P4/6P1/PPP1QPKP/R4R2 w - - 0 16",
+    "solution": [
+      "Nxc6",
+      "Qxc6",
+      "Qxe6"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1500
+  },
+  {
+    "id": "OL011k",
+    "fen": "r2q1rk1/pp2bppp/4pn2/3N4/2P5/8/PP3PPP/R1BQR1K1 w - - 0 14",
+    "solution": [
+      "Nxf6+",
+      "Bxf6",
+      "Qxd8"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1550
+  },
+  {
+    "id": "OL012l",
+    "fen": "r1b1r1k1/ppq2ppp/2p1pn2/3N4/3P4/8/PPP1QPPP/R1B2RK1 w - - 0 14",
+    "solution": [
+      "Nxf6+",
+      "gxf6",
+      "Qxe6"
+    ],
+    "themes": [
+      "overloading",
+      "middlegame"
+    ],
+    "rating": 1600
+  }
+];
+
+// Trapped Piece Puzzles (12)
+export const trappedPiecePuzzles: Puzzle[] = [
+  {
+    "id": "TP001a",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
+    "solution": [
+      "a6",
+      "Ba4",
+      "b5",
+      "Bb3"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1000
+  },
+  {
+    "id": "TP002b",
+    "fen": "rnbqkb1r/pppppppp/8/8/2B1n3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+    "solution": [
+      "d3",
+      "Nc5",
+      "b4"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1050
+  },
+  {
+    "id": "TP003c",
+    "fen": "r1bqkbnr/pppppppp/2n5/8/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 3",
+    "solution": [
+      "Nb4",
+      "c3",
+      "Na6"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1050
+  },
+  {
+    "id": "TP004d",
+    "fen": "rnbqk2r/pppp1ppp/5n2/2b1p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 4 4",
+    "solution": [
+      "d3",
+      "d6",
+      "Na4"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1100
+  },
+  {
+    "id": "TP005e",
+    "fen": "r2qkbnr/ppp2ppp/2np4/4p3/2B1P1b1/5N2/PPPP1PPP/RNBQ1RK1 w kq - 2 5",
+    "solution": [
+      "h3",
+      "Bh5",
+      "g4",
+      "Bg6"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1100
+  },
+  {
+    "id": "TP006f",
+    "fen": "rnbqkb1r/ppp1pppp/3p4/8/3Pn3/5N2/PPP1PPPP/RNBQKB1R w KQkq - 0 4",
+    "solution": [
+      "d5",
+      "Nc5",
+      "b4"
+    ],
+    "themes": [
+      "trappedPiece",
+      "middlegame"
+    ],
+    "rating": 1150
+  },
+  {
+    "id": "TP007g",
+    "fen": "r1bqk2r/ppppbppp/2n5/4p2n/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 w kq - 5 5",
+    "solution": [
+      "d4",
+      "exd4",
+      "Nxd4",
+      "Nxd4"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1150
+  },
+  {
+    "id": "TP008h",
+    "fen": "rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 2",
+    "solution": [
+      "e5",
+      "Bf5",
+      "d3"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1200
+  },
+  {
+    "id": "TP009i",
+    "fen": "r2qkb1r/ppp2ppp/2n1bn2/3pp3/4P3/1B3N2/PPPP1PPP/RNBQ1RK1 w kq - 4 5",
+    "solution": [
+      "exd5",
+      "Nxd5",
+      "c4"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1250
+  },
+  {
+    "id": "TP010j",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5NP1/PPPP1P1P/RNBQKB1R b KQkq - 0 3",
+    "solution": [
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1300
+  },
+  {
+    "id": "TP011k",
+    "fen": "r1b1kbnr/ppppqppp/2n5/4p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 4 4",
+    "solution": [
+      "d4",
+      "exd4",
+      "Nd5",
+      "Qd6"
+    ],
+    "themes": [
+      "trappedPiece",
+      "middlegame"
+    ],
+    "rating": 1350
+  },
+  {
+    "id": "TP012l",
+    "fen": "rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq - 3 4",
+    "solution": [
+      "Bxc3+",
+      "bxc3",
+      "Ne4",
+      "Qc2"
+    ],
+    "themes": [
+      "trappedPiece",
+      "opening"
+    ],
+    "rating": 1400
+  }
+];
+
+// Zwischenzug Puzzles (12)
+export const zwischenzugPuzzles: Puzzle[] = [
+  {
+    "id": "ZW001a",
+    "fen": "r1bqr1k1/ppp2ppp/2n5/3Np3/2B5/8/PPPP1PPP/R1BQ1RK1 w - - 0 10",
+    "solution": [
+      "Nf6+",
+      "Kh8",
+      "Nxd7"
+    ],
+    "themes": [
+      "zwischenzug",
+      "middlegame"
+    ],
+    "rating": 1400
+  },
+  {
+    "id": "ZW002b",
+    "fen": "r2q1rk1/ppp2ppp/2nb4/3Np3/8/8/PPPP1PPP/R1BQR1K1 w - - 0 12",
+    "solution": [
+      "Nf6+",
+      "Kh8",
+      "Nxd7"
+    ],
+    "themes": [
+      "zwischenzug",
+      "middlegame"
+    ],
+    "rating": 1450
+  },
+  {
+    "id": "ZW003c",
+    "fen": "r1b1k2r/pppp1ppp/2n2n2/2b1N3/2B1P3/8/PPPP1PPP/RNBQK2R w KQkq - 4 5",
+    "solution": [
+      "Nxc6",
+      "dxc6",
+      "Bxf7+",
+      "Kf8"
+    ],
+    "themes": [
+      "zwischenzug",
+      "opening"
+    ],
+    "rating": 1400
+  },
+  {
+    "id": "ZW004d",
+    "fen": "r2qkb1r/ppp1pppp/2n2n2/3p4/3P1Bb1/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 4 4",
+    "solution": [
+      "Ne5",
+      "Bxd1",
+      "Nxc6"
+    ],
+    "themes": [
+      "zwischenzug",
+      "opening"
+    ],
+    "rating": 1500
+  },
+  {
+    "id": "ZW005e",
+    "fen": "r1bqkb1r/pppp1ppp/2n5/4N3/2B1n3/8/PPPP1PPP/RNBQK2R w KQkq - 0 5",
+    "solution": [
+      "Bxf7+",
+      "Ke7",
+      "Nxc6+"
+    ],
+    "themes": [
+      "zwischenzug",
+      "opening"
+    ],
+    "rating": 1500
+  },
+  {
+    "id": "ZW006f",
+    "fen": "r1b1k2r/ppppqppp/2n5/2b1N3/4n3/2N5/PPPP1PPP/R1BQKB1R w KQkq - 6 6",
+    "solution": [
+      "Nxc6",
+      "dxc6",
+      "Nxe4"
+    ],
+    "themes": [
+      "zwischenzug",
+      "middlegame"
+    ],
+    "rating": 1550
+  },
+  {
+    "id": "ZW007g",
+    "fen": "r2qk2r/ppp1bppp/2n1bn2/3Np3/4P3/8/PPPP1PPP/R1BQKB1R w KQkq - 2 7",
+    "solution": [
+      "Nxf6+",
+      "Bxf6",
+      "Qxe5+"
+    ],
+    "themes": [
+      "zwischenzug",
+      "middlegame"
+    ],
+    "rating": 1550
+  },
+  {
+    "id": "ZW008h",
+    "fen": "r1bqr1k1/ppp2ppp/2n2n2/3Np3/1bB5/8/PPPP1PPP/R1BQ1RK1 w - - 0 10",
+    "solution": [
+      "Nxf6+",
+      "Qxf6",
+      "Bxe5"
+    ],
+    "themes": [
+      "zwischenzug",
+      "middlegame"
+    ],
+    "rating": 1600
+  },
+  {
+    "id": "ZW009i",
+    "fen": "r2q1rk1/ppp2ppp/2n1b3/3nN3/3P4/8/PPP2PPP/R1BQKB1R w KQ - 0 10",
+    "solution": [
+      "Nxc6",
+      "bxc6",
+      "dxe5"
+    ],
+    "themes": [
+      "zwischenzug",
+      "middlegame"
+    ],
+    "rating": 1600
+  },
+  {
+    "id": "ZW010j",
+    "fen": "r1b1k2r/pppp1ppp/2n2n2/4N3/1bBPP3/8/PPP2PPP/RNBQK2R w KQkq - 2 5",
+    "solution": [
+      "Nxc6",
+      "dxc6",
+      "e5"
+    ],
+    "themes": [
+      "zwischenzug",
+      "opening"
+    ],
+    "rating": 1650
+  },
+  {
+    "id": "ZW011k",
+    "fen": "r1b1r1k1/ppp1qppp/2n2n2/3Np3/2B5/8/PPPP1PPP/R1BQR1K1 w - - 0 12",
+    "solution": [
+      "Nxf6+",
+      "gxf6",
+      "Bxe5"
+    ],
+    "themes": [
+      "zwischenzug",
+      "middlegame"
+    ],
+    "rating": 1700
+  },
+  {
+    "id": "ZW012l",
+    "fen": "r1bqk2r/pppp1ppp/2n5/2b1N3/4n3/2N5/PPPPBPPP/R1BQK2R w KQkq - 6 6",
+    "solution": [
+      "Nxc6",
+      "dxc6",
+      "Nxe4"
+    ],
+    "themes": [
+      "zwischenzug",
+      "middlegame"
+    ],
+    "rating": 1800
+  }
+];
+
+// Endgame Puzzles (12)
+export const endgamePuzzles: Puzzle[] = [
+  {
+    "id": "EG001a",
+    "fen": "8/8/8/8/4k3/8/4KP2/8 w - - 0 1",
+    "solution": [
+      "f4",
+      "Kd5",
+      "f5"
+    ],
+    "themes": [
+      "endgame",
+      "pawnEndgame"
+    ],
+    "rating": 1200
+  },
+  {
+    "id": "EG002b",
+    "fen": "8/5pk1/8/5PK1/8/8/8/8 w - - 0 1",
+    "solution": [
+      "Kh5",
+      "Kf8",
+      "Kg6"
+    ],
+    "themes": [
+      "endgame",
+      "pawnEndgame"
+    ],
+    "rating": 1200
+  },
+  {
+    "id": "EG003c",
+    "fen": "8/8/4k3/8/3PK3/8/8/8 w - - 0 1",
+    "solution": [
+      "d5+",
+      "Kd6",
+      "Kd4"
+    ],
+    "themes": [
+      "endgame",
+      "pawnEndgame"
+    ],
+    "rating": 1250
+  },
+  {
+    "id": "EG004d",
+    "fen": "8/8/8/1k6/8/1K6/1P6/8 w - - 0 1",
+    "solution": [
+      "Ka4",
+      "Kc6",
+      "Ka5"
+    ],
+    "themes": [
+      "endgame",
+      "pawnEndgame"
+    ],
+    "rating": 1250
+  },
+  {
+    "id": "EG005e",
+    "fen": "8/8/8/8/8/5k2/4p3/4K3 b - - 0 1",
+    "solution": [
+      "Kf2",
+      "Kd2",
+      "e1=Q+"
+    ],
+    "themes": [
+      "endgame",
+      "promotion"
+    ],
+    "rating": 1300
+  },
+  {
+    "id": "EG006f",
+    "fen": "8/3k4/8/3PK3/8/8/8/8 w - - 0 1",
+    "solution": [
+      "Kf6",
+      "Kd8",
+      "d6"
+    ],
+    "themes": [
+      "endgame",
+      "pawnEndgame"
+    ],
+    "rating": 1300
+  },
+  {
+    "id": "EG007g",
+    "fen": "4k3/8/8/8/8/8/R7/4K3 w - - 0 1",
+    "solution": [
+      "Ke2",
+      "Kd7",
+      "Ke3"
+    ],
+    "themes": [
+      "endgame",
+      "rookEndgame"
+    ],
+    "rating": 1350
+  },
+  {
+    "id": "EG008h",
+    "fen": "8/2R5/8/4k3/8/4K3/8/8 w - - 0 1",
+    "solution": [
+      "Kd3",
+      "Kf4",
+      "Kd4"
+    ],
+    "themes": [
+      "endgame",
+      "rookEndgame"
+    ],
+    "rating": 1350
+  },
+  {
+    "id": "EG009i",
+    "fen": "8/8/1pk5/8/1PK5/8/8/8 w - - 0 1",
+    "solution": [
+      "b5+",
+      "cxb5+",
+      "Kxb5"
+    ],
+    "themes": [
+      "endgame",
+      "pawnEndgame"
+    ],
+    "rating": 1400
+  },
+  {
+    "id": "EG010j",
+    "fen": "8/p7/1p6/1P6/P4k2/5p2/5K2/8 w - - 0 40",
+    "solution": [
+      "Ke1",
+      "Ke3",
+      "Kf1"
+    ],
+    "themes": [
+      "endgame",
+      "pawnEndgame"
+    ],
+    "rating": 1450
+  },
+  {
+    "id": "EG011k",
+    "fen": "8/8/4k3/4p3/4K3/4P3/8/8 w - - 0 1",
+    "solution": [
+      "Kd3",
+      "Kd5",
+      "Ke2"
+    ],
+    "themes": [
+      "endgame",
+      "pawnEndgame"
+    ],
+    "rating": 1500
+  },
+  {
+    "id": "EG012l",
+    "fen": "8/8/8/8/2k5/r7/4K3/R7 w - - 0 1",
+    "solution": [
+      "Rc1+",
+      "Kb3",
+      "Kd2"
+    ],
+    "themes": [
+      "endgame",
+      "rookEndgame"
+    ],
+    "rating": 1600
+  }
+];
+
+// Clearance Puzzles (12)
+export const clearancePuzzles: Puzzle[] = [
+  {
+    "id": "CL001a",
+    "fen": "r1bqkb1r/pppppppp/2n2n2/8/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 2 3",
+    "solution": [
+      "d5",
+      "Ne5",
+      "Bd3"
+    ],
+    "themes": [
+      "clearance",
+      "opening"
+    ],
+    "rating": 1300
+  },
+  {
+    "id": "CL002b",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4PP2/8/PPPP2PP/RNBQKBNR b KQkq - 0 3",
+    "solution": [
+      "exf4",
+      "Nf3",
+      "d5"
+    ],
+    "themes": [
+      "clearance",
+      "opening"
+    ],
+    "rating": 1300
+  },
+  {
+    "id": "CL003c",
+    "fen": "r1bqkb1r/ppp1pppp/2n2n2/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 2 4",
+    "solution": [
+      "e5",
+      "Ne4",
+      "Nxe4"
+    ],
+    "themes": [
+      "clearance",
+      "opening"
+    ],
+    "rating": 1350
+  },
+  {
+    "id": "CL004d",
+    "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R b KQkq - 3 3",
+    "solution": [
+      "c5",
+      "e3",
+      "Nc6"
+    ],
+    "themes": [
+      "clearance",
+      "opening"
+    ],
+    "rating": 1350
+  },
+  {
+    "id": "CL005e",
+    "fen": "r1bqkbnr/pppppppp/2n5/8/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq - 3 2",
+    "solution": [
+      "e5",
+      "Nf3",
+      "Nf6"
+    ],
+    "themes": [
+      "clearance",
+      "opening"
+    ],
+    "rating": 1400
+  },
+  {
+    "id": "CL006f",
+    "fen": "r1b1kb1r/ppppqppp/2n2n2/4p3/2BPP3/2N2N2/PPP2PPP/R1BQK2R b KQkq - 5 5",
+    "solution": [
+      "exd4",
+      "Nxd4",
+      "d5"
+    ],
+    "themes": [
+      "clearance",
+      "middlegame"
+    ],
+    "rating": 1400
+  },
+  {
+    "id": "CL007g",
+    "fen": "rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 2 5",
+    "solution": [
+      "c5",
+      "Ne4",
+      "Nxe4"
+    ],
+    "themes": [
+      "clearance",
+      "middlegame"
+    ],
+    "rating": 1450
+  },
+  {
+    "id": "CL008h",
+    "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+    "solution": [
+      "d4",
+      "exd4",
+      "e5"
+    ],
+    "themes": [
+      "clearance",
+      "opening"
+    ],
+    "rating": 1450
+  },
+  {
+    "id": "CL009i",
+    "fen": "r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 7",
+    "solution": [
+      "d4",
+      "exd4",
+      "Nxd4"
+    ],
+    "themes": [
+      "clearance",
+      "middlegame"
+    ],
+    "rating": 1500
+  },
+  {
+    "id": "CL010j",
+    "fen": "rnbqkb1r/pp3ppp/4pn2/2pp4/3PP3/2N2N2/PPP2PPP/R1BQKB1R w KQkq - 0 5",
+    "solution": [
+      "e5",
+      "Nfd7",
+      "f4"
+    ],
+    "themes": [
+      "clearance",
+      "opening"
+    ],
+    "rating": 1550
+  },
+  {
+    "id": "CL011k",
+    "fen": "r1bqk2r/ppppbppp/2n2n2/4p3/2BPP3/2N2N2/PPP2PPP/R1BQK2R b KQkq - 5 5",
+    "solution": [
+      "d6",
+      "d5",
+      "Nb8"
+    ],
+    "themes": [
+      "clearance",
+      "middlegame"
+    ],
+    "rating": 1600
+  },
+  {
+    "id": "CL012l",
+    "fen": "rnbq1rk1/ppp1bppp/4pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQ - 2 6",
+    "solution": [
+      "cxd5",
+      "exd5",
+      "Bd3"
+    ],
+    "themes": [
+      "clearance",
+      "middlegame"
+    ],
+    "rating": 1700
+  }
+];
+
+
 // All puzzles combined
 export const allPuzzles: Puzzle[] = [
   ...forkPuzzles,
@@ -2169,6 +3037,11 @@ export const allPuzzles: Puzzle[] = [
   ...skewerPuzzles,
   ...attractionPuzzles,
   ...sacrificePuzzles,
+  ...overloadingPuzzles,
+  ...trappedPiecePuzzles,
+  ...zwischenzugPuzzles,
+  ...endgamePuzzles,
+  ...clearancePuzzles,
 ];
 
 // Get puzzles by theme
@@ -2189,7 +3062,7 @@ export function getRandomPuzzle(theme?: string): Puzzle | null {
 }
 
 // Puzzle themes available
-export const availableThemes = ["fork","pin","discoveredAttack","backRankMate","mateIn1","mateIn2","deflection","skewer","attraction","sacrifice"];
+export const availableThemes = ["fork","pin","discoveredAttack","backRankMate","mateIn1","mateIn2","deflection","skewer","attraction","sacrifice","overloading","trappedPiece","zwischenzug","endgame","clearance"];
 
 // Total puzzle count
-export const totalPuzzleCount = 124;
+export const totalPuzzleCount = 184;

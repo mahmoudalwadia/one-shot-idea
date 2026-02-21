@@ -20,7 +20,7 @@ export const midgameCourse: Course = {
           type: 'explanation',
           fen: 'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQ1RK1 w - - 4 6',
           title: 'Prerequisites for Attack',
-          explanation: `Attacking the king is the ultimate goal in chess, but **premature attacks are the downfall of many players**. Before launching an assault, you need several key elements in place.
+          explanation: `Attacking the king is the ultimate goal in chess, but **premature attacks are the downfall of many players**. Kingside attacks have been a hallmark of chess since the Romantic era (1850s-1880s), with Adolf Anderssen's "Immortal Game" (1851) and "Evergreen Game" (1852) standing as legendary examples of brilliant king attacks. Before launching an assault, you need several key elements in place.
 
 **The Five Prerequisites:**
 
@@ -237,7 +237,7 @@ Find the move that **creates the most dangerous threats**!
           type: 'explanation',
           fen: 'r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4',
           title: 'Types of Sacrifices',
-          explanation: `Sacrifices in chess can be categorized into three main types, each requiring different skills to evaluate and execute.
+          explanation: `Sacrifices in chess can be categorized into three main types, each requiring different skills to evaluate and execute. The sacrifice as an art form reached its peak with Mikhail Tal, the 8th World Champion (1960-1961), known as the "Magician from Riga," whose sacrificial brilliance has never been matched.
 
 **1. Tactical Sacrifices**
 - You see a **concrete winning line**
@@ -474,7 +474,7 @@ Find the sacrifice that **breaks through Black's defenses**!
           type: 'explanation',
           fen: 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4',
           title: 'The Art of Sacrifice',
-          explanation: `This position shows the famous **Scholar's Mate threat** - but brilliant sacrifices go far deeper than simple tricks.
+          explanation: `This position shows the famous **Scholar's Mate threat** - but brilliant sacrifices go far deeper than simple tricks. The history of chess is illuminated by dazzling sacrificial combinations, from Anderssen's Immortal Game (1851) to Kasparov's legendary encounters.
 
 The greatest players in history have won games by giving away their most powerful pieces. Why would anyone sacrifice a queen or multiple rooks?
 
@@ -845,7 +845,7 @@ Find the move that looks crazy but wins brilliantly! Sometimes the best move is 
           type: 'explanation',
           fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1',
           title: 'Why the Center Matters',
-          explanation: `The center of the board - the squares **d4, d5, e4, and e5** - is the most important territory in chess. Whoever controls these squares usually controls the game.
+          explanation: `The center of the board - the squares **d4, d5, e4, and e5** - is the most important territory in chess. The debate over central control shaped the greatest theoretical divide in chess history: the classical school (Steinitz, Tarrasch) insisted on occupying the center with pawns, while the hypermoderns (Nimzowitsch, Reti) argued for controlling it from a distance. Whoever controls these squares usually controls the game.
 
 **Why the center is crucial:**
 
@@ -1045,6 +1045,25 @@ Find the move that **takes control of the center** and creates the most problems
           successMessage: 'Excellent! Both cxd5 (creating an isolated queen pawn after exd5, or gaining space after Nxd5) and e4 (the breakthrough) are strong. These moves seize central control.',
           failureMessage: 'How can White either open the position favorably or gain more central space?',
         },
+        {
+          id: 'central-outpost-practice',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp2bppp/2n1pn2/2pp4/3PP3/2N2N2/PPP1BPPP/R1BQ1RK1 w - - 0 8',
+          title: 'Seize the Central Outpost',
+          explanation: `White has pawns on d4 and e4, and Black has just played ...c5, challenging the center. But this creates a hole on d5!
+
+Find the move that **plants a piece on the ideal central outpost** and takes permanent control of the center.`,
+          correctMoves: ['e5'],
+          arrows: [
+            { from: 'e4', to: 'e5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e5', color: 'green' },
+            { square: 'd5', color: 'yellow' },
+          ],
+          successMessage: 'Correct! e5 gains space and pushes the knight away from f6. White can later maneuver a knight to d5 via c3-e2-d4-d5 or c3-d5 directly, occupying the permanent outpost.',
+          failureMessage: 'Look at how you can gain space in the center and create a strong outpost for your pieces on d5.',
+        },
       ],
     },
     {
@@ -1060,7 +1079,7 @@ Find the move that **takes control of the center** and creates the most problems
           type: 'explanation',
           fen: 'r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4',
           title: 'The Power of Coordination',
-          explanation: `In chess, individual pieces have limited power. But when pieces work together, they become far more than the sum of their parts. This is **piece coordination**.
+          explanation: `In chess, individual pieces have limited power. But when pieces work together, they become far more than the sum of their parts. This is **piece coordination**. The importance of coordination was emphasized by Nimzowitsch and later by the Soviet school, where Botvinnik trained generations of champions to think in terms of how pieces work together rather than in isolation.
 
 **Why coordination matters:**
 
@@ -1261,6 +1280,26 @@ Find the move that **improves White's piece coordination** the most!`,
           successMessage: 'Good choices! Bf4 activates the bishop (controls d6, c7), Qc2 prepares doubling rooks, and Rc1 claims the c-file. All improve coordination!',
           failureMessage: 'Look for moves that activate passive pieces or connect your forces.',
         },
+        {
+          id: 'coordinate-pieces-practice',
+          type: 'interactive',
+          fen: 'r1b2rk1/pp1nqppp/2p1pn2/3p4/2PP4/2NBPN2/PP3PPP/R1BQ1RK1 w - - 0 10',
+          title: 'Coordinate for the Attack',
+          explanation: `White has well-developed pieces but they need to work together for a kingside attack. The bishop on d3 eyes h7, the knight on f3 could jump to powerful squares, and the queen waits on d1.
+
+Find the move that **brings another piece into the attack** and coordinates with the bishop on d3 for maximum pressure on the kingside.`,
+          correctMoves: ['e4'],
+          arrows: [
+            { from: 'e3', to: 'e4', color: 'green' },
+            { from: 'd3', to: 'h7', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'e4', color: 'green' },
+            { square: 'h7', color: 'red' },
+          ],
+          successMessage: 'Excellent! e4 opens the position and frees the c1 bishop. After dxe4 Nxe4, White\'s pieces coordinate beautifully: the knight on e4 eyes f6 and g5, the bishop on d3 targets h7, and the dark-squared bishop can emerge to g5 or f4.',
+          failureMessage: 'Think about opening lines so all your pieces can work together. What pawn break unleashes your army?',
+        },
       ],
     },
     {
@@ -1276,7 +1315,7 @@ Find the move that **improves White's piece coordination** the most!`,
           type: 'explanation',
           fen: 'r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4',
           title: 'What is Initiative?',
-          explanation: `The **initiative** is having the active side of the position - you create threats, and your opponent must respond. It's like being the one asking questions while your opponent scrambles for answers.
+          explanation: `The **initiative** is having the active side of the position - you create threats, and your opponent must respond. The concept was central to the play of Alexander Alekhine (World Champion 1927-1935, 1937-1946), who believed that maintaining the initiative was worth material sacrifices. It's like being the one asking questions while your opponent scrambles for answers.
 
 **Signs you have the initiative:**
 
@@ -1456,6 +1495,25 @@ Find the move that **creates the most dynamic possibilities** and puts Black und
           successMessage: 'Well played! cxd5 opens lines and creates tension. If Black recaptures exd5, they get an isolated pawn; if Nxd5, White gains piece activity. This seizes the initiative!',
           failureMessage: 'Look for a move that opens lines or creates targets for your pieces.',
         },
+        {
+          id: 'initiative-practice',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp2ppbp/2np1np1/8/3NP3/2N1BP2/PPPQ2PP/R3KB1R w KQ - 0 8',
+          title: 'Maintain the Initiative',
+          explanation: `White has a strong center and well-placed pieces. Black has just fianchettoed the bishop to g7, a typical Dragon-style setup. White must keep the pressure up and not allow Black to consolidate.
+
+Find the move that **maintains White's initiative** by creating immediate threats while improving the position.`,
+          correctMoves: ['O-O-O'],
+          arrows: [
+            { from: 'e1', to: 'c1', color: 'green' },
+            { from: 'h2', to: 'h4', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'c1', color: 'green' },
+          ],
+          successMessage: 'Correct! O-O-O castles queenside, putting the rook on d1 where it supports the d4 knight and prepares a kingside pawn storm with h4-h5. The initiative continues with concrete threats!',
+          failureMessage: 'Think about where your king should go to maintain attacking momentum. Which castling direction supports your aggressive plans?',
+        },
       ],
     },
     {
@@ -1471,7 +1529,7 @@ Find the move that **creates the most dynamic possibilities** and puts Black und
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 7',
           title: 'Finding a Plan',
-          explanation: `Every chess position needs a plan. Playing random moves without direction leads to drift and eventual loss. Here's how to find a plan:
+          explanation: `Every chess position needs a plan. Playing random moves without direction leads to drift and eventual loss. The concept of typical middlegame plans tied to specific positions was systematized by the Soviet training system, particularly through the writings of Alexander Kotov in "Think Like a Grandmaster" (1971). Here's how to find a plan:
 
 **The Four-Step Planning Process:**
 
@@ -1665,6 +1723,26 @@ Find the move that **starts a concrete plan** for White!`,
           successMessage: 'Excellent! Nd5 occupies a powerful central outpost (Black must reckon with Nxf6). Bg5 pins the knight and creates pressure. Both are excellent plans!',
           failureMessage: 'Look for a move that either occupies a strong square or creates pressure on Black\'s position.',
         },
+        {
+          id: 'iqp-practice',
+          type: 'interactive',
+          fen: 'r1bq1rk1/pp3ppp/2nbpn2/3p4/3P4/2NBPN2/PP3PPP/R1BQ1RK1 w - - 0 10',
+          title: 'Play Against the IQP',
+          explanation: `Black has an isolated queen pawn on d5. This is a classic structure where White must execute the anti-IQP plan.
+
+The d5 pawn is weak because no neighboring pawn can protect it. Find the move that **blockades and pressures the isolated pawn** most effectively.`,
+          correctMoves: ['Nb5'],
+          arrows: [
+            { from: 'c3', to: 'b5', color: 'green' },
+            { from: 'b5', to: 'd5', color: 'blue' },
+          ],
+          highlights: [
+            { square: 'd5', color: 'red' },
+            { square: 'b5', color: 'green' },
+          ],
+          successMessage: 'Well played! Nb5 targets the d6 bishop and eyes the d5 blockading square. The knight will dominate the position from d5 where it cannot be driven away by pawns. The d5 pawn becomes a permanent weakness.',
+          failureMessage: 'The isolated d5 pawn needs a blockader on d5. Which knight move heads toward this ideal outpost?',
+        },
       ],
     },
     {
@@ -1680,7 +1758,7 @@ Find the move that **starts a concrete plan** for White!`,
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 7',
           title: 'What is Prophylaxis?',
-          explanation: `**Prophylaxis** is thinking about your opponent's ideas and preventing them before they happen. It's the defensive counterpart to aggressive play.
+          explanation: `**Prophylaxis** is thinking about your opponent's ideas and preventing them before they happen. Nimzowitsch coined the term, but it was Tigran Petrosian who elevated prophylactic thinking to its highest form, often making mysterious-looking moves that only made sense when the opponent's plans were considered. It's the defensive counterpart to aggressive play.
 
 **The prophylactic thinking process:**
 
@@ -1836,6 +1914,87 @@ Find the move that **prevents Black's ideas** while improving White's position!`
           successMessage: 'Well done! O-O castles to safety (prophylactic king safety). a3 prevents ...Bb4 and prepares b4. Both are prophylactic improvements!',
           failureMessage: 'What are Black\'s main ideas? How can you prevent them while improving your position?',
         },
+        {
+          id: 'petrosian-exchange',
+          type: 'explanation',
+          fen: 'r4rk1/pp1bqppp/2n1pn2/2pp4/3P4/2NBPN2/PP2QPPP/R1B2RK1 w - - 0 11',
+          title: 'Petrosian\'s Prophylactic Exchange',
+          explanation: `Tigran Petrosian was famous for making **prophylactic exchanges** - trading pieces not for immediate gain, but to prevent the opponent's future ideas.
+
+**The Petrosian Exchange Sacrifice:**
+Petrosian would sometimes give up the exchange (rook for minor piece) purely to prevent the opponent from ever generating an attack. This was revolutionary thinking.
+
+**In this position:**
+Black's knight on c6 supports the ...d4 break and controls e5. Petrosian-style thinking says: "Remove the knight, and all of Black's plans collapse."
+
+**Key prophylactic exchanges:**
+1. Trade the opponent's **best piece** - even at slight material cost
+2. Exchange the piece that **supports their plan**
+3. Trade attacking pieces when your king is targeted
+4. Remove the piece that's "glue" holding their position together
+
+**Petrosian's insight**: "Sometimes you must give up material to gain peace of mind. A quiet position with a slight disadvantage is better than a chaotic one where your opponent has all the chances."`,
+          arrows: [
+            { from: 'd3', to: 'c6', color: 'yellow' },
+          ],
+          highlights: [
+            { square: 'c6', color: 'red' },
+          ],
+        },
+        {
+          id: 'petrosian-puzzle',
+          type: 'interactive',
+          fen: 'r1b2rk1/pp2qppp/2n1pn2/2pp4/3P4/P1NBPN2/1P3PPP/R1BQ1RK1 w - - 0 10',
+          title: 'Think Like Petrosian',
+          explanation: `Black has a solid position and plans to play ...c4 followed by ...b5-b4, gaining queenside space and pushing White's knight away from c3.
+
+Think prophylactically: what does Black want, and how can you stop it while improving your position?
+
+Find the **Petrosian-style prophylactic move** that prevents Black's queenside expansion.`,
+          correctMoves: ['dxc5'],
+          arrows: [
+            { from: 'd4', to: 'c5', color: 'green' },
+            { from: 'c5', to: 'b4', color: 'red' },
+          ],
+          highlights: [
+            { square: 'c5', color: 'green' },
+          ],
+          successMessage: 'Excellent prophylactic thinking! dxc5 eliminates the tension and prevents ...c4. After Qxc5, White can play b4 to control c5 permanently, and Black\'s queenside expansion is stopped. Petrosian would approve!',
+          failureMessage: 'Think about what Black wants (...c4 and ...b5). How can you change the pawn structure to prevent this plan?',
+        },
+        {
+          id: 'overprotection',
+          type: 'explanation',
+          fen: 'r1bq1rk1/pp2bppp/2n1pn2/3p4/2PP4/2N1PN2/PP2BPPP/R1BQ1RK1 w - - 0 8',
+          title: 'Nimzowitsch\'s Overprotection',
+          explanation: `Nimzowitsch introduced the concept of **overprotection** - defending a key point with more pieces than strictly necessary.
+
+**Why overprotect?**
+1. The extra defenders can **redeploy** when needed without leaving the point weak
+2. Pieces gathered around a strong point naturally **coordinate well**
+3. It **discourages** the opponent from even trying to attack that point
+4. Overprotected points become **springboards** for your own plans
+
+**In this position:**
+The d4 pawn is White's central anchor. Overprotecting it with Qc2, Rd1, and keeping the knight on c3 means White can later play e4 or b4 without worrying about d4 collapsing.
+
+**Practical application:**
+- Identify your most important structural point
+- Gather pieces around it (they don't have to be idle - they serve multiple purposes)
+- Use the stability to launch operations elsewhere
+
+**Nimzowitsch's paradox**: "The overprotected point radiates power." The pieces gathered to defend it are actually positioned to attack!`,
+          highlights: [
+            { square: 'd4', color: 'green' },
+            { square: 'c3', color: 'blue' },
+            { square: 'f3', color: 'blue' },
+            { square: 'e3', color: 'blue' },
+          ],
+          arrows: [
+            { from: 'd1', to: 'd4', color: 'yellow' },
+            { from: 'c3', to: 'd4', color: 'yellow' },
+          ],
+        },
       ],
     },
     {
@@ -1851,7 +2010,7 @@ Find the move that **prevents Black's ideas** while improving White's position!`
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 7',
           title: 'Recognizing Critical Moments',
-          explanation: `Every chess game has **critical moments** - positions where the decisions made shape the entire outcome. Spending your time wisely means identifying these moments.
+          explanation: `Every chess game has **critical moments** - positions where the decisions made shape the entire outcome. Garry Kasparov was renowned for his ability to sense these pivotal moments, often spending 30+ minutes on a single move when the position demanded it. Spending your time wisely means identifying these moments.
 
 **What makes a moment critical?**
 
@@ -2022,6 +2181,54 @@ What is Black's best response?`,
           successMessage: 'Good choice! exd4 accepts the challenge in the center. After Nxd4, Black can recapture with Nxd4, maintaining equality. This is a principled decision!',
           failureMessage: 'White has challenged the center with d4. How should Black respond to this critical break?',
         },
+        {
+          id: 'exchange-decision',
+          type: 'explanation',
+          fen: 'r1bq1rk1/ppp1bppp/2n1pn2/3p4/2PP4/2N1PN2/PP2BPPP/R1BQ1RK1 w - - 0 8',
+          title: 'Critical Exchange Decisions',
+          explanation: `Some of the most critical moments involve **exchange decisions** - whether to trade pieces or not. These moments are often more important than tactical shots.
+
+**Critical exchange questions:**
+
+1. **Should I trade queens?** Removing queens fundamentally changes the game. If you're attacking, keep them. If defending or ahead in material, trade them.
+
+2. **Should I trade this knight for that bishop?** Consider the pawn structure. In closed positions, keep knights. In open positions, keep bishops.
+
+3. **Should I capture, or maintain the tension?** Releasing tension is a commitment. Sometimes maintaining tension gives you more options.
+
+**Signs of a critical exchange moment:**
+- Your opponent offers a trade that seems "free" but changes the position
+- You can simplify into an endgame but aren't sure if it's winning
+- A piece trade would change the pawn structure
+
+**Kasparov vs Karpov** exchanges were legendary - entire World Championship games turned on a single exchange decision. Both players spent enormous time on these moments.
+
+**Rule of thumb**: If you're unsure about an exchange, maintain the tension. You can always trade later, but you can't "un-trade."`,
+          highlights: [
+            { square: 'c4', color: 'yellow' },
+            { square: 'd5', color: 'yellow' },
+          ],
+        },
+        {
+          id: 'critical-pawn-break',
+          type: 'interactive',
+          fen: 'r1bqr1k1/pp1n1ppp/2pb1n2/3p4/2PP4/2NBPN2/PP3PPP/R1BQR1K1 w - - 0 11',
+          title: 'The Critical Pawn Break',
+          explanation: `This is a critical moment in a typical Queen's Gambit position. White has been building up slowly and must decide: is NOW the right time for the central break?
+
+Both sides are fully developed. Black's pieces are reasonably placed but slightly passive. White's pieces support the center.
+
+Find the move that **creates a critical breakthrough** in the center!`,
+          correctMoves: ['e4'],
+          arrows: [
+            { from: 'e3', to: 'e4', color: 'green' },
+          ],
+          highlights: [
+            { square: 'e4', color: 'green' },
+          ],
+          successMessage: 'Excellent timing! e4 is the critical break. After dxe4 Nxe4 Nxe4 Bxe4, White opens the position when all pieces are ready. The bishop on d3 gains the e4 square, the rooks have open files, and White\'s initiative is powerful.',
+          failureMessage: 'White\'s pieces are all ready and supporting the center. What central break opens the position at the perfect moment?',
+        },
       ],
     },
     {
@@ -2037,7 +2244,7 @@ What is Black's best response?`,
           type: 'explanation',
           fen: 'r1bq1rk1/pppp1ppp/2n2n2/4p1N1/2B1P3/8/PPPP1PPP/RNBQ1RK1 b - - 5 5',
           title: 'Defensive Mindset',
-          explanation: `Defense in chess is an art. When you're under attack, the way you think must change completely.
+          explanation: `Defense in chess is an art. Emanuel Lasker (World Champion 1894-1921) was the first great defender, famous for saving "lost" positions through sheer tenacity, and later Petrosian and Karpov refined defensive technique into a winning weapon. When you're under attack, the way you think must change completely.
 
 **The Defensive Mindset:**
 
@@ -2232,6 +2439,26 @@ Find the **best defensive resource** for Black.`,
           successMessage: 'Well defended! h6 kicks the knight and provides luft. d5! is even better - a counterattacking resource that opens lines and challenges the bishop while defending.',
           failureMessage: 'Look for moves that either drive back the attackers or create counter-threats.',
         },
+        {
+          id: 'defensive-resource',
+          type: 'interactive',
+          fen: 'r1b2r1k/pppp2pp/2n2n2/4pq2/2B1N3/3P4/PPP2PPP/R1BQ1RK1 b - - 0 10',
+          title: 'Find the Defensive Resource',
+          explanation: `Black's queen is aggressively placed on f5, but White's knight on e4 eyes f6 and d6. The position is tense and Black needs to consolidate.
+
+Find the move that **defends the critical threats** while keeping Black's position solid. Look for a move that addresses White's Nf6+ threat.`,
+          correctMoves: ['d5'],
+          arrows: [
+            { from: 'd7', to: 'd5', color: 'green' },
+            { from: 'e4', to: 'f6', color: 'red' },
+          ],
+          highlights: [
+            { square: 'd5', color: 'green' },
+            { square: 'e4', color: 'red' },
+          ],
+          successMessage: 'Excellent defense! d5 attacks the bishop on c4 while driving away the dangerous knight from e4. After Bb3 (or Bb5) dxe4, Black has eliminated White\'s most dangerous piece and opened the center for counterplay.',
+          failureMessage: 'White\'s knight on e4 threatens Nf6+. How can you attack it while simultaneously improving your center?',
+        },
       ],
     },
     {
@@ -2247,7 +2474,7 @@ Find the **best defensive resource** for Black.`,
           type: 'explanation',
           fen: 'r1bq1rk1/ppp2ppp/2np1n2/4p3/4P3/2NP1N2/PPP2PPP/R1BQ1RK1 w - - 0 8',
           title: 'When to Transition',
-          explanation: `The decision to transition from middlegame to endgame is one of the most important in chess. Get it right, and you convert advantages smoothly. Get it wrong, and you let your opponent back into the game.
+          explanation: `The decision to transition from middlegame to endgame is one of the most important in chess. Capablanca was the supreme master of this art, knowing exactly when to simplify into a winning endgame, while Anatoly Karpov later perfected the technique of gradually squeezing opponents through precise transitions. Get it right, and you convert advantages smoothly. Get it wrong, and you let your opponent back into the game.
 
 **When to transition to the endgame:**
 
@@ -2411,6 +2638,92 @@ Find the move that **creates the most favorable transition**!`,
           ],
           successMessage: 'Good choice! cxd5 followed by exd5 creates an isolated queen pawn for Black if they recapture with e6. exd5 Nxd5 Nxd5 exd5 creates an IQP structure that White can target in an endgame.',
           failureMessage: 'Look at the pawn tension in the center. How can White create a favorable structure for the endgame?',
+        },
+        {
+          id: 'when-not-to-simplify',
+          type: 'explanation',
+          fen: 'r2q1rk1/pp2bppp/2n1pn2/2Bp4/3P4/2N1PN2/PP3PPP/R2Q1RK1 w - - 0 12',
+          title: 'When NOT to Transition',
+          explanation: `Knowing when to stay in the middlegame is just as important as knowing when to simplify. Transitioning at the wrong moment can throw away a winning position.
+
+**Don't transition when:**
+
+1. **You have an attack going** - Exchanging pieces kills your momentum. If your pieces are aimed at the enemy king, keep them!
+
+2. **Your opponent is worse but the endgame is drawn** - Opposite-colored bishop endings, for example, are notoriously drawish even with an extra pawn.
+
+3. **Your advantage is dynamic, not static** - Initiative, piece activity, and attacking chances are temporary. They don't survive simplification.
+
+4. **You'd trade your good pieces** - If simplifying means giving up your best-placed pieces, reconsider.
+
+**The key question**: "Will my advantage persist after the trade?" If yes, simplify. If no, keep playing the middlegame.
+
+**Kasparov's mistake**: Even Kasparov occasionally traded into drawn endgames when he could have maintained winning pressure in the middlegame. It happens to everyone!`,
+          highlights: [
+            { square: 'c5', color: 'green' },
+            { square: 'd4', color: 'green' },
+          ],
+        },
+        {
+          id: 'simplification-timing',
+          type: 'interactive',
+          fen: 'r4rk1/pp1bqppp/2n1pn2/3p4/3P4/2NBPN2/PP3PPP/R2Q1RK1 w - - 0 13',
+          title: 'Time to Simplify?',
+          explanation: `White has a small but persistent advantage: better pawn structure and more active minor pieces. Black's position is solid but slightly passive.
+
+Should White continue playing the middlegame, or is it time to trade pieces and head for a favorable endgame?
+
+Find the move that **starts the simplification process** correctly.`,
+          correctMoves: ['Nb5'],
+          arrows: [
+            { from: 'c3', to: 'b5', color: 'green' },
+          ],
+          highlights: [
+            { square: 'b5', color: 'green' },
+          ],
+          successMessage: 'Well played! Nb5 threatens Nc7, forking the rook and attacking a7. Black must deal with this, and any resolution favors White: if the knights get traded, White\'s bishop dominates in the resulting position. The simplification leads to a lasting structural advantage.',
+          failureMessage: 'Look for an active piece move that creates threats while steering toward a favorable endgame. Which knight move creates immediate problems?',
+        },
+        {
+          id: 'transition-summary',
+          type: 'explanation',
+          fen: '4r1k1/ppp2ppp/3p4/4p3/4P3/2NP4/PPP2PPP/4R1K1 w - - 0 20',
+          title: 'The Transition Checklist',
+          explanation: `Before transitioning to an endgame, run through this mental checklist:
+
+**1. Am I better in the endgame?**
+- Compare pawn structures
+- Evaluate piece activity after trades
+- Consider king positions
+
+**2. What specifically is my advantage?**
+- Extra pawn? (Usually good to simplify)
+- Better structure? (Often good to simplify)
+- More active pieces? (Sometimes better to keep playing)
+- Attacking chances? (Usually DON'T simplify)
+
+**3. Can my opponent hold the endgame?**
+- Are there fortress possibilities?
+- Opposite-colored bishops?
+- Drawn theoretical positions?
+
+**4. What's the right order of exchanges?**
+- Queens first if you want a quiet endgame
+- Keep queens if your king is safer
+- Trade their best piece, keep yours
+
+**The Capablanca method**: "Simplify, simplify, simplify." But only when each simplification maintains or increases your advantage.
+
+**Final wisdom**: The transition phase is where many games are decided. Master it, and you'll convert many more advantages into victories.`,
+          highlights: [
+            { square: 'e4', color: 'green' },
+            { square: 'e5', color: 'red' },
+            { square: 'd6', color: 'red' },
+          ],
+          arrows: [
+            { from: 'g1', to: 'f2', color: 'blue' },
+            { from: 'f2', to: 'e3', color: 'blue' },
+          ],
         },
       ],
     },
